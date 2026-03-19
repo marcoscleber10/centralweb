@@ -3,62 +3,706 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CentralWeb • Soluções Digitais</title>
+    <title>CentralWeb • Hub da Internet</title>
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* ========== VARIÁVEIS E RESET ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #0a0a0f;
+            color: #e1e1e6;
+            transition: background-color 0.3s, color 0.3s;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 1rem;
         }
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 500px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            text-align: center;
+
+        /* Tema claro */
+        body.light-mode {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
         }
-        h1 {
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 2.5rem;
+
+        body.light-mode .category-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
-        p {
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+
+        body.light-mode .header,
+        body.light-mode .footer {
+            background: rgba(255, 255, 255, 0.6);
         }
-        .btn {
-            background: #667eea;
-            color: white;
+
+        /* ========== LAYOUT GERAL ========== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(20, 20, 30, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #5f7fff, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search-global {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-global i {
+            color: #888;
+            margin-right: 0.5rem;
+        }
+
+        .search-global input {
+            background: transparent;
             border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
+            padding: 0.7rem 0;
+            width: 100%;
+            color: inherit;
+            outline: none;
             font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-decoration: none;
-            display: inline-block;
         }
-        .btn:hover {
-            background: #5a67d8;
+
+        .search-global input::placeholder {
+            color: #aaa;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .header-actions button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        body.light-mode .header-actions button {
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+
+        .header-actions button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .clock {
+            font-size: 1.3rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+        }
+
+        /* Widget de clima */
+        .weather-widget {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 1rem;
+        }
+
+        .weather-widget i {
+            color: #ffd966;
+        }
+
+        /* Favoritos */
+        .favorites-bar {
+            background: rgba(30, 30, 40, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .favorites-title {
+            font-size: 0.9rem;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .favorites-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            flex: 1;
+        }
+
+        .favorite-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .favorite-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .favorite-item i {
+            font-size: 0.8rem;
+            color: #ffb703;
+        }
+
+        /* Grid de categorias */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.7);
+            border-color: rgba(100, 130, 255, 0.5);
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0.5rem;
+        }
+
+        .category-title i {
+            color: #5f7fff;
+        }
+
+        .links-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .link-item {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: inherit;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
+
+        .link-item i {
+            font-size: 1.1rem;
+            color: #a0a0ff;
+        }
+
+        .link-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.03);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .link-item .fa-star {
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            color: #aaa;
+            transition: 0.2s;
+        }
+
+        .link-item .fa-star:hover {
+            color: #ffb703;
+        }
+
+        .link-item .fa-star.favorited {
+            color: #ffb703;
+        }
+
+        /* Histórico */
+        .history-section {
+            background: rgba(20, 20, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .history-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .history-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .history-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Botão de tela cheia */
+        .fullscreen-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        /* Responsivo */
+        @media (max-width: 700px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .clock {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>🌐 CentralWeb</h1>
-        <p>Soluções digitais personalizadas para sua empresa. Desenvolvemos sites, sistemas e estratégias online que realmente funcionam.</p>
-        <a href="#" class="btn">Entre em contato</a>
+    <div class="container">
+        <!-- ========== HEADER ========== -->
+        <header class="header">
+            <div class="logo">
+                <h1>CentralWeb</h1>
+            </div>
+            <div class="search-global">
+                <i class="fas fa-search"></i>
+                <input type="text" id="globalSearch" placeholder="Buscar plataforma... (filtra categorias)">
+            </div>
+            <div class="header-actions">
+                <div class="clock" id="liveClock">--:--:--</div>
+                <div class="weather-widget" id="weatherWidget">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span>22°C • São Paulo</span>
+                </div>
+                <button id="themeToggle" title="Alternar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="fullscreenBtn" title="Tela cheia">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- ========== FAVORITOS ========== -->
+        <div class="favorites-bar">
+            <span class="favorites-title"><i class="fas fa-star"></i> Favoritos</span>
+            <div class="favorites-list" id="favoritesList">
+                <!-- Itens favoritos serão inseridos via JS -->
+            </div>
+        </div>
+
+        <!-- ========== CATEGORIAS (GRID) ========== -->
+        <div class="categories-grid" id="categoriesGrid">
+            <!-- As categorias serão geradas pelo JavaScript -->
+        </div>
+
+        <!-- ========== HISTÓRICO ========== -->
+        <div class="history-section">
+            <div class="history-title">
+                <i class="fas fa-history"></i> Últimos acessos
+            </div>
+            <div class="history-items" id="historyItems">
+                <!-- Histórico será preenchido dinamicamente -->
+            </div>
+        </div>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="footer">
+            <p>© 2026 CentralWeb • Seu hub da internet</p>
+        </footer>
     </div>
+
+    <script>
+        (function() {
+            // ========== BASE DE DADOS DAS CATEGORIAS E LINKS ==========
+            const categories = [
+                {
+                    name: "🔍 Busca",
+                    icon: "fa-search",
+                    links: [
+                        { name: "Google", url: "https://www.google.com", icon: "fab fa-google" },
+                        { name: "Bing", url: "https://www.bing.com", icon: "fab fa-microsoft" },
+                        { name: "DuckDuckGo", url: "https://duckduckgo.com", icon: "fas fa-duck" }
+                    ]
+                },
+                {
+                    name: "📱 Redes Sociais",
+                    icon: "fa-share-alt",
+                    links: [
+                        { name: "Instagram", url: "https://instagram.com", icon: "fab fa-instagram" },
+                        { name: "Facebook", url: "https://facebook.com", icon: "fab fa-facebook" },
+                        { name: "TikTok", url: "https://tiktok.com", icon: "fab fa-tiktok" },
+                        { name: "X (Twitter)", url: "https://twitter.com", icon: "fab fa-x-twitter" },
+                        { name: "Reddit", url: "https://reddit.com", icon: "fab fa-reddit-alien" }
+                    ]
+                },
+                {
+                    name: "🎥 Vídeo & Streaming",
+                    icon: "fa-video",
+                    links: [
+                        { name: "YouTube", url: "https://youtube.com", icon: "fab fa-youtube" },
+                        { name: "Netflix", url: "https://netflix.com", icon: "fas fa-film" },
+                        { name: "Twitch", url: "https://twitch.tv", icon: "fab fa-twitch" }
+                    ]
+                },
+                {
+                    name: "💬 Comunicação",
+                    icon: "fa-comments",
+                    links: [
+                        { name: "WhatsApp Web", url: "https://web.whatsapp.com", icon: "fab fa-whatsapp" },
+                        { name: "Discord", url: "https://discord.com", icon: "fab fa-discord" },
+                        { name: "Zoom", url: "https://zoom.us", icon: "fas fa-video" }
+                    ]
+                },
+                {
+                    name: "🤖 Inteligência Artificial",
+                    icon: "fa-robot",
+                    links: [
+                        { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" },
+                        { name: "Gemini", url: "https://gemini.google.com", icon: "fas fa-brain" },
+                        { name: "Claude", url: "https://claude.ai", icon: "fas fa-magic" }
+                    ]
+                },
+                {
+                    name: "🛒 E-commerce",
+                    icon: "fa-shopping-cart",
+                    links: [
+                        { name: "Amazon", url: "https://amazon.com", icon: "fab fa-amazon" },
+                        { name: "Mercado Livre", url: "https://mercadolivre.com.br", icon: "fas fa-store" },
+                        { name: "Shopee", url: "https://shopee.com.br", icon: "fas fa-bag-shopping" },
+                        { name: "AliExpress", url: "https://aliexpress.com", icon: "fab fa-alipay" }
+                    ]
+                },
+                {
+                    name: "📰 Notícias",
+                    icon: "fa-newspaper",
+                    links: [
+                        { name: "CNN", url: "https://cnn.com", icon: "fas fa-globe" },
+                        { name: "BBC", url: "https://bbc.com", icon: "fas fa-globe" },
+                        { name: "UOL", url: "https://uol.com.br", icon: "fas fa-globe" },
+                        { name: "Globo", url: "https://globo.com", icon: "fas fa-globe" }
+                    ]
+                },
+                {
+                    name: "📚 Informação",
+                    icon: "fa-book",
+                    links: [
+                        { name: "Wikipedia", url: "https://wikipedia.org", icon: "fab fa-wikipedia-w" },
+                        { name: "Quora", url: "https://quora.com", icon: "fab fa-quora" },
+                        { name: "Stack Overflow", url: "https://stackoverflow.com", icon: "fab fa-stack-overflow" }
+                    ]
+                },
+                {
+                    name: "🎵 Música",
+                    icon: "fa-music",
+                    links: [
+                        { name: "Spotify", url: "https://open.spotify.com", icon: "fab fa-spotify" }
+                    ]
+                },
+                {
+                    name: "🛠️ Ferramentas",
+                    icon: "fa-tools",
+                    links: [
+                        { name: "Canva", url: "https://canva.com", icon: "fab fa-canva" },
+                        { name: "GitHub", url: "https://github.com", icon: "fab fa-github" },
+                        { name: "Adobe", url: "https://adobe.com", icon: "fab fa-adobe" },
+                        { name: "WordPress", url: "https://wordpress.com", icon: "fab fa-wordpress" }
+                    ]
+                }
+            ];
+
+            // ========== ELEMENTOS DOM ==========
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            const favoritesList = document.getElementById('favoritesList');
+            const historyItems = document.getElementById('historyItems');
+            const themeToggle = document.getElementById('themeToggle');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const globalSearch = document.getElementById('globalSearch');
+            const clockEl = document.getElementById('liveClock');
+
+            // ========== ESTADO ==========
+            let favorites = JSON.parse(localStorage.getItem('centralweb_favorites')) || [];
+            let history = JSON.parse(localStorage.getItem('centralweb_history')) || [];
+            let currentTheme = localStorage.getItem('centralweb_theme') || 'dark'; // dark ou light
+
+            // ========== FUNÇÕES AUXILIARES ==========
+            function saveFavorites() {
+                localStorage.setItem('centralweb_favorites', JSON.stringify(favorites));
+            }
+
+            function saveHistory() {
+                localStorage.setItem('centralweb_history', JSON.stringify(history));
+            }
+
+            // Adicionar ao histórico
+            function addToHistory(linkName, linkUrl) {
+                const entry = { name: linkName, url: linkUrl, timestamp: Date.now() };
+                history = [entry, ...history.filter(h => h.url !== linkUrl).slice(0, 9)]; // mantém últimos 10 únicos
+                saveHistory();
+                renderHistory();
+            }
+
+            // ========== RENDERIZAR CATEGORIAS E LINKS ==========
+            function renderCategories(filterText = '') {
+                const filter = filterText.toLowerCase();
+                let html = '';
+                categories.forEach(cat => {
+                    // Filtra links se houver busca
+                    const filteredLinks = cat.links.filter(link => link.name.toLowerCase().includes(filter) || cat.name.toLowerCase().includes(filter));
+                    if (filteredLinks.length === 0 && filter !== '') return; // não mostra categoria se não tiver links correspondentes
+
+                    html += `
+                        <div class="category-card" data-category="${cat.name}">
+                            <div class="category-title">
+                                <i class="fas ${cat.icon}"></i> ${cat.name}
+                            </div>
+                            <div class="links-list">
+                                ${filteredLinks.map(link => {
+                                    const isFav = favorites.some(f => f.url === link.url);
+                                    return `
+                                        <a href="${link.url}" target="_blank" class="link-item" data-url="${link.url}" data-name="${link.name}">
+                                            <i class="${link.icon}"></i> ${link.name}
+                                            <i class="fas fa-star ${isFav ? 'favorited' : ''}" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite('${link.name}', '${link.url}', '${link.icon}')"></i>
+                                        </a>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                categoriesGrid.innerHTML = html;
+            }
+
+            // ========== RENDERIZAR FAVORITOS ==========
+            function renderFavorites() {
+                if (favorites.length === 0) {
+                    favoritesList.innerHTML = '<span style="color:#aaa; font-size:0.9rem;">Nenhum favorito ainda</span>';
+                    return;
+                }
+                favoritesList.innerHTML = favorites.map(fav => `
+                    <div class="favorite-item" onclick="window.open('${fav.url}', '_blank'); addToHistory('${fav.name}', '${fav.url}');">
+                        <i class="${fav.icon}"></i> ${fav.name}
+                        <i class="fas fa-times-circle" style="color:#ff6b6b; margin-left:0.3rem;" onclick="event.stopPropagation(); removeFavorite('${fav.url}')"></i>
+                    </div>
+                `).join('');
+            }
+
+            // ========== RENDERIZAR HISTÓRICO ==========
+            function renderHistory() {
+                if (history.length === 0) {
+                    historyItems.innerHTML = '<span style="color:#aaa;">Nenhum acesso recente</span>';
+                    return;
+                }
+                historyItems.innerHTML = history.map(item => `
+                    <div class="history-item" onclick="window.open('${item.url}', '_blank');">
+                        <i class="fas fa-clock"></i> ${item.name}
+                    </div>
+                `).join('');
+            }
+
+            // ========== ALTERNAR FAVORITO ==========
+            window.toggleFavorite = (name, url, icon) => {
+                const exists = favorites.findIndex(f => f.url === url);
+                if (exists >= 0) {
+                    favorites.splice(exists, 1);
+                } else {
+                    favorites.push({ name, url, icon });
+                }
+                saveFavorites();
+                renderFavorites();
+                renderCategories(globalSearch.value); // re-render para atualizar estrelas
+            };
+
+            window.removeFavorite = (url) => {
+                favorites = favorites.filter(f => f.url !== url);
+                saveFavorites();
+                renderFavorites();
+                renderCategories(globalSearch.value);
+            };
+
+            // ========== TEMA ==========
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    document.body.classList.remove('light-mode');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+                localStorage.setItem('centralweb_theme', theme);
+            }
+
+            themeToggle.addEventListener('click', () => {
+                const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+                applyTheme(newTheme);
+            });
+
+            // ========== RELÓGIO ==========
+            function updateClock() {
+                const now = new Date();
+                const timeStr = now.toLocaleTimeString('pt-BR', { hour12: false });
+                clockEl.textContent = timeStr;
+            }
+            setInterval(updateClock, 1000);
+            updateClock();
+
+            // ========== TELA CHEIA ==========
+            fullscreenBtn.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    }
+                }
+            });
+
+            // ========== BUSCA GLOBAL ==========
+            globalSearch.addEventListener('input', (e) => {
+                renderCategories(e.target.value);
+            });
+
+            // ========== CLIMA (SIMULADO) ==========
+            // Para manter simples, usamos um valor fixo. Poderia ser substituído por uma API real.
+            // Se quiser API real, descomente abaixo e adicione sua chave.
+            /*
+            fetch('https://api.openweathermap.org/data/2.5/weather?q=Sao Paulo,br&units=metric&appid=SUA_CHAVE')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('weatherWidget').innerHTML = `<i class="fas fa-cloud-sun"></i> ${Math.round(data.main.temp)}°C • São Paulo`;
+                });
+            */
+
+            // ========== INICIALIZAÇÃO ==========
+            function init() {
+                applyTheme(currentTheme);
+                renderCategories();
+                renderFavorites();
+                renderHistory();
+
+                // Interceptar cliques em links para registrar histórico
+                document.addEventListener('click', (e) => {
+                    const link = e.target.closest('.link-item');
+                    if (link && link.href) {
+                        // O link abre em nova aba (target _blank), então registramos aqui
+                        const name = link.dataset.name;
+                        const url = link.dataset.url;
+                        if (name && url) {
+                            addToHistory(name, url);
+                        }
+                    }
+                });
+            }
+
+            init();
+
+            // Expor addToHistory globalmente para chamadas onclick
+            window.addToHistory = addToHistory;
+
+        })();
+    </script>
 </body>
 </html>
