@@ -9,7 +9,6 @@
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
-        /* (mesmo estilo da versão anterior - manter igual) */
         * {
             margin: 0;
             padding: 0;
@@ -409,6 +408,41 @@
             color: #fbbf24;
         }
 
+        /* Card de publicidade */
+        .ad-card {
+            background: linear-gradient(145deg, #2a1f3a, #1a1f3a);
+            border: 2px solid #ffd966;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .ad-card .category-title {
+            border-bottom: none;
+            color: #ffd966;
+        }
+        .ad-card .category-title i {
+            color: #ffd966;
+        }
+        .ad-card .ad-button {
+            background: #25D366;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            transition: 0.2s;
+        }
+        .ad-card .ad-button:hover {
+            background: #128C7E;
+            transform: scale(1.05);
+        }
+
         .history-section {
             background: rgba(22, 25, 37, 0.6);
             backdrop-filter: blur(8px);
@@ -575,7 +609,6 @@
                     { name: "DeepSeek", url: "https://deepseek.com", icon: "fas fa-dragon" },
                     { name: "Sentient", url: "https://chat.sentient.xyz/", icon: "fas fa-robot" }
                 ]},
-                // NOVA CATEGORIA: Finanças (Análise & Dados)
                 { name: "📊 Finanças (Análise & Dados)", icon: "fa-chart-pie", links: [
                     { name: "TradingView", url: "https://tradingview.com", icon: "fas fa-chart-simple" },
                     { name: "TradingView Heatmap", url: "https://www.tradingview.com/heatmap/stock/#%7B%22dataSource%22%3A%22SPX500%22%2C%22blockColor%22%3A%22change%22%2C%22blockSize%22%3A%22market_cap_basic%22%2C%22grouping%22%3A%22sector%22%7D", icon: "fas fa-fire" },
@@ -590,7 +623,6 @@
                     { name: "SpikeToSpike", url: "https://spiketospike.com/fee", icon: "fas fa-bolt" },
                     { name: "Investing.com", url: "https://investing.com", icon: "fas fa-coins" }
                 ]},
-                // NOVA CATEGORIA: Cripto (Corretoras & Pagamentos)
                 { name: "💳 Cripto (Corretoras & Pagamentos)", icon: "fa-credit-card", links: [
                     { name: "Binance", url: "https://www.binance.com/referral/earn-together/refer2earn-usdc/claim?hl=pt&ref=GRO_28502_X3ASN", icon: "fab fa-bitcoin" },
                     { name: "OKX", url: "https://okx.com/pt-br/join/5126561", icon: "fab fa-bitcoin" },
@@ -600,9 +632,9 @@
                     { name: "Coinbase", url: "https://coinbase.com/join/U43LRXQ?src=android-whatsapp", icon: "fab fa-coinbase" },
                     { name: "Kraken", url: "https://invite.kraken.com/JDNW/e5jtbd5m", icon: "fab fa-kraken" },
                     { name: "Bitget", url: "https://l1nq.com/viX10", icon: "fas fa-bolt" },
-                    { name: "Bitget (2)", url: "https://share.bitget.com/u/SCZX48ZV?clacCode=6CTUL240", icon: "fas fa-bolt" },
+                    // Bitget (2) removido
                     { name: "Bingx", url: "https://bingx.com/invite/L6KDF9/", icon: "fas fa-chart-line" },
-                    { name: "Mexc", url: "https://promote.mexc.com/r/6ekeguuA", icon: "fas fa-coins" }, // corrigido
+                    { name: "Mexc", url: "https://promote.mexc.com/r/6ekeguuA", icon: "fas fa-coins" },
                     { name: "Coinex", url: "https://www.coinex.com/register?refer_code=z6s4m&channel=Referral", icon: "fas fa-coins" },
                     { name: "Backpack", url: "https://backpack.exchange/refer/marcoscleberc", icon: "fas fa-backpack" },
                     { name: "HiperLiquid", url: "https://app.hyperliquid.xyz/join/MARCOSCLEBER", icon: "fas fa-water" },
@@ -641,7 +673,6 @@
                     { name: "DentPeg", url: "http://dentpeg.com", icon: "fas fa-credit-card" },
                     { name: "PixGo", url: "https://pixgo.org/register.php", icon: "fas fa-pix" }
                 ]},
-                // Demais categorias (mantidas)
                 { name: "🍳 Receitas", icon: "fa-utensils", links: [
                     { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
                     { name: "Receitas Globo", url: "https://receitas.globo.com", icon: "fas fa-globe" },
@@ -704,7 +735,7 @@
                 ]}
             ];
 
-            // SEUS PROJETOS PESSOAIS (atualizado)
+            // SEUS PROJETOS PESSOAIS
             const userProjects = [
                 { name: "Preço Justo", url: "https://site-combustai-620634786284.southamerica-east1.run.app", icon: "fas fa-gas-pump" },
                 { name: "Clube DCA", url: "https://marcoscleber10.github.io/Clube-DCA/", icon: "fas fa-users" },
@@ -725,7 +756,7 @@
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
             ];
 
-            // Mapeamento para busca inteligente (atualizado com todos os novos links)
+            // Mapeamento para busca inteligente (atualizado)
             const smartSearchMap = [
                 { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
                 { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
@@ -863,6 +894,22 @@
                     });
                     html += '</div></div>';
                 });
+
+                // Adicionar card de publicidade no final
+                html += `
+                    <div class="category-card ad-card">
+                        <div class="category-title">
+                            <i class="fas fa-tv"></i> 📺 PROMOÇÃO
+                        </div>
+                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📱 IPTV + APP</div>
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #ffd966;">R$ 30/mês</div>
+                        <div style="margin: 0.5rem 0;">Milhares de canais, filmes e séries</div>
+                        <a href="https://wa.me/5597991916621" target="_blank" class="ad-button">
+                            <i class="fab fa-whatsapp"></i> Peça seu teste grátis de 6h
+                        </a>
+                    </div>
+                `;
+
                 categoriesGrid.innerHTML = html;
             }
 
@@ -995,9 +1042,9 @@
 
             // ========== REGISTRAR CLIQUE EM LINKS PARA HISTÓRICO ==========
             document.addEventListener('click', (e) => {
-                const link = e.target.closest('.link-item, .daily-item, .project-item');
+                const link = e.target.closest('.link-item, .daily-item, .project-item, .ad-button');
                 if (link && link.href) {
-                    const name = link.dataset.name || link.querySelector('span')?.innerText || 'Link';
+                    const name = link.dataset.name || link.innerText.trim() || 'Link';
                     const url = link.href;
                     if (name && url) addToHistory(name, url);
                 }
