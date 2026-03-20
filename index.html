@@ -245,6 +245,55 @@
             margin-left: 0.5rem;
         }
 
+        /* Seção Seus Projetos (destaque) */
+        .projects-section {
+            margin-bottom: 2rem;
+        }
+        .projects-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ffd966;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .project-item {
+            background: linear-gradient(145deg, #2a2f4b, #1e2235);
+            border-radius: 28px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+            border: 1px solid #4a4f70;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .project-item:hover {
+            transform: translateY(-4px);
+            border-color: #7b8cff;
+            box-shadow: 0 10px 20px #1e1e3f;
+        }
+        .project-item i {
+            font-size: 2rem;
+            color: #7b8cff;
+        }
+        .project-item span {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .project-item small {
+            font-size: 0.8rem;
+            color: #aab6fe;
+        }
+
         /* Seção Uso Diário */
         .daily-section {
             margin-bottom: 2rem;
@@ -419,16 +468,16 @@
             .header-actions {
                 justify-content: space-between;
             }
-            .daily-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .daily-grid, .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             .crypto-widget {
                 flex-wrap: wrap;
             }
         }
         @media (max-width: 480px) {
-            .daily-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .daily-grid, .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -470,10 +519,18 @@
             </div>
         </div>
 
+        <!-- SEÇÃO SEUS PROJETOS (links pessoais) -->
+        <div class="projects-section">
+            <div class="projects-title">
+                <i class="fas fa-rocket"></i> 🚀 Seus Projetos
+            </div>
+            <div class="projects-grid" id="projectsGrid"></div>
+        </div>
+
         <!-- SEÇÃO USO DIÁRIO -->
         <div class="daily-section">
             <div class="daily-title">
-                <i class="fas fa-rocket"></i> ⭐ Uso Diário
+                <i class="fas fa-bolt"></i> ⭐ Uso Diário
             </div>
             <div class="daily-grid" id="dailyGrid"></div>
         </div>
@@ -491,7 +548,7 @@
 
         <!-- FOOTER -->
         <footer class="footer">
-            <p>© 2026 CentralWeb • Seu hub da internet • <i class="fas fa-bolt"></i> versão avançada</p>
+            <p>© 2026 CentralWeb • Seu hub da internet • <i class="fas fa-bolt"></i> edição especial</p>
         </footer>
     </div>
 
@@ -518,6 +575,7 @@
                 ]},
                 { name: "💬 Comunicação", icon: "fa-comments", links: [
                     { name: "WhatsApp Web", url: "https://web.whatsapp.com", icon: "fab fa-whatsapp" },
+                    { name: "Telegram", url: "https://web.telegram.org", icon: "fab fa-telegram" },
                     { name: "Discord", url: "https://discord.com", icon: "fab fa-discord" },
                     { name: "Zoom", url: "https://zoom.us", icon: "fas fa-video" }
                 ]},
@@ -525,7 +583,21 @@
                     { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" },
                     { name: "Gemini", url: "https://gemini.google.com", icon: "fas fa-brain" },
                     { name: "Claude", url: "https://claude.ai", icon: "fas fa-magic" },
-                    { name: "DeepSeek", url: "https://deepseek.com", icon: "fas fa-dragon" } // Adicionado DeepSeek
+                    { name: "DeepSeek", url: "https://deepseek.com", icon: "fas fa-dragon" }
+                ]},
+                { name: "💰 Finanças / Cripto", icon: "fa-chart-line", links: [
+                    { name: "TradingView", url: "https://tradingview.com", icon: "fas fa-chart-simple" },
+                    { name: "TradingView Heatmap", url: "https://www.tradingview.com/heatmap/stock/#%7B%22dataSource%22%3A%22SPX500%22%2C%22blockColor%22%3A%22change%22%2C%22blockSize%22%3A%22market_cap_basic%22%2C%22grouping%22%3A%22sector%22%7D", icon: "fas fa-fire" },
+                    { name: "Finviz Map", url: "https://finviz.com/map.ashx", icon: "fas fa-map" },
+                    { name: "Coin360", url: "https://coin360.com", icon: "fas fa-globe" },
+                    { name: "CoinMarketCap", url: "https://coinmarketcap.com", icon: "fas fa-chart-bar" },
+                    { name: "CryptoRank", url: "https://cryptorank.io/price/bitcoin/analytics", icon: "fas fa-ranking-star" },
+                    { name: "Coinglass", url: "https://coinglass.com", icon: "fas fa-glass-water" },
+                    { name: "DeFi Llama (Solana)", url: "https://defillama.com/chain/Solana", icon: "fas fa-llama" },
+                    { name: "Arkham", url: "https://arkm.com/wallet/assets", icon: "fas fa-user-secret" },
+                    { name: "CryptoQuant", url: "https://cryptoquant.com/asset/btc/chart/market-indicator/mvrv-ratio", icon: "fas fa-chart-line" },
+                    { name: "SpikeToSpike", url: "https://spiketospike.com/fee", icon: "fas fa-bolt" },
+                    { name: "Investing.com", url: "https://investing.com", icon: "fas fa-coins" }
                 ]},
                 { name: "🍳 Receitas", icon: "fa-utensils", links: [
                     { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
@@ -536,11 +608,6 @@
                     { name: "LinkedIn", url: "https://linkedin.com", icon: "fab fa-linkedin" },
                     { name: "Indeed", url: "https://indeed.com", icon: "fas fa-building" },
                     { name: "Catho", url: "https://catho.com.br", icon: "fas fa-file-signature" }
-                ]},
-                { name: "💰 Finanças / Cripto", icon: "fa-chart-line", links: [
-                    { name: "TradingView", url: "https://tradingview.com", icon: "fas fa-chart-simple" },
-                    { name: "Investing.com", url: "https://investing.com", icon: "fas fa-coins" },
-                    { name: "CoinMarketCap", url: "https://coinmarketcap.com", icon: "fas fa-bitcoin-sign" }
                 ]},
                 { name: "🧠 Educação / Cursos", icon: "fa-graduation-cap", links: [
                     { name: "Coursera", url: "https://coursera.org", icon: "fas fa-laptop" },
@@ -581,7 +648,10 @@
                     { name: "Stack Overflow", url: "https://stackoverflow.com", icon: "fab fa-stack-overflow" }
                 ]},
                 { name: "🎵 Música", icon: "fa-music", links: [
-                    { name: "Spotify", url: "https://open.spotify.com", icon: "fab fa-spotify" }
+                    { name: "Spotify", url: "https://open.spotify.com", icon: "fab fa-spotify" },
+                    { name: "Deezer", url: "https://deezer.com", icon: "fab fa-deezer" },
+                    { name: "YouTube Music", url: "https://music.youtube.com", icon: "fab fa-youtube" },
+                    { name: "SoundCloud", url: "https://soundcloud.com", icon: "fab fa-soundcloud" }
                 ]},
                 { name: "🛠️ Ferramentas", icon: "fa-tools", links: [
                     { name: "Canva", url: "https://canva.com", icon: "fab fa-canva" },
@@ -589,6 +659,15 @@
                     { name: "Adobe", url: "https://adobe.com", icon: "fab fa-adobe" },
                     { name: "WordPress", url: "https://wordpress.com", icon: "fab fa-wordpress" }
                 ]}
+            ];
+
+            // Seus projetos pessoais
+            const userProjects = [
+                { name: "Preço Justo", url: "https://marcoscleber10.github.io/Pre-o-justo/", icon: "fas fa-calculator" },
+                { name: "Clube DCA", url: "https://marcoscleber10.github.io/Clube-DCA/", icon: "fas fa-users" },
+                { name: "Sinais Invest", url: "https://marcoscleber10.github.io/sinaisinvest", icon: "fas fa-chart-line" },
+                { name: "Invest Opção", url: "https://marcoscleber10.github.io/Investopcao/", icon: "fas fa-chart-pie" },
+                { name: "Scalp Calc", url: "https://scalp-calc.vercel.app/", icon: "fas fa-calculator" }
             ];
 
             // Lista para a seção "Uso Diário"
@@ -600,14 +679,19 @@
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
             ];
 
-            // Mapeamento para busca inteligente
+            // Mapeamento para busca inteligente (incluindo seus projetos)
             const smartSearchMap = [
                 { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
                 { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
                 { keywords: ["chat", "gpt", "chatgpt"], url: "https://chat.openai.com", name: "ChatGPT" },
                 { keywords: ["whats", "whatsapp"], url: "https://web.whatsapp.com", name: "WhatsApp" },
                 { keywords: ["youtube", "yt"], url: "https://youtube.com", name: "YouTube" },
-                { keywords: ["maps", "mapa", "waze"], url: "https://maps.google.com", name: "Google Maps" }
+                { keywords: ["maps", "mapa", "waze"], url: "https://maps.google.com", name: "Google Maps" },
+                { keywords: ["preco", "justo"], url: "https://marcoscleber10.github.io/Pre-o-justo/", name: "Preço Justo" },
+                { keywords: ["clube", "dca"], url: "https://marcoscleber10.github.io/Clube-DCA/", name: "Clube DCA" },
+                { keywords: ["sinais"], url: "https://marcoscleber10.github.io/sinaisinvest", name: "Sinais Invest" },
+                { keywords: ["invest", "opcao"], url: "https://marcoscleber10.github.io/Investopcao/", name: "Invest Opção" },
+                { keywords: ["scalp", "calc"], url: "https://scalp-calc.vercel.app/", name: "Scalp Calc" }
             ];
 
             // ========== ESTADO GLOBAL ==========
@@ -620,6 +704,7 @@
             const favoritesList = document.getElementById('favoritesList');
             const historyItems = document.getElementById('historyItems');
             const dailyGrid = document.getElementById('dailyGrid');
+            const projectsGrid = document.getElementById('projectsGrid');
             const themeToggle = document.getElementById('themeToggle');
             const fullscreenBtn = document.getElementById('fullscreenBtn');
             const globalSearch = document.getElementById('globalSearch');
@@ -640,6 +725,20 @@
             }
 
             // ========== RENDERIZAÇÃO ==========
+            function renderProjects() {
+                let html = '';
+                userProjects.forEach(p => {
+                    html += `
+                        <div class="project-item" onclick="window.open('${p.url}','_blank'); addToHistory('${p.name}', '${p.url}');">
+                            <i class="${p.icon}"></i>
+                            <span>${p.name}</span>
+                            <small>${p.url.replace('https://', '')}</small>
+                        </div>
+                    `;
+                });
+                projectsGrid.innerHTML = html;
+            }
+
             function renderDaily() {
                 let html = '';
                 dailyLinks.forEach(link => {
@@ -805,10 +904,10 @@
 
             // ========== REGISTRAR CLIQUE EM LINKS PARA HISTÓRICO ==========
             document.addEventListener('click', (e) => {
-                const link = e.target.closest('.link-item');
+                const link = e.target.closest('.link-item, .daily-item, .project-item');
                 if (link && link.href) {
-                    const name = link.dataset.name;
-                    const url = link.dataset.url;
+                    const name = link.dataset.name || link.querySelector('span')?.innerText || 'Link';
+                    const url = link.href;
                     if (name && url) addToHistory(name, url);
                 }
             });
@@ -816,6 +915,7 @@
             // ========== INICIALIZAÇÃO ==========
             function init() {
                 applyTheme(currentTheme);
+                renderProjects();
                 renderDaily();
                 renderCategories();
                 renderFavorites();
