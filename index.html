@@ -632,7 +632,6 @@
                     { name: "Coinbase", url: "https://coinbase.com/join/U43LRXQ?src=android-whatsapp", icon: "fab fa-coinbase" },
                     { name: "Kraken", url: "https://invite.kraken.com/JDNW/e5jtbd5m", icon: "fab fa-kraken" },
                     { name: "Bitget", url: "https://l1nq.com/viX10", icon: "fas fa-bolt" },
-                    // Bitget (2) removido
                     { name: "Bingx", url: "https://bingx.com/invite/L6KDF9/", icon: "fas fa-chart-line" },
                     { name: "Mexc", url: "https://promote.mexc.com/r/6ekeguuA", icon: "fas fa-coins" },
                     { name: "Coinex", url: "https://www.coinex.com/register?refer_code=z6s4m&channel=Referral", icon: "fas fa-coins" },
@@ -644,7 +643,7 @@
                     { name: "Bybit Card", url: "https://bybit.com/invite?ref=6MOOPN", icon: "fas fa-credit-card" },
                     { name: "Revolut", url: "https://revolut.com/marcos5njm", icon: "fas fa-credit-card" },
                     { name: "AstroPay", url: "https://astropay.com/Kj6IFzgR8g", icon: "fas fa-credit-card" },
-                    { name: "Redotpay", url: "https://url.hk/i/pt/teder", icon: "fas fa-credit-card" },
+                    { name: "Redotpay", url: "https://url.hk/i/pt/teder", icon: "fas fa-credit-card" }, // corrigido
                     { name: "Oobit", url: "https://get.oobit.app/jzrrer", icon: "fab fa-bitcoin" },
                     { name: "Zeal", url: "https://zeal.go.link/6iCO9?adj_label=2614ac9c-34d5-428f-a6ea-6bd41933bf3a&adj_campaign=copy", icon: "fas fa-credit-card" },
                     { name: "Tuyo", url: "https://get.tuyo.com/code/DGGNSU", icon: "fas fa-credit-card" },
@@ -653,7 +652,7 @@
                     { name: "Alfred P2P", url: "https://www.alfredp2p.io/fee", icon: "fas fa-handshake" },
                     { name: "P2P.me", url: "https://app.p2p.me/recommend?address=0x4eBbC6C03BCCF6B62797C2641e2111173Fd04C11&nonce=838763&signature=0x7a24224ef98e72b0b90aeb5f67c49bb967746eca07ff4aa133cc8428c165098c1141180098aee8ce1bcb7940fb26eff070583f00ccef9a421cb63b3b0d99eda61b", icon: "fas fa-handshake" },
                     { name: "Crypix.me", url: "https://crypix.me/auth/register.php?ref=marcoscleberc", icon: "fas fa-camera" },
-                    { name: "RoyalBTC", url: "https://www.royalbtc.io/", icon: "fab fa-bitcoin" },
+                    { name: "RoyalBTC", url: "https://www.royalbtc.io/", icon: "fab fa-bitcoin" }, // corrigido
                     { name: "Chainless", url: "https://chainless.finance/download", icon: "fas fa-link" },
                     { name: "Kast Finance", url: "https://go.kast.xyz/VqVO/NB70TILN", icon: "fas fa-wallet" },
                     { name: "Ripio", url: "https://join.ripio.com/marcos_c_113", icon: "fas fa-university" },
@@ -673,6 +672,13 @@
                     { name: "DentPeg", url: "http://dentpeg.com", icon: "fas fa-credit-card" },
                     { name: "PixGo", url: "https://pixgo.org/register.php", icon: "fas fa-pix" }
                 ]},
+                // Card de publicidade inserido logo após a categoria Cripto
+                {
+                    name: "📺 PROMOÇÃO IPTV",
+                    icon: "fa-tv",
+                    isAd: true, // marcador para tratamento especial
+                    links: [] // não será usado
+                },
                 { name: "🍳 Receitas", icon: "fa-utensils", links: [
                     { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
                     { name: "Receitas Globo", url: "https://receitas.globo.com", icon: "fas fa-globe" },
@@ -756,7 +762,7 @@
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
             ];
 
-            // Mapeamento para busca inteligente (atualizado)
+            // Mapeamento para busca inteligente (mantido igual, mas adicionado keywords para a promoção)
             const smartSearchMap = [
                 { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
                 { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
@@ -817,7 +823,8 @@
                 { keywords: ["infinitepay"], url: "https://infinitepay.io/?rid=marcoscleber", name: "InfinitePay" },
                 { keywords: ["truther"], url: "https://play.google.com/store/apps/details?id=vc.smartpay.app", name: "Truther" },
                 { keywords: ["sentient"], url: "https://chat.sentient.xyz/", name: "Sentient" },
-                { keywords: ["linktree"], url: "https://linktr.ee/marcoscleberc", name: "Linktree" }
+                { keywords: ["linktree"], url: "https://linktr.ee/marcoscleberc", name: "Linktree" },
+                { keywords: ["iptv", "teste", "6h", "grátis"], url: "https://wa.me/5597991916621", name: "Teste IPTV" } // atalho para a promoção
             ];
 
             // ========== ESTADO GLOBAL ==========
@@ -882,6 +889,25 @@
                 const f = filter.toLowerCase();
                 let html = '';
                 categories.forEach(cat => {
+                    // Se for o card de publicidade, renderiza de forma especial
+                    if (cat.isAd) {
+                        html += `
+                            <div class="category-card ad-card">
+                                <div class="category-title">
+                                    <i class="fas fa-tv"></i> ${cat.name}
+                                </div>
+                                <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📱 APP + IPTV</div>
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #ffd966;">R$ 30/mês</div>
+                                <div style="margin: 0.5rem 0;">Milhares de canais, filmes e séries</div>
+                                <a href="https://wa.me/5597991916621" target="_blank" class="ad-button">
+                                    <i class="fab fa-whatsapp"></i> Peça seu teste grátis de 6h
+                                </a>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    // Filtra os links pela busca
                     const filteredLinks = cat.links.filter(l => l.name.toLowerCase().includes(f) || cat.name.toLowerCase().includes(f));
                     if (filteredLinks.length === 0 && f !== '') return;
                     html += `<div class="category-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div><div class="links-list">`;
@@ -894,21 +920,6 @@
                     });
                     html += '</div></div>';
                 });
-
-                // Adicionar card de publicidade no final
-                html += `
-                    <div class="category-card ad-card">
-                        <div class="category-title">
-                            <i class="fas fa-tv"></i> 📺 PROMOÇÃO
-                        </div>
-                        <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📱 IPTV + APP</div>
-                        <div style="font-size: 1.5rem; font-weight: bold; color: #ffd966;">R$ 30/mês</div>
-                        <div style="margin: 0.5rem 0;">Milhares de canais, filmes e séries</div>
-                        <a href="https://wa.me/5597991916621" target="_blank" class="ad-button">
-                            <i class="fab fa-whatsapp"></i> Peça seu teste grátis de 6h
-                        </a>
-                    </div>
-                `;
 
                 categoriesGrid.innerHTML = html;
             }
