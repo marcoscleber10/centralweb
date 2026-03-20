@@ -9,6 +9,7 @@
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
+        /* (estilos idênticos à versão anterior - manter) */
         * {
             margin: 0;
             padding: 0;
@@ -172,7 +173,6 @@
             border: 1px solid rgba(255,255,255,0.15);
         }
 
-        /* Widget de cotações */
         .crypto-widget {
             display: flex;
             flex-wrap: wrap;
@@ -413,7 +413,6 @@
             color: #fbbf24;
         }
 
-        /* Card de publicidade */
         .ad-card {
             background: linear-gradient(145deg, #2a1f3a, #1a1f3a);
             border: 2px solid #ffd966;
@@ -514,7 +513,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- HEADER -->
         <header class="header">
             <div class="logo">
                 <h1>CentralWeb</h1>
@@ -526,7 +524,6 @@
             </div>
             <div class="header-actions">
                 <div class="clock" id="liveClock">--:--:--</div>
-                <!-- Widget de cotações (será preenchido via JS) -->
                 <div class="crypto-widget" id="cryptoWidget">
                     <div class="crypto-item"><i class="fab fa-bitcoin"></i> BTC: <span id="btcPrice">...</span></div>
                     <div class="crypto-item"><i class="fas fa-dollar-sign"></i> USD/BRL: <span id="usdbrl">...</span></div>
@@ -542,13 +539,11 @@
             </div>
         </header>
 
-        <!-- FAVORITOS VISUAIS -->
         <div class="favorites-bar">
             <div class="favorites-title"><i class="fas fa-star"></i> Seus favoritos</div>
             <div class="favorites-list" id="favoritesList"></div>
         </div>
 
-        <!-- SEÇÃO SEUS PROJETOS -->
         <div class="projects-section">
             <div class="projects-title">
                 <i class="fas fa-rocket"></i> 🚀 Seus Projetos
@@ -556,7 +551,6 @@
             <div class="projects-grid" id="projectsGrid"></div>
         </div>
 
-        <!-- SEÇÃO USO DIÁRIO -->
         <div class="daily-section">
             <div class="daily-title">
                 <i class="fas fa-bolt"></i> ⭐ Uso Diário
@@ -564,10 +558,8 @@
             <div class="daily-grid" id="dailyGrid"></div>
         </div>
 
-        <!-- GRADE DE CATEGORIAS -->
         <div class="categories-grid" id="categoriesGrid"></div>
 
-        <!-- HISTÓRICO -->
         <div class="history-section">
             <div class="history-title">
                 <i class="fas fa-history"></i> Últimos acessos
@@ -575,7 +567,6 @@
             <div class="history-items" id="historyItems"></div>
         </div>
 
-        <!-- FOOTER -->
         <footer class="footer">
             <p>© 2026 CentralWeb • Seu hub da internet • <i class="fas fa-bolt"></i> edição especial</p>
         </footer>
@@ -583,12 +574,13 @@
 
     <script>
         (function() {
-            // ========== CATEGORIAS E DADOS (idênticos à versão anterior) ==========
+            // ========== CATEGORIAS ATUALIZADAS ==========
             const categories = [
                 { name: "🔍 Busca", icon: "fa-search", links: [
                     { name: "Google", url: "https://www.google.com", icon: "fab fa-google" },
                     { name: "Bing", url: "https://www.bing.com", icon: "fab fa-microsoft" },
-                    { name: "DuckDuckGo", url: "https://duckduckgo.com", icon: "fas fa-duck" }
+                    { name: "DuckDuckGo", url: "https://duckduckgo.com", icon: "fas fa-duck" },
+                    { name: "Yandex", url: "https://yandex.com", icon: "fab fa-yandex" } // NOVO
                 ]},
                 { name: "📱 Redes Sociais", icon: "fa-share-alt", links: [
                     { name: "Instagram", url: "https://instagram.com", icon: "fab fa-instagram" },
@@ -614,7 +606,8 @@
                     { name: "Gemini", url: "https://gemini.google.com", icon: "fas fa-brain" },
                     { name: "Claude", url: "https://claude.ai", icon: "fas fa-magic" },
                     { name: "DeepSeek", url: "https://deepseek.com", icon: "fas fa-dragon" },
-                    { name: "Sentient", url: "https://chat.sentient.xyz/", icon: "fas fa-robot" }
+                    { name: "Sentient", url: "https://chat.sentient.xyz/", icon: "fas fa-robot" },
+                    { name: "Grok", url: "https://grok.com", icon: "fas fa-chart-line" } // NOVO
                 ]},
                 { name: "📊 Finanças (Análise & Dados)", icon: "fa-chart-pie", links: [
                     { name: "TradingView", url: "https://tradingview.com", icon: "fas fa-chart-simple" },
@@ -684,6 +677,7 @@
                     icon: "fa-tv",
                     isAd: true
                 },
+                // demais categorias (Receitas, Empregos, etc.) mantidas
                 { name: "🍳 Receitas", icon: "fa-utensils", links: [
                     { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
                     { name: "Receitas Globo", url: "https://receitas.globo.com", icon: "fas fa-globe" },
@@ -746,7 +740,7 @@
                 ]}
             ];
 
-            // SEUS PROJETOS
+            // PROJETOS PESSOAIS (mesmo)
             const userProjects = [
                 { name: "Preço Justo", url: "https://site-combustai-620634786284.southamerica-east1.run.app", icon: "fas fa-gas-pump" },
                 { name: "Clube DCA", url: "https://marcoscleber10.github.io/Clube-DCA/", icon: "fas fa-users" },
@@ -767,7 +761,7 @@
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
             ];
 
-            // SMART SEARCH (mantido igual)
+            // SMART SEARCH (atualizado para incluir Yandex e Grok)
             const smartSearchMap = [
                 { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
                 { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
@@ -829,7 +823,9 @@
                 { keywords: ["truther"], url: "https://play.google.com/store/apps/details?id=vc.smartpay.app", name: "Truther" },
                 { keywords: ["sentient"], url: "https://chat.sentient.xyz/", name: "Sentient" },
                 { keywords: ["linktree"], url: "https://linktr.ee/marcoscleberc", name: "Linktree" },
-                { keywords: ["iptv", "teste", "6h", "grátis"], url: "https://wa.me/5597991916621", name: "Teste IPTV" }
+                { keywords: ["iptv", "teste", "6h", "grátis"], url: "https://wa.me/5597991916621", name: "Teste IPTV" },
+                { keywords: ["yandex"], url: "https://yandex.com", name: "Yandex" },
+                { keywords: ["grok"], url: "https://grok.com", name: "Grok" }
             ];
 
             // ========== FUNÇÕES DE COTAÇÕES (AwesomeAPI) ==========
@@ -858,6 +854,8 @@
                     if (brentData['BRENTUSD']) {
                         const brent = parseFloat(brentData['BRENTUSD'].bid).toFixed(2);
                         document.getElementById('brent').innerText = `$${brent}`;
+                    } else {
+                        document.getElementById('brent').innerText = '--';
                     }
                     if (goldData['XAUUSD']) {
                         const gold = parseFloat(goldData['XAUUSD'].bid).toFixed(2);
