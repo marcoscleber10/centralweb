@@ -9,8 +9,6 @@
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
-        /* (todos os estilos permanecem idênticos à versão anterior, 
-           apenas o .crypto-widget foi ajustado para suportar mais itens) */
         * {
             margin: 0;
             padding: 0;
@@ -837,7 +835,6 @@
             // ========== FUNÇÕES DE COTAÇÕES (AwesomeAPI) ==========
             async function fetchQuotes() {
                 try {
-                    // Endpoints gratuitos da AwesomeAPI (não requer chave)
                     const [btcRes, usdRes, brentRes, goldRes] = await Promise.all([
                         fetch('https://economia.awesomeapi.com.br/json/last/BTC-USD'),
                         fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL'),
@@ -850,32 +847,24 @@
                     const brentData = await brentRes.json();
                     const goldData = await goldRes.json();
 
-                    // Bitcoin
                     if (btcData['BTCUSD']) {
                         const btc = parseFloat(btcData['BTCUSD'].bid).toFixed(2);
                         document.getElementById('btcPrice').innerText = `$${btc}`;
                     }
-                    // Dólar
                     if (usdData['USDBRL']) {
                         const usd = parseFloat(usdData['USDBRL'].bid).toFixed(2);
                         document.getElementById('usdbrl').innerText = `R$ ${usd}`;
                     }
-                    // Petróleo Brent
                     if (brentData['BRENTUSD']) {
                         const brent = parseFloat(brentData['BRENTUSD'].bid).toFixed(2);
                         document.getElementById('brent').innerText = `$${brent}`;
                     }
-                    // Ouro
                     if (goldData['XAUUSD']) {
                         const gold = parseFloat(goldData['XAUUSD'].bid).toFixed(2);
                         document.getElementById('gold').innerText = `$${gold}`;
                     }
                 } catch (error) {
                     console.error('Erro ao buscar cotações:', error);
-                    document.getElementById('btcPrice').innerText = '--';
-                    document.getElementById('usdbrl').innerText = '--';
-                    document.getElementById('brent').innerText = '--';
-                    document.getElementById('gold').innerText = '--';
                 }
             }
 
@@ -1093,8 +1082,8 @@
                 renderCategories();
                 renderFavorites();
                 renderHistory();
-                fetchQuotes();          // primeira chamada
-                setInterval(fetchQuotes, 60000); // atualizar a cada 60s
+                fetchQuotes();
+                setInterval(fetchQuotes, 60000);
             }
             init();
             window.addToHistory = addToHistory;
