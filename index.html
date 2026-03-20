@@ -446,6 +446,21 @@
             transform: scale(1.05);
         }
 
+        .info-card {
+            background: rgba(50, 55, 80, 0.8);
+            border-left: 4px solid #ffd966;
+        }
+        .info-card .category-title {
+            border-bottom: none;
+            color: #ffd966;
+            font-size: 1.2rem;
+        }
+        .info-card .info-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #ddd;
+        }
+
         .history-section {
             background: rgba(22, 25, 37, 0.6);
             backdrop-filter: blur(8px);
@@ -573,7 +588,7 @@
 
     <script>
         (function() {
-            // ========== CATEGORIAS ATUALIZADAS (inclui nova categoria de combustível) ==========
+            // ========== CATEGORIAS COMPLETAS ==========
             const categories = [
                 { name: "🔍 Busca", icon: "fa-search", links: [
                     { name: "Google", url: "https://www.google.com", icon: "fab fa-google" },
@@ -682,19 +697,24 @@
                     { name: "DentPeg", url: "http://dentpeg.com", icon: "fas fa-credit-card" },
                     { name: "PixGo", url: "https://pixgo.org/register.php", icon: "fas fa-pix" }
                 ]},
-                // NOVA CATEGORIA: Economize Combustível
+                // CATEGORIA COMBUSTÍVEL COMPLETA (com Livelo)
                 { name: "⛽ Economize Combustível", icon: "fa-gas-pump", links: [
-                    { name: "Shell Box (App)", url: "https://www.shell.com.br/motoristas/app-shell-box.html", icon: "fab fa-google-play" },
-                    { name: "Shell Box (Android)", url: "https://play.google.com/store/apps/details?id=com.raizen.shellbox", icon: "fab fa-android" },
+                    { name: "Shell Box (R$15 desconto)", url: "https://shellbox.onelink.me/0Eik/6c597fbb?autofill=TRUE&automaticInsertion=TRUE&voucherCode=SFO5024", icon: "fas fa-gas-pump" },
+                    { name: "Petrobras App", url: "https://play.google.com/store/apps/details?id=br.com.petrobras.br.ma02", icon: "fab fa-android" },
+                    { name: "Baratão Combustíveis (Android)", url: "https://play.google.com/store/apps/details?id=com.barataoapp&referrer=00296621774", icon: "fab fa-android" },
+                    { name: "Baratão Combustíveis (iOS)", url: "https://apps.apple.com/app/id1613535824?at=00296621774", icon: "fab fa-apple" },
                     { name: "Egasosa", url: "https://www.egasosa.com.br", icon: "fas fa-gas-pump" },
                     { name: "Abastece Aí (Ipiranga)", url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", icon: "fas fa-gas-pump" },
-                    { name: "Dicas de economia", url: "#", icon: "fas fa-lightbulb", note: "💡 Dica: Combine cupons de boas-vindas + cashback do banco para descontos acima de R$1/litro!" }
-                ]},
+                    { name: "Livelo – Pontos ALE", url: "https://www.livelo.com.br", icon: "fas fa-star" }
+                ] },
+                // CARD INFORMATIVO DA LIVELO/ALE
                 {
-                    name: "📺 PROMOÇÃO IPTV",
-                    icon: "fa-tv",
-                    isAd: true
+                    name: "💡 Dica: Pontos Livelo nos Postos ALE",
+                    icon: "fa-lightbulb",
+                    isInfo: true,
+                    content: "✅ Abasteça em postos ALE e pague com pontos Livelo via QR Code. Ganhe pontos a cada R$3. Use cupons como <strong>ALE20</strong> para bônus. Combine com cashback do cartão e o desconto pode passar de <strong>R$1 por litro</strong>!"
                 },
+                // DEMAIS CATEGORIAS
                 { name: "🍳 Receitas", icon: "fa-utensils", links: [
                     { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
                     { name: "Receitas Globo", url: "https://receitas.globo.com", icon: "fas fa-globe" },
@@ -754,10 +774,16 @@
                     { name: "GitHub", url: "https://github.com", icon: "fab fa-github" },
                     { name: "Adobe", url: "https://adobe.com", icon: "fab fa-adobe" },
                     { name: "WordPress", url: "https://wordpress.com", icon: "fab fa-wordpress" }
-                ]}
+                ]},
+                // CARD DE PUBLICIDADE IPTV
+                {
+                    name: "📺 PROMOÇÃO IPTV",
+                    icon: "fa-tv",
+                    isAd: true
+                }
             ];
 
-            // PROJETOS PESSOAIS (mesmo)
+            // PROJETOS PESSOAIS
             const userProjects = [
                 { name: "Preço Justo", url: "https://site-combustai-620634786284.southamerica-east1.run.app", icon: "fas fa-gas-pump" },
                 { name: "Clube DCA", url: "https://marcoscleber10.github.io/Clube-DCA/", icon: "fas fa-users" },
@@ -778,7 +804,7 @@
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
             ];
 
-            // SMART SEARCH (inclui palavras-chave para combustível)
+            // SMART SEARCH (palavras-chave para todos os links)
             const smartSearchMap = [
                 { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
                 { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
@@ -854,12 +880,15 @@
                 { keywords: ["eesel"], url: "https://www.eesel.ai/", name: "eesel AI" },
                 { keywords: ["copilot studio"], url: "https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio", name: "Microsoft Copilot Studio" },
                 { keywords: ["watsonx"], url: "https://www.ibm.com/products/watsonx-assistant", name: "IBM Watsonx Assistant" },
-                { keywords: ["shell", "box", "shellbox"], url: "https://www.shell.com.br/motoristas/app-shell-box.html", name: "Shell Box" },
+                { keywords: ["shell", "box", "shellbox", "cupom"], url: "https://shellbox.onelink.me/0Eik/6c597fbb?autofill=TRUE&automaticInsertion=TRUE&voucherCode=SFO5024", name: "Shell Box R$15" },
+                { keywords: ["petrobras"], url: "https://play.google.com/store/apps/details?id=br.com.petrobras.br.ma02", name: "Petrobras App" },
+                { keywords: ["baratao"], url: "https://play.google.com/store/apps/details?id=com.barataoapp&referrer=00296621774", name: "Baratão Combustíveis" },
                 { keywords: ["egasosa"], url: "https://www.egasosa.com.br", name: "Egasosa" },
-                { keywords: ["ipiranga", "abastece ai"], url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", name: "Abastece Aí" }
+                { keywords: ["ipiranga", "abastece ai"], url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", name: "Abastece Aí" },
+                { keywords: ["livelo", "ale", "pontos"], url: "https://www.livelo.com.br", name: "Livelo – Pontos ALE" }
             ];
 
-            // ========== FUNÇÕES DE COTAÇÕES (AwesomeAPI) ==========
+            // ========== FUNÇÕES DE COTAÇÕES ==========
             async function fetchQuotes() {
                 try {
                     const [btcRes, usdRes, brentRes, goldRes] = await Promise.all([
@@ -868,7 +897,6 @@
                         fetch('https://economia.awesomeapi.com.br/json/last/BRENT-USD'),
                         fetch('https://economia.awesomeapi.com.br/json/last/XAU-USD')
                     ]);
-
                     const btcData = await btcRes.json();
                     const usdData = await usdRes.json();
                     const brentData = await brentRes.json();
@@ -897,7 +925,7 @@
                 }
             }
 
-            // ========== RENDERIZAÇÃO (mesma lógica) ==========
+            // ========== RENDERIZAÇÃO ==========
             let favorites = JSON.parse(localStorage.getItem('centralweb_favorites')) || [];
             let history = JSON.parse(localStorage.getItem('centralweb_history')) || [];
             let currentTheme = localStorage.getItem('centralweb_theme') || 'dark';
@@ -954,23 +982,21 @@
                         </div>`;
                         return;
                     }
+                    if (cat.isInfo) {
+                        html += `<div class="category-card info-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div>
+                            <div class="info-content">${cat.content}</div>
+                        </div>`;
+                        return;
+                    }
                     const filteredLinks = cat.links.filter(l => l.name.toLowerCase().includes(f) || cat.name.toLowerCase().includes(f));
                     if (filteredLinks.length === 0 && f !== '') return;
                     html += `<div class="category-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div><div class="links-list">`;
                     filteredLinks.forEach(link => {
                         const isFav = favorites.some(f => f.url === link.url);
-                        // Se for a dica de economia (URL #) exibe de forma especial
-                        if (link.url === '#') {
-                            html += `<div class="link-item" style="cursor:default; background:rgba(255,215,0,0.1); border-color:#ffd966;">
-                                <i class="${link.icon}"></i> ${link.name}
-                                <span style="font-size:0.8rem; margin-left:0.3rem;">💡 ${link.note || ''}</span>
-                            </div>`;
-                        } else {
-                            html += `<a href="${link.url}" target="_blank" class="link-item" data-url="${link.url}" data-name="${link.name}">
-                                <i class="${link.icon}"></i> ${link.name}
-                                <i class="fas fa-star ${isFav ? 'favorited' : ''}" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite('${link.name}', '${link.url}', '${link.icon}')"></i>
-                            </a>`;
-                        }
+                        html += `<a href="${link.url}" target="_blank" class="link-item" data-url="${link.url}" data-name="${link.name}">
+                            <i class="${link.icon}"></i> ${link.name}
+                            <i class="fas fa-star ${isFav ? 'favorited' : ''}" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite('${link.name}', '${link.url}', '${link.icon}')"></i>
+                        </a>`;
                     });
                     html += '</div></div>';
                 });
