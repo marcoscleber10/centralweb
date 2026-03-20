@@ -4,298 +4,421 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CentralWeb • Hub da Internet</title>
-    <!-- Font Awesome -->
+    <!-- Font Awesome 6 (ícones) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
+
         body {
-            background-color: #0a0a0f;
-            color: #e1e1e6;
-            transition: background-color 0.3s, color 0.3s;
+            background: #0c0c14;
+            color: #eaeef2;
+            transition: background 0.3s, color 0.3s;
             min-height: 100vh;
             padding: 1rem;
         }
+
         body.light-mode {
-            background-color: #f5f5f7;
-            color: #1d1d1f;
+            background: #f0f2f5;
+            color: #1e1e2f;
         }
-        body.light-mode .category-card {
+
+        body.light-mode .glass-card {
             background: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
         }
-        body.light-mode .header,
-        body.light-mode .footer {
-            background: rgba(255, 255, 255, 0.6);
-        }
+
         .container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
         }
-        .header {
-            background: rgba(20, 20, 30, 0.8);
+
+        /* Glassmorphism base */
+        .glass-card {
+            background: rgba(20, 22, 35, 0.7);
             backdrop-filter: blur(12px);
-            border-radius: 30px;
-            padding: 1rem 2rem;
-            margin-bottom: 2rem;
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+            transition: all 0.2s ease;
+        }
+
+        /* Header */
+        .header {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 1rem;
+            gap: 1.2rem;
+            padding: 1.2rem 2rem;
+            margin-bottom: 2rem;
+            background: rgba(20, 22, 35, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
+
         .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #5f7fff, #c084fc);
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #7b8cff, #c07cff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .search-global {
             flex: 1;
-            min-width: 250px;
+            min-width: 260px;
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 0.3rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.08);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            border: 1px solid rgba(255,255,255,0.15);
         }
+
         .search-global i {
-            color: #888;
-            margin-right: 0.5rem;
+            color: #9aa0b0;
+            font-size: 1.2rem;
+            margin-right: 0.8rem;
         }
+
         .search-global input {
             background: transparent;
             border: none;
-            padding: 0.7rem 0;
             width: 100%;
+            padding: 0.6rem 0;
             color: inherit;
-            outline: none;
             font-size: 1rem;
+            outline: none;
         }
+
         .search-global input::placeholder {
-            color: #aaa;
+            color: #7f8596;
         }
+
         .header-actions {
             display: flex;
-            gap: 0.8rem;
             align-items: center;
+            gap: 0.8rem;
         }
+
         .header-actions button {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
             color: white;
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             cursor: pointer;
             transition: 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
+
         body.light-mode .header-actions button {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0,0,0,0.05);
             color: #333;
+            border-color: rgba(0,0,0,0.1);
         }
+
         .header-actions button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.07);
         }
+
         .clock {
-            font-size: 1.3rem;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.4rem 1rem;
+            background: rgba(255,255,255,0.08);
+            padding: 0.5rem 1.2rem;
             border-radius: 40px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.15);
         }
+
         .weather-widget {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.3rem 1rem;
+            background: rgba(0,0,0,0.3);
+            padding: 0.5rem 1.2rem;
             border-radius: 40px;
-            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .weather-widget i {
-            color: #ffd966;
-        }
+
+        /* Barra de favoritos */
         .favorites-bar {
-            background: rgba(30, 30, 40, 0.7);
+            background: rgba(25, 28, 40, 0.8);
             backdrop-filter: blur(8px);
-            border-radius: 50px;
-            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            padding: 0.7rem 1.8rem;
             margin-bottom: 2rem;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255,255,255,0.1);
         }
+
         .favorites-title {
-            font-size: 0.9rem;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            color: #b5bcd0;
+            letter-spacing: 0.5px;
         }
+
         .favorites-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
-            flex: 1;
+            gap: 0.7rem;
         }
+
         .favorite-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.4rem 0.8rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
+            background: rgba(255,255,255,0.08);
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.5rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: 0.2s;
             border: 1px solid transparent;
         }
+
         .favorite-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.2);
         }
-        .favorite-item i {
-            font-size: 0.8rem;
-            color: #ffb703;
+
+        .favorite-item i:first-child {
+            color: #ffb347;
         }
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
+
+        .favorite-item .fa-times-circle {
+            color: #ff7b7b;
+            font-size: 0.9rem;
+        }
+
+        /* Seção "Uso Diário" (destaque) */
+        .daily-section {
             margin-bottom: 2rem;
         }
-        .category-card {
-            background: rgba(20, 20, 30, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-        }
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.7);
-            border-color: rgba(100, 130, 255, 0.5);
-        }
-        .category-title {
-            font-size: 1.4rem;
+
+        .daily-title {
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #fff;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 0.5rem;
-        }
-        .category-title i {
-            color: #5f7fff;
-        }
-        .links-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-        .link-item {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            color: inherit;
-            font-size: 0.95rem;
-            transition: 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            cursor: pointer;
-        }
-        .link-item i {
-            font-size: 1.1rem;
-            color: #a0a0ff;
-        }
-        .link-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(1.03);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-        .link-item .fa-star {
-            margin-left: 0.3rem;
-            font-size: 0.8rem;
-            color: #aaa;
-            transition: 0.2s;
-        }
-        .link-item .fa-star:hover {
-            color: #ffb703;
-        }
-        .link-item .fa-star.favorited {
-            color: #ffb703;
-        }
-        .history-section {
-            background: rgba(20, 20, 30, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .history-title {
-            font-size: 1.2rem;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
+
+        .daily-title i {
+            color: #fbbf24;
+        }
+
+        .daily-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .daily-item {
+            background: rgba(40, 45, 60, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 28px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .daily-item:hover {
+            transform: translateY(-4px);
+            background: rgba(55, 60, 80, 0.8);
+            border-color: #7b8cff;
+        }
+
+        .daily-item i {
+            font-size: 2rem;
+            color: #a0b0ff;
+        }
+
+        .daily-item span {
+            font-weight: 500;
+        }
+
+        /* Grid de categorias */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-card {
+            background: rgba(22, 25, 37, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 1.8rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(130, 150, 255, 0.5);
+            box-shadow: 0 25px 40px -12px #2a2f5a;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.8rem;
+        }
+
+        .category-title i {
+            color: #7b8cff;
+            font-size: 1.6rem;
+        }
+
+        .links-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .link-item {
+            background: rgba(255,255,255,0.06);
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            color: inherit;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+        }
+
+        .link-item i:first-child {
+            font-size: 1.2rem;
+            color: #aab6fe;
+        }
+
+        .link-item:hover {
+            background: rgba(255,255,255,0.12);
+            transform: scale(1.02);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .link-item .fa-star {
+            margin-left: 0.3rem;
+            font-size: 0.9rem;
+            color: #6f7588;
+            transition: 0.2s;
+        }
+
+        .link-item .fa-star:hover {
+            color: #fbbf24;
+        }
+
+        .link-item .fa-star.favorited {
+            color: #fbbf24;
+        }
+
+        /* Histórico */
+        .history-section {
+            background: rgba(22, 25, 37, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 1.8rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .history-title {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         .history-items {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
         }
+
         .history-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 0.4rem 1rem;
+            background: rgba(255,255,255,0.05);
+            padding: 0.5rem 1.2rem;
             border-radius: 30px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            cursor: pointer;
+            transition: 0.2s;
         }
+
+        .history-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
         .footer {
             text-align: center;
-            padding: 1.5rem;
-            color: #aaa;
+            padding: 2rem 1rem;
+            color: #8e96b0;
             font-size: 0.9rem;
         }
+
+        /* Responsivo */
         @media (max-width: 700px) {
             .header {
                 flex-direction: column;
                 align-items: stretch;
             }
-            .clock {
-                text-align: center;
+            .header-actions {
+                justify-content: space-between;
+            }
+            .daily-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .daily-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- HEADER -->
         <header class="header">
             <div class="logo">
                 <h1>CentralWeb</h1>
@@ -319,15 +442,28 @@
             </div>
         </header>
 
+        <!-- FAVORITOS -->
         <div class="favorites-bar">
             <span class="favorites-title"><i class="fas fa-star"></i> Favoritos</span>
             <div class="favorites-list" id="favoritesList">
-                <!-- Favoritos via JS -->
+                <!-- preenchido via js -->
             </div>
         </div>
 
+        <!-- SEÇÃO USO DIÁRIO (destaque) -->
+        <div class="daily-section">
+            <div class="daily-title">
+                <i class="fas fa-rocket"></i> ⭐ Uso Diário
+            </div>
+            <div class="daily-grid" id="dailyGrid">
+                <!-- será populado com os principais -->
+            </div>
+        </div>
+
+        <!-- GRADE DE CATEGORIAS -->
         <div class="categories-grid" id="categoriesGrid"></div>
 
+        <!-- HISTÓRICO -->
         <div class="history-section">
             <div class="history-title">
                 <i class="fas fa-history"></i> Últimos acessos
@@ -335,14 +471,17 @@
             <div class="history-items" id="historyItems"></div>
         </div>
 
+        <!-- FOOTER -->
         <footer class="footer">
-            <p>© 2026 CentralWeb • Seu hub da internet</p>
+            <p>© 2026 CentralWeb • Seu hub da internet • <i class="fas fa-bolt"></i> versão avançada</p>
         </footer>
     </div>
 
     <script>
         (function() {
+            // ========== BASE DE DADOS COMPLETA ==========
             const categories = [
+                // (as categorias originais já estão aqui, mas adicionaremos as novas)
                 { name: "🔍 Busca", icon: "fa-search", links: [
                     { name: "Google", url: "https://www.google.com", icon: "fab fa-google" },
                     { name: "Bing", url: "https://www.bing.com", icon: "fab fa-microsoft" },
@@ -370,7 +509,45 @@
                     { name: "Gemini", url: "https://gemini.google.com", icon: "fas fa-brain" },
                     { name: "Claude", url: "https://claude.ai", icon: "fas fa-magic" }
                 ]},
-                { name: "🛒 E-commerce", icon: "fa-shopping-cart", links: [
+                // NOVAS CATEGORIAS ALTAMENTE BUSCADAS:
+                { name: "🍳 Receitas", icon: "fa-utensils", links: [
+                    { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
+                    { name: "Receitas Globo", url: "https://receitas.globo.com", icon: "fas fa-globe" },
+                    { name: "Tasty", url: "https://tasty.co", icon: "fas fa-cookie-bite" }
+                ]},
+                { name: "💼 Empregos", icon: "fa-briefcase", links: [
+                    { name: "LinkedIn", url: "https://linkedin.com", icon: "fab fa-linkedin" },
+                    { name: "Indeed", url: "https://indeed.com", icon: "fas fa-building" },
+                    { name: "Catho", url: "https://catho.com.br", icon: "fas fa-file-signature" }
+                ]},
+                { name: "💰 Finanças / Cripto", icon: "fa-chart-line", links: [
+                    { name: "TradingView", url: "https://tradingview.com", icon: "fas fa-chart-simple" },
+                    { name: "Investing.com", url: "https://investing.com", icon: "fas fa-coins" },
+                    { name: "CoinMarketCap", url: "https://coinmarketcap.com", icon: "fas fa-bitcoin-sign" }
+                ]},
+                { name: "🧠 Educação / Cursos", icon: "fa-graduation-cap", links: [
+                    { name: "Coursera", url: "https://coursera.org", icon: "fas fa-laptop" },
+                    { name: "Udemy", url: "https://udemy.com", icon: "fas fa-chalkboard-user" },
+                    { name: "Khan Academy", url: "https://khanacademy.org", icon: "fas fa-school" }
+                ]},
+                { name: "🎮 Games", icon: "fa-gamepad", links: [
+                    { name: "Steam", url: "https://steampowered.com", icon: "fab fa-steam" },
+                    { name: "Epic Games", url: "https://epicgames.com", icon: "fab fa-epic-games" }
+                ]},
+                { name: "📦 Downloads", icon: "fa-download", links: [
+                    { name: "MediaFire", url: "https://mediafire.com", icon: "fas fa-cloud-upload-alt" },
+                    { name: "APKMirror", url: "https://apkmirror.com", icon: "fas fa-mobile-alt" }
+                ]},
+                { name: "🌐 Tradutor", icon: "fa-language", links: [
+                    { name: "Google Tradutor", url: "https://translate.google.com", icon: "fas fa-language" },
+                    { name: "DeepL", url: "https://deepl.com", icon: "fas fa-gem" }
+                ]},
+                { name: "🧭 Mapas", icon: "fa-map-location-dot", links: [
+                    { name: "Google Maps", url: "https://maps.google.com", icon: "fas fa-map" },
+                    { name: "Waze", url: "https://waze.com", icon: "fab fa-waze" }
+                ]},
+                // Mantendo as categorias anteriores que ainda não foram listadas (E-commerce, Notícias, Informação, Música, Ferramentas)
+                { name: "🛒 E-commerce", icon: "fa-cart-shopping", links: [
                     { name: "Amazon", url: "https://amazon.com", icon: "fab fa-amazon" },
                     { name: "Mercado Livre", url: "https://mercadolivre.com.br", icon: "fas fa-store" },
                     { name: "Shopee", url: "https://shopee.com.br", icon: "fas fa-bag-shopping" },
@@ -398,18 +575,31 @@
                 ]}
             ];
 
+            // Lista para a seção "Uso Diário" (destaque)
+            const dailyLinks = [
+                { name: "Google", url: "https://google.com", icon: "fab fa-google" },
+                { name: "WhatsApp", url: "https://web.whatsapp.com", icon: "fab fa-whatsapp" },
+                { name: "YouTube", url: "https://youtube.com", icon: "fab fa-youtube" },
+                { name: "Google Maps", url: "https://maps.google.com", icon: "fas fa-map" },
+                { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
+            ];
+
+            // ========== ESTADO GLOBAL ==========
             let favorites = JSON.parse(localStorage.getItem('centralweb_favorites')) || [];
             let history = JSON.parse(localStorage.getItem('centralweb_history')) || [];
             let currentTheme = localStorage.getItem('centralweb_theme') || 'dark';
 
+            // ========== ELEMENTOS DOM ==========
             const categoriesGrid = document.getElementById('categoriesGrid');
             const favoritesList = document.getElementById('favoritesList');
             const historyItems = document.getElementById('historyItems');
+            const dailyGrid = document.getElementById('dailyGrid');
             const themeToggle = document.getElementById('themeToggle');
             const fullscreenBtn = document.getElementById('fullscreenBtn');
             const globalSearch = document.getElementById('globalSearch');
             const clockEl = document.getElementById('liveClock');
 
+            // ========== FUNÇÕES DE PERSISTÊNCIA ==========
             function saveFavorites() {
                 localStorage.setItem('centralweb_favorites', JSON.stringify(favorites));
             }
@@ -422,12 +612,27 @@
                 renderHistory();
             }
 
+            // ========== RENDERIZAÇÃO DA SEÇÃO USO DIÁRIO ==========
+            function renderDaily() {
+                let html = '';
+                dailyLinks.forEach(link => {
+                    html += `
+                        <div class="daily-item" onclick="window.open('${link.url}','_blank'); addToHistory('${link.name}', '${link.url}');">
+                            <i class="${link.icon}"></i>
+                            <span>${link.name}</span>
+                        </div>
+                    `;
+                });
+                dailyGrid.innerHTML = html;
+            }
+
+            // ========== RENDERIZAR CATEGORIAS (com filtro) ==========
             function renderCategories(filter = '') {
                 const f = filter.toLowerCase();
                 let html = '';
                 categories.forEach(cat => {
                     const filteredLinks = cat.links.filter(l => l.name.toLowerCase().includes(f) || cat.name.toLowerCase().includes(f));
-                    if (!filteredLinks.length && f) return;
+                    if (filteredLinks.length === 0 && f !== '') return;
                     html += `<div class="category-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div><div class="links-list">`;
                     filteredLinks.forEach(link => {
                         const isFav = favorites.some(f => f.url === link.url);
@@ -441,31 +646,34 @@
                 categoriesGrid.innerHTML = html;
             }
 
+            // ========== RENDERIZAR FAVORITOS ==========
             function renderFavorites() {
-                if (!favorites.length) {
+                if (favorites.length === 0) {
                     favoritesList.innerHTML = '<span style="color:#aaa;">Nenhum favorito</span>';
                     return;
                 }
                 favoritesList.innerHTML = favorites.map(f => `
-                    <div class="favorite-item" onclick="window.open('${f.url}','_blank'); addToHistory('${f.name}','${f.url}');">
+                    <div class="favorite-item" onclick="window.open('${f.url}','_blank'); addToHistory('${f.name}', '${f.url}');">
                         <i class="${f.icon}"></i> ${f.name}
-                        <i class="fas fa-times-circle" style="color:#ff6b6b;" onclick="event.stopPropagation(); removeFavorite('${f.url}')"></i>
+                        <i class="fas fa-times-circle" onclick="event.stopPropagation(); removeFavorite('${f.url}')"></i>
                     </div>
                 `).join('');
             }
 
+            // ========== RENDERIZAR HISTÓRICO ==========
             function renderHistory() {
-                if (!history.length) {
+                if (history.length === 0) {
                     historyItems.innerHTML = '<span style="color:#aaa;">Nenhum acesso recente</span>';
                     return;
                 }
                 historyItems.innerHTML = history.map(h => `
-                    <div class="history-item" onclick="window.open('${h.url}','_blank');">
+                    <div class="history-item" onclick="window.open('${h.url}','_blank'); addToHistory('${h.name}', '${h.url}');">
                         <i class="fas fa-clock"></i> ${h.name}
                     </div>
                 `).join('');
             }
 
+            // ========== FUNÇÕES DE FAVORITO (expostas globalmente) ==========
             window.toggleFavorite = (name, url, icon) => {
                 const idx = favorites.findIndex(f => f.url === url);
                 if (idx >= 0) favorites.splice(idx, 1);
@@ -482,6 +690,7 @@
                 renderCategories(globalSearch.value);
             };
 
+            // ========== TEMA ==========
             function applyTheme(theme) {
                 if (theme === 'light') {
                     document.body.classList.add('light-mode');
@@ -492,23 +701,33 @@
                 }
                 localStorage.setItem('centralweb_theme', theme);
             }
+
             themeToggle.addEventListener('click', () => {
-                applyTheme(document.body.classList.contains('light-mode') ? 'dark' : 'light');
+                const newTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+                applyTheme(newTheme);
             });
 
+            // ========== TELA CHEIA ==========
             fullscreenBtn.addEventListener('click', () => {
-                if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-                else document.exitFullscreen();
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
             });
 
+            // ========== BUSCA GLOBAL ==========
             globalSearch.addEventListener('input', (e) => renderCategories(e.target.value));
 
+            // ========== RELÓGIO ==========
             function updateClock() {
-                clockEl.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false });
+                const now = new Date();
+                clockEl.textContent = now.toLocaleTimeString('pt-BR', { hour12: false });
             }
             setInterval(updateClock, 1000);
             updateClock();
 
+            // ========== REGISTRAR CLIQUE EM LINKS PARA HISTÓRICO ==========
             document.addEventListener('click', (e) => {
                 const link = e.target.closest('.link-item');
                 if (link && link.href) {
@@ -518,11 +737,18 @@
                 }
             });
 
-            applyTheme(currentTheme);
-            renderCategories();
-            renderFavorites();
-            renderHistory();
+            // ========== INICIALIZAÇÃO ==========
+            function init() {
+                applyTheme(currentTheme);
+                renderDaily();
+                renderCategories();
+                renderFavorites();
+                renderHistory();
+            }
 
+            init();
+
+            // expor addToHistory globalmente
             window.addToHistory = addToHistory;
         })();
     </script>
