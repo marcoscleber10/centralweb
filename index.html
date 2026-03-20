@@ -9,6 +9,7 @@
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
+        /* (mesmo estilo da versão anterior - manter igual) */
         * {
             margin: 0;
             padding: 0;
@@ -40,7 +41,6 @@
             margin: 0 auto;
         }
 
-        /* Glassmorphism base */
         .glass-card {
             background: rgba(20, 22, 35, 0.7);
             backdrop-filter: blur(12px);
@@ -51,7 +51,6 @@
             transition: all 0.2s ease;
         }
 
-        /* Header */
         .header {
             display: flex;
             flex-wrap: wrap;
@@ -106,7 +105,6 @@
             color: #7f8596;
         }
 
-        /* Sugestões da busca inteligente */
         .search-suggestions {
             position: absolute;
             top: 100%;
@@ -174,7 +172,6 @@
             border: 1px solid rgba(255,255,255,0.15);
         }
 
-        /* Widget cripto */
         .crypto-widget {
             display: flex;
             gap: 1rem;
@@ -190,14 +187,13 @@
             font-size: 0.95rem;
         }
         .crypto-item i {
-            color: #f2a900; /* Bitcoin color */
+            color: #f2a900;
         }
         .crypto-item span:last-child {
             font-weight: 600;
             color: #7bff9c;
         }
 
-        /* Barra de favoritos (agora visual) */
         .favorites-bar {
             background: rgba(25, 28, 40, 0.8);
             backdrop-filter: blur(8px);
@@ -245,7 +241,6 @@
             margin-left: 0.5rem;
         }
 
-        /* Seção Seus Projetos (destaque) */
         .projects-section {
             margin-bottom: 2rem;
         }
@@ -294,7 +289,6 @@
             color: #aab6fe;
         }
 
-        /* Seção Uso Diário */
         .daily-section {
             margin-bottom: 2rem;
         }
@@ -341,7 +335,6 @@
             font-weight: 500;
         }
 
-        /* Grid de categorias */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
@@ -416,7 +409,6 @@
             color: #fbbf24;
         }
 
-        /* Histórico */
         .history-section {
             background: rgba(22, 25, 37, 0.6);
             backdrop-filter: blur(8px);
@@ -459,7 +451,6 @@
             font-size: 0.9rem;
         }
 
-        /* Responsivo */
         @media (max-width: 700px) {
             .header {
                 flex-direction: column;
@@ -496,7 +487,6 @@
             </div>
             <div class="header-actions">
                 <div class="clock" id="liveClock">--:--:--</div>
-                <!-- Widget Cripto -->
                 <div class="crypto-widget" id="cryptoWidget">
                     <div class="crypto-item"><i class="fab fa-bitcoin"></i> <span id="btcPrice">$67,890</span></div>
                     <div class="crypto-item"><i class="fab fa-ethereum"></i> <span id="ethPrice">$3,456</span></div>
@@ -514,12 +504,10 @@
         <!-- FAVORITOS VISUAIS -->
         <div class="favorites-bar">
             <div class="favorites-title"><i class="fas fa-star"></i> Seus favoritos</div>
-            <div class="favorites-list" id="favoritesList">
-                <!-- preenchido via js -->
-            </div>
+            <div class="favorites-list" id="favoritesList"></div>
         </div>
 
-        <!-- SEÇÃO SEUS PROJETOS (links pessoais) -->
+        <!-- SEÇÃO SEUS PROJETOS (ATUALIZADA) -->
         <div class="projects-section">
             <div class="projects-title">
                 <i class="fas fa-rocket"></i> 🚀 Seus Projetos
@@ -597,7 +585,13 @@
                     { name: "Arkham", url: "https://arkm.com/wallet/assets", icon: "fas fa-user-secret" },
                     { name: "CryptoQuant", url: "https://cryptoquant.com/asset/btc/chart/market-indicator/mvrv-ratio", icon: "fas fa-chart-line" },
                     { name: "SpikeToSpike", url: "https://spiketospike.com/fee", icon: "fas fa-bolt" },
-                    { name: "Investing.com", url: "https://investing.com", icon: "fas fa-coins" }
+                    { name: "Investing.com", url: "https://investing.com", icon: "fas fa-coins" },
+                    // NOVOS LINKS DE CRIPTO
+                    { name: "DentPeg", url: "http://dentpeg.com", icon: "fas fa-credit-card" },
+                    { name: "Ether.fi", url: "https://www.ether.fi/refer/a217ecdb", icon: "fas fa-fire" },
+                    { name: "OKX", url: "https://okx.com/pt-br/join/5126561?utm_campaign=pay-card&display=4", icon: "fab fa-bitcoin" },
+                    { name: "PixGo", url: "https://pixgo.org/register.php", icon: "fas fa-pix" },
+                    { name: "Crypix.me", url: "http://crypix.me/auth/register.php?ref=marcoscleberc", icon: "fas fa-camera" }
                 ]},
                 { name: "🍳 Receitas", icon: "fa-utensils", links: [
                     { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
@@ -661,13 +655,17 @@
                 ]}
             ];
 
-            // Seus projetos pessoais
+            // SEUS PROJETOS PESSOAIS (ATUALIZADO)
             const userProjects = [
                 { name: "Preço Justo", url: "https://marcoscleber10.github.io/Pre-o-justo/", icon: "fas fa-calculator" },
                 { name: "Clube DCA", url: "https://marcoscleber10.github.io/Clube-DCA/", icon: "fas fa-users" },
                 { name: "Sinais Invest", url: "https://marcoscleber10.github.io/sinaisinvest", icon: "fas fa-chart-line" },
                 { name: "Invest Opção", url: "https://marcoscleber10.github.io/Investopcao/", icon: "fas fa-chart-pie" },
-                { name: "Scalp Calc", url: "https://scalp-calc.vercel.app/", icon: "fas fa-calculator" }
+                { name: "Scalp Calc", url: "https://scalp-calc.vercel.app/", icon: "fas fa-calculator" },
+                // NOVOS PROJETOS
+                { name: "História das Copas", url: "https://historia-copas-620634786284.southamerica-east1.run.app", icon: "fas fa-futbol" },
+                { name: "Pepinômetro", url: "https://pepinometro-620634786284.southamerica-east1.run.app", icon: "fas fa-balance-scale" },
+                { name: "Todey Cards", url: "http://www.todey.xyz/cards", icon: "fas fa-credit-card" }
             ];
 
             // Lista para a seção "Uso Diário"
@@ -679,7 +677,7 @@
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
             ];
 
-            // Mapeamento para busca inteligente (incluindo seus projetos)
+            // Mapeamento para busca inteligente (ATUALIZADO)
             const smartSearchMap = [
                 { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
                 { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
@@ -691,7 +689,16 @@
                 { keywords: ["clube", "dca"], url: "https://marcoscleber10.github.io/Clube-DCA/", name: "Clube DCA" },
                 { keywords: ["sinais"], url: "https://marcoscleber10.github.io/sinaisinvest", name: "Sinais Invest" },
                 { keywords: ["invest", "opcao"], url: "https://marcoscleber10.github.io/Investopcao/", name: "Invest Opção" },
-                { keywords: ["scalp", "calc"], url: "https://scalp-calc.vercel.app/", name: "Scalp Calc" }
+                { keywords: ["scalp", "calc"], url: "https://scalp-calc.vercel.app/", name: "Scalp Calc" },
+                // NOVOS ATALHOS
+                { keywords: ["copas", "historia", "futebol"], url: "https://historia-copas-620634786284.southamerica-east1.run.app", name: "História das Copas" },
+                { keywords: ["pepino", "politica", "transparencia"], url: "https://pepinometro-620634786284.southamerica-east1.run.app", name: "Pepinômetro" },
+                { keywords: ["todey", "cards"], url: "http://www.todey.xyz/cards", name: "Todey Cards" },
+                { keywords: ["dentpeg"], url: "http://dentpeg.com", name: "DentPeg" },
+                { keywords: ["ether.fi"], url: "https://www.ether.fi/refer/a217ecdb", name: "Ether.fi" },
+                { keywords: ["okx"], url: "https://okx.com/pt-br/join/5126561", name: "OKX" },
+                { keywords: ["pixgo"], url: "https://pixgo.org/register.php", name: "PixGo" },
+                { keywords: ["crypix"], url: "http://crypix.me/auth/register.php?ref=marcoscleberc", name: "Crypix.me" }
             ];
 
             // ========== ESTADO GLOBAL ==========
@@ -732,7 +739,7 @@
                         <div class="project-item" onclick="window.open('${p.url}','_blank'); addToHistory('${p.name}', '${p.url}');">
                             <i class="${p.icon}"></i>
                             <span>${p.name}</span>
-                            <small>${p.url.replace('https://', '')}</small>
+                            <small>${p.url.replace('https://', '').replace('http://', '')}</small>
                         </div>
                     `;
                 });
@@ -803,7 +810,6 @@
                     searchSuggestions.style.display = 'none';
                     return;
                 }
-                // Procurar correspondências
                 const matches = smartSearchMap.filter(item => 
                     item.keywords.some(kw => kw.includes(text) || text.includes(kw))
                 );
@@ -826,7 +832,6 @@
 
             globalSearch.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    // Se houver sugestão, pega a primeira
                     const firstSuggestion = searchSuggestions.querySelector('div');
                     if (firstSuggestion) {
                         firstSuggestion.click();
@@ -834,7 +839,6 @@
                 }
             });
 
-            // Fechar sugestões ao clicar fora
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.search-global')) {
                     searchSuggestions.style.display = 'none';
@@ -894,7 +898,6 @@
 
             // ========== WIDGET CRIPTO (simulado) ==========
             function updateCrypto() {
-                // Simulação de valores
                 document.getElementById('btcPrice').textContent = '$' + (67000 + Math.floor(Math.random() * 1000));
                 document.getElementById('ethPrice').textContent = '$' + (3400 + Math.floor(Math.random() * 100));
                 document.getElementById('dominance').textContent = (50 + Math.random() * 5).toFixed(1) + '%';
@@ -924,7 +927,6 @@
 
             init();
 
-            // expor addToHistory globalmente
             window.addToHistory = addToHistory;
         })();
     </script>
