@@ -83,6 +83,7 @@
             border-radius: 60px;
             padding: 0.5rem 1.2rem;
             border: 1px solid rgba(255,255,255,0.15);
+            position: relative;
         }
 
         .search-global i {
@@ -103,6 +104,33 @@
 
         .search-global input::placeholder {
             color: #7f8596;
+        }
+
+        /* Sugestões da busca inteligente */
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(30, 32, 45, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            margin-top: 0.5rem;
+            padding: 0.8rem 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 1000;
+            display: none;
+        }
+        .search-suggestions div {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .search-suggestions div:hover {
+            background: rgba(255,255,255,0.1);
         }
 
         .header-actions {
@@ -146,74 +174,81 @@
             border: 1px solid rgba(255,255,255,0.15);
         }
 
-        .weather-widget {
+        /* Widget cripto */
+        .crypto-widget {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
             background: rgba(0,0,0,0.3);
             padding: 0.5rem 1.2rem;
             border-radius: 40px;
             border: 1px solid rgba(255,255,255,0.1);
         }
+        .crypto-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.95rem;
+        }
+        .crypto-item i {
+            color: #f2a900; /* Bitcoin color */
+        }
+        .crypto-item span:last-child {
+            font-weight: 600;
+            color: #7bff9c;
+        }
 
-        /* Barra de favoritos */
+        /* Barra de favoritos (agora visual) */
         .favorites-bar {
             background: rgba(25, 28, 40, 0.8);
             backdrop-filter: blur(8px);
             border-radius: 60px;
-            padding: 0.7rem 1.8rem;
+            padding: 1rem 1.8rem;
             margin-bottom: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1rem;
             border: 1px solid rgba(255,255,255,0.1);
         }
-
         .favorites-title {
             font-size: 1rem;
             color: #b5bcd0;
+            margin-bottom: 1rem;
             letter-spacing: 0.5px;
         }
-
         .favorites-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.7rem;
+            gap: 1rem;
         }
-
         .favorite-item {
-            background: rgba(255,255,255,0.08);
-            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.8rem 1.5rem;
             border-radius: 40px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
+            gap: 0.8rem;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
             transition: 0.2s;
             border: 1px solid transparent;
         }
-
         .favorite-item:hover {
-            background: rgba(255,255,255,0.15);
-            border-color: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
         }
-
         .favorite-item i:first-child {
+            font-size: 1.3rem;
             color: #ffb347;
         }
-
         .favorite-item .fa-times-circle {
             color: #ff7b7b;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            margin-left: 0.5rem;
         }
 
-        /* Seção "Uso Diário" (destaque) */
+        /* Seção Uso Diário */
         .daily-section {
             margin-bottom: 2rem;
         }
-
         .daily-title {
             font-size: 1.5rem;
             font-weight: 600;
@@ -222,22 +257,19 @@
             align-items: center;
             gap: 0.5rem;
         }
-
         .daily-title i {
             color: #fbbf24;
         }
-
         .daily-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
         }
-
         .daily-item {
             background: rgba(40, 45, 60, 0.7);
             backdrop-filter: blur(8px);
             border-radius: 28px;
-            padding: 1rem;
+            padding: 1.2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -247,18 +279,15 @@
             transition: 0.2s;
             cursor: pointer;
         }
-
         .daily-item:hover {
             transform: translateY(-4px);
             background: rgba(55, 60, 80, 0.8);
             border-color: #7b8cff;
         }
-
         .daily-item i {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #a0b0ff;
         }
-
         .daily-item span {
             font-weight: 500;
         }
@@ -270,7 +299,6 @@
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-
         .category-card {
             background: rgba(22, 25, 37, 0.7);
             backdrop-filter: blur(10px);
@@ -279,13 +307,11 @@
             border: 1px solid rgba(255,255,255,0.08);
             transition: all 0.2s;
         }
-
         .category-card:hover {
             transform: translateY(-5px);
             border-color: rgba(130, 150, 255, 0.5);
             box-shadow: 0 25px 40px -12px #2a2f5a;
         }
-
         .category-title {
             font-size: 1.5rem;
             font-weight: 600;
@@ -296,18 +322,15 @@
             border-bottom: 2px solid rgba(255,255,255,0.1);
             padding-bottom: 0.8rem;
         }
-
         .category-title i {
             color: #7b8cff;
             font-size: 1.6rem;
         }
-
         .links-list {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
         }
-
         .link-item {
             background: rgba(255,255,255,0.06);
             padding: 0.6rem 1.2rem;
@@ -322,29 +345,24 @@
             border: 1px solid rgba(255,255,255,0.05);
             cursor: pointer;
         }
-
         .link-item i:first-child {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #aab6fe;
         }
-
         .link-item:hover {
             background: rgba(255,255,255,0.12);
             transform: scale(1.02);
             border-color: rgba(255,255,255,0.2);
         }
-
         .link-item .fa-star {
             margin-left: 0.3rem;
             font-size: 0.9rem;
             color: #6f7588;
             transition: 0.2s;
         }
-
         .link-item .fa-star:hover {
             color: #fbbf24;
         }
-
         .link-item .fa-star.favorited {
             color: #fbbf24;
         }
@@ -358,7 +376,6 @@
             margin-top: 2rem;
             border: 1px solid rgba(255,255,255,0.08);
         }
-
         .history-title {
             font-size: 1.4rem;
             margin-bottom: 1.2rem;
@@ -366,13 +383,11 @@
             align-items: center;
             gap: 0.5rem;
         }
-
         .history-items {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
         }
-
         .history-item {
             background: rgba(255,255,255,0.05);
             padding: 0.5rem 1.2rem;
@@ -384,7 +399,6 @@
             cursor: pointer;
             transition: 0.2s;
         }
-
         .history-item:hover {
             background: rgba(255,255,255,0.1);
         }
@@ -408,6 +422,9 @@
             .daily-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+            .crypto-widget {
+                flex-wrap: wrap;
+            }
         }
         @media (max-width: 480px) {
             .daily-grid {
@@ -426,12 +443,15 @@
             <div class="search-global">
                 <i class="fas fa-search"></i>
                 <input type="text" id="globalSearch" placeholder="Buscar plataforma...">
+                <div class="search-suggestions" id="searchSuggestions"></div>
             </div>
             <div class="header-actions">
                 <div class="clock" id="liveClock">--:--:--</div>
-                <div class="weather-widget" id="weatherWidget">
-                    <i class="fas fa-cloud-sun"></i>
-                    <span>22°C • São Paulo</span>
+                <!-- Widget Cripto -->
+                <div class="crypto-widget" id="cryptoWidget">
+                    <div class="crypto-item"><i class="fab fa-bitcoin"></i> <span id="btcPrice">$67,890</span></div>
+                    <div class="crypto-item"><i class="fab fa-ethereum"></i> <span id="ethPrice">$3,456</span></div>
+                    <div class="crypto-item"><i class="fas fa-chart-line"></i> <span id="dominance">52%</span></div>
                 </div>
                 <button id="themeToggle" title="Alternar tema">
                     <i class="fas fa-moon"></i>
@@ -442,22 +462,20 @@
             </div>
         </header>
 
-        <!-- FAVORITOS -->
+        <!-- FAVORITOS VISUAIS -->
         <div class="favorites-bar">
-            <span class="favorites-title"><i class="fas fa-star"></i> Favoritos</span>
+            <div class="favorites-title"><i class="fas fa-star"></i> Seus favoritos</div>
             <div class="favorites-list" id="favoritesList">
                 <!-- preenchido via js -->
             </div>
         </div>
 
-        <!-- SEÇÃO USO DIÁRIO (destaque) -->
+        <!-- SEÇÃO USO DIÁRIO -->
         <div class="daily-section">
             <div class="daily-title">
                 <i class="fas fa-rocket"></i> ⭐ Uso Diário
             </div>
-            <div class="daily-grid" id="dailyGrid">
-                <!-- será populado com os principais -->
-            </div>
+            <div class="daily-grid" id="dailyGrid"></div>
         </div>
 
         <!-- GRADE DE CATEGORIAS -->
@@ -481,7 +499,6 @@
         (function() {
             // ========== BASE DE DADOS COMPLETA ==========
             const categories = [
-                // (as categorias originais já estão aqui, mas adicionaremos as novas)
                 { name: "🔍 Busca", icon: "fa-search", links: [
                     { name: "Google", url: "https://www.google.com", icon: "fab fa-google" },
                     { name: "Bing", url: "https://www.bing.com", icon: "fab fa-microsoft" },
@@ -507,9 +524,9 @@
                 { name: "🤖 Inteligência Artificial", icon: "fa-robot", links: [
                     { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" },
                     { name: "Gemini", url: "https://gemini.google.com", icon: "fas fa-brain" },
-                    { name: "Claude", url: "https://claude.ai", icon: "fas fa-magic" }
+                    { name: "Claude", url: "https://claude.ai", icon: "fas fa-magic" },
+                    { name: "DeepSeek", url: "https://deepseek.com", icon: "fas fa-dragon" } // Adicionado DeepSeek
                 ]},
-                // NOVAS CATEGORIAS ALTAMENTE BUSCADAS:
                 { name: "🍳 Receitas", icon: "fa-utensils", links: [
                     { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
                     { name: "Receitas Globo", url: "https://receitas.globo.com", icon: "fas fa-globe" },
@@ -546,7 +563,6 @@
                     { name: "Google Maps", url: "https://maps.google.com", icon: "fas fa-map" },
                     { name: "Waze", url: "https://waze.com", icon: "fab fa-waze" }
                 ]},
-                // Mantendo as categorias anteriores que ainda não foram listadas (E-commerce, Notícias, Informação, Música, Ferramentas)
                 { name: "🛒 E-commerce", icon: "fa-cart-shopping", links: [
                     { name: "Amazon", url: "https://amazon.com", icon: "fab fa-amazon" },
                     { name: "Mercado Livre", url: "https://mercadolivre.com.br", icon: "fas fa-store" },
@@ -575,13 +591,23 @@
                 ]}
             ];
 
-            // Lista para a seção "Uso Diário" (destaque)
+            // Lista para a seção "Uso Diário"
             const dailyLinks = [
                 { name: "Google", url: "https://google.com", icon: "fab fa-google" },
                 { name: "WhatsApp", url: "https://web.whatsapp.com", icon: "fab fa-whatsapp" },
                 { name: "YouTube", url: "https://youtube.com", icon: "fab fa-youtube" },
                 { name: "Google Maps", url: "https://maps.google.com", icon: "fas fa-map" },
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
+            ];
+
+            // Mapeamento para busca inteligente
+            const smartSearchMap = [
+                { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
+                { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
+                { keywords: ["chat", "gpt", "chatgpt"], url: "https://chat.openai.com", name: "ChatGPT" },
+                { keywords: ["whats", "whatsapp"], url: "https://web.whatsapp.com", name: "WhatsApp" },
+                { keywords: ["youtube", "yt"], url: "https://youtube.com", name: "YouTube" },
+                { keywords: ["maps", "mapa", "waze"], url: "https://maps.google.com", name: "Google Maps" }
             ];
 
             // ========== ESTADO GLOBAL ==========
@@ -597,6 +623,7 @@
             const themeToggle = document.getElementById('themeToggle');
             const fullscreenBtn = document.getElementById('fullscreenBtn');
             const globalSearch = document.getElementById('globalSearch');
+            const searchSuggestions = document.getElementById('searchSuggestions');
             const clockEl = document.getElementById('liveClock');
 
             // ========== FUNÇÕES DE PERSISTÊNCIA ==========
@@ -612,7 +639,7 @@
                 renderHistory();
             }
 
-            // ========== RENDERIZAÇÃO DA SEÇÃO USO DIÁRIO ==========
+            // ========== RENDERIZAÇÃO ==========
             function renderDaily() {
                 let html = '';
                 dailyLinks.forEach(link => {
@@ -626,7 +653,6 @@
                 dailyGrid.innerHTML = html;
             }
 
-            // ========== RENDERIZAR CATEGORIAS (com filtro) ==========
             function renderCategories(filter = '') {
                 const f = filter.toLowerCase();
                 let html = '';
@@ -646,10 +672,9 @@
                 categoriesGrid.innerHTML = html;
             }
 
-            // ========== RENDERIZAR FAVORITOS ==========
             function renderFavorites() {
                 if (favorites.length === 0) {
-                    favoritesList.innerHTML = '<span style="color:#aaa;">Nenhum favorito</span>';
+                    favoritesList.innerHTML = '<span style="color:#aaa;">Clique na estrela para favoritar</span>';
                     return;
                 }
                 favoritesList.innerHTML = favorites.map(f => `
@@ -660,7 +685,6 @@
                 `).join('');
             }
 
-            // ========== RENDERIZAR HISTÓRICO ==========
             function renderHistory() {
                 if (history.length === 0) {
                     historyItems.innerHTML = '<span style="color:#aaa;">Nenhum acesso recente</span>';
@@ -673,7 +697,52 @@
                 `).join('');
             }
 
-            // ========== FUNÇÕES DE FAVORITO (expostas globalmente) ==========
+            // ========== BUSCA INTELIGENTE ==========
+            function handleSmartSearch(input) {
+                const text = input.toLowerCase().trim();
+                if (text === '') {
+                    searchSuggestions.style.display = 'none';
+                    return;
+                }
+                // Procurar correspondências
+                const matches = smartSearchMap.filter(item => 
+                    item.keywords.some(kw => kw.includes(text) || text.includes(kw))
+                );
+                if (matches.length > 0) {
+                    searchSuggestions.innerHTML = matches.map(m => 
+                        `<div onclick="window.open('${m.url}','_blank'); addToHistory('${m.name}', '${m.url}'); globalSearch.value=''; searchSuggestions.style.display='none';">
+                            <i class="fas fa-arrow-right"></i> Ir para ${m.name}
+                        </div>`
+                    ).join('');
+                    searchSuggestions.style.display = 'block';
+                } else {
+                    searchSuggestions.style.display = 'none';
+                }
+            }
+
+            globalSearch.addEventListener('input', (e) => {
+                renderCategories(e.target.value);
+                handleSmartSearch(e.target.value);
+            });
+
+            globalSearch.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    // Se houver sugestão, pega a primeira
+                    const firstSuggestion = searchSuggestions.querySelector('div');
+                    if (firstSuggestion) {
+                        firstSuggestion.click();
+                    }
+                }
+            });
+
+            // Fechar sugestões ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-global')) {
+                    searchSuggestions.style.display = 'none';
+                }
+            });
+
+            // ========== FAVORITOS ==========
             window.toggleFavorite = (name, url, icon) => {
                 const idx = favorites.findIndex(f => f.url === url);
                 if (idx >= 0) favorites.splice(idx, 1);
@@ -716,9 +785,6 @@
                 }
             });
 
-            // ========== BUSCA GLOBAL ==========
-            globalSearch.addEventListener('input', (e) => renderCategories(e.target.value));
-
             // ========== RELÓGIO ==========
             function updateClock() {
                 const now = new Date();
@@ -726,6 +792,16 @@
             }
             setInterval(updateClock, 1000);
             updateClock();
+
+            // ========== WIDGET CRIPTO (simulado) ==========
+            function updateCrypto() {
+                // Simulação de valores
+                document.getElementById('btcPrice').textContent = '$' + (67000 + Math.floor(Math.random() * 1000));
+                document.getElementById('ethPrice').textContent = '$' + (3400 + Math.floor(Math.random() * 100));
+                document.getElementById('dominance').textContent = (50 + Math.random() * 5).toFixed(1) + '%';
+            }
+            setInterval(updateCrypto, 5000);
+            updateCrypto();
 
             // ========== REGISTRAR CLIQUE EM LINKS PARA HISTÓRICO ==========
             document.addEventListener('click', (e) => {
