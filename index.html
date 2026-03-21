@@ -412,6 +412,57 @@
             color: #fbbf24;
         }
 
+        /* Blocos informativos dentro da categoria combustível */
+        .fuel-info-block {
+            margin-top: 1rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed rgba(255,255,255,0.2);
+        }
+        .fuel-info-item {
+            background: rgba(30, 35, 50, 0.6);
+            border-radius: 24px;
+            padding: 1rem 1.2rem;
+            margin-top: 1rem;
+            transition: 0.2s;
+        }
+        .fuel-info-item:hover {
+            background: rgba(45, 50, 70, 0.7);
+            transform: translateY(-2px);
+        }
+        .fuel-info-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .fuel-info-title i {
+            color: #ffd966;
+        }
+        .fuel-info-desc {
+            font-size: 0.9rem;
+            color: #cbd5e6;
+            line-height: 1.4;
+        }
+        .fuel-info-desc strong {
+            color: #ffd966;
+        }
+        .fuel-info-button {
+            display: inline-block;
+            margin-top: 0.7rem;
+            background: #2a6f5c;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .fuel-info-button:hover {
+            background: #1e8f72;
+        }
+
         .ad-card {
             background: linear-gradient(145deg, #2a1f3a, #1a1f3a);
             border: 2px solid #ffd966;
@@ -697,24 +748,35 @@
                     { name: "DentPeg", url: "http://dentpeg.com", icon: "fas fa-credit-card" },
                     { name: "PixGo", url: "https://pixgo.org/register.php", icon: "fas fa-pix" }
                 ]},
-                // CATEGORIA COMBUSTÍVEL COMPLETA (com Livelo)
-                { name: "⛽ Economize Combustível", icon: "fa-gas-pump", links: [
-                    { name: "Shell Box (R$15 desconto)", url: "https://shellbox.onelink.me/0Eik/6c597fbb?autofill=TRUE&automaticInsertion=TRUE&voucherCode=SFO5024", icon: "fas fa-gas-pump" },
-                    { name: "Petrobras App", url: "https://play.google.com/store/apps/details?id=br.com.petrobras.br.ma02", icon: "fab fa-android" },
-                    { name: "Baratão Combustíveis (Android)", url: "https://play.google.com/store/apps/details?id=com.barataoapp&referrer=00296621774", icon: "fab fa-android" },
-                    { name: "Baratão Combustíveis (iOS)", url: "https://apps.apple.com/app/id1613535824?at=00296621774", icon: "fab fa-apple" },
-                    { name: "Egasosa", url: "https://www.egasosa.com.br", icon: "fas fa-gas-pump" },
-                    { name: "Abastece Aí (Ipiranga)", url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", icon: "fas fa-gas-pump" },
-                    { name: "Livelo – Pontos ALE", url: "https://www.livelo.com.br", icon: "fas fa-star" }
-                ] },
-                // CARD INFORMATIVO DA LIVELO/ALE
+                // CATEGORIA COMBUSTÍVEL COM OS LINKS + BLOCOS INFORMATIVOS ABAIXO
                 {
-                    name: "💡 Dica: Pontos Livelo nos Postos ALE",
-                    icon: "fa-lightbulb",
-                    isInfo: true,
-                    content: "✅ Abasteça em postos ALE e pague com pontos Livelo via QR Code. Ganhe pontos a cada R$3. Use cupons como <strong>ALE20</strong> para bônus. Combine com cashback do cartão e o desconto pode passar de <strong>R$1 por litro</strong>!"
+                    name: "⛽ Economize Combustível",
+                    icon: "fa-gas-pump",
+                    links: [
+                        { name: "Shell Box (R$15 desconto)", url: "https://shellbox.onelink.me/0Eik/6c597fbb?autofill=TRUE&automaticInsertion=TRUE&voucherCode=SFO5024", icon: "fas fa-gas-pump" },
+                        { name: "Petrobras App", url: "https://play.google.com/store/apps/details?id=br.com.petrobras.br.ma02", icon: "fab fa-android" },
+                        { name: "Baratão Combustíveis (Android)", url: "https://play.google.com/store/apps/details?id=com.barataoapp&referrer=00296621774", icon: "fab fa-android" },
+                        { name: "Baratão Combustíveis (iOS)", url: "https://apps.apple.com/app/id1613535824?at=00296621774", icon: "fab fa-apple" },
+                        { name: "Egasosa", url: "https://www.egasosa.com.br", icon: "fas fa-gas-pump" },
+                        { name: "Abastece Aí (Ipiranga)", url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", icon: "fas fa-gas-pump" },
+                        { name: "Livelo – Pontos ALE", url: "https://www.livelo.com.br", icon: "fas fa-star" }
+                    ],
+                    extraBlocks: [
+                        {
+                            title: "💡 Dica: Pontos Livelo nos Postos ALE",
+                            icon: "fa-lightbulb",
+                            content: "Abasteça em postos ALE e pague com pontos Livelo via QR Code. Ganhe pontos a cada R$3. Use cupons como <strong>ALE20</strong> para bônus. Combine com cashback do cartão e o desconto pode passar de <strong>R$1 por litro</strong>!"
+                        },
+                        {
+                            title: "📍 Preço Justo – Compare por geolocalização",
+                            icon: "fa-map-marker-alt",
+                            content: "Encontre o menor preço da gasolina, etanol e diesel perto de você. Atualizado em tempo real com base na sua região.",
+                            buttonText: "Ver preços agora",
+                            buttonUrl: "https://site-combustai-620634786284.southamerica-east1.run.app/"
+                        }
+                    ]
                 },
-                // DEMAIS CATEGORIAS
+                // DEMAIS CATEGORIAS (Receitas, Empregos, etc.)
                 { name: "🍳 Receitas", icon: "fa-utensils", links: [
                     { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
                     { name: "Receitas Globo", url: "https://receitas.globo.com", icon: "fas fa-globe" },
@@ -804,8 +866,9 @@
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
             ];
 
-            // SMART SEARCH (palavras-chave para todos os links)
+            // SMART SEARCH (mantido igual, já incluindo as novas palavras)
             const smartSearchMap = [
+                // ... mantém todos os itens da versão anterior (para não alongar, mas estão todos aqui no código final)
                 { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
                 { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
                 { keywords: ["chat", "gpt", "chatgpt"], url: "https://chat.openai.com", name: "ChatGPT" },
@@ -885,7 +948,8 @@
                 { keywords: ["baratao"], url: "https://play.google.com/store/apps/details?id=com.barataoapp&referrer=00296621774", name: "Baratão Combustíveis" },
                 { keywords: ["egasosa"], url: "https://www.egasosa.com.br", name: "Egasosa" },
                 { keywords: ["ipiranga", "abastece ai"], url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", name: "Abastece Aí" },
-                { keywords: ["livelo", "ale", "pontos"], url: "https://www.livelo.com.br", name: "Livelo – Pontos ALE" }
+                { keywords: ["livelo", "ale", "pontos"], url: "https://www.livelo.com.br", name: "Livelo – Pontos ALE" },
+                { keywords: ["preço justo", "menor preço"], url: "https://site-combustai-620634786284.southamerica-east1.run.app/", name: "Preço Justo – Geolocalização" }
             ];
 
             // ========== FUNÇÕES DE COTAÇÕES ==========
@@ -925,7 +989,7 @@
                 }
             }
 
-            // ========== RENDERIZAÇÃO ==========
+            // ========== RENDERIZAÇÃO COM SUPORTE A EXTRA BLOCOS ==========
             let favorites = JSON.parse(localStorage.getItem('centralweb_favorites')) || [];
             let history = JSON.parse(localStorage.getItem('centralweb_history')) || [];
             let currentTheme = localStorage.getItem('centralweb_theme') || 'dark';
@@ -988,17 +1052,36 @@
                         </div>`;
                         return;
                     }
+
                     const filteredLinks = cat.links.filter(l => l.name.toLowerCase().includes(f) || cat.name.toLowerCase().includes(f));
-                    if (filteredLinks.length === 0 && f !== '') return;
-                    html += `<div class="category-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div><div class="links-list">`;
+                    if (filteredLinks.length === 0 && f !== '' && !cat.extraBlocks) return;
+                    // Se for a categoria combustível e tiver blocos extras, adiciona após os links
+                    let categoryHtml = `<div class="category-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div><div class="links-list">`;
                     filteredLinks.forEach(link => {
                         const isFav = favorites.some(f => f.url === link.url);
-                        html += `<a href="${link.url}" target="_blank" class="link-item" data-url="${link.url}" data-name="${link.name}">
+                        categoryHtml += `<a href="${link.url}" target="_blank" class="link-item" data-url="${link.url}" data-name="${link.name}">
                             <i class="${link.icon}"></i> ${link.name}
                             <i class="fas fa-star ${isFav ? 'favorited' : ''}" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite('${link.name}', '${link.url}', '${link.icon}')"></i>
                         </a>`;
                     });
-                    html += '</div></div>';
+                    categoryHtml += `</div>`;
+
+                    // Se a categoria é a de combustível e tem extraBlocks, insere-os abaixo
+                    if (cat.extraBlocks && cat.extraBlocks.length) {
+                        categoryHtml += `<div class="fuel-info-block">`;
+                        cat.extraBlocks.forEach(block => {
+                            categoryHtml += `
+                                <div class="fuel-info-item">
+                                    <div class="fuel-info-title"><i class="fas ${block.icon}"></i> ${block.title}</div>
+                                    <div class="fuel-info-desc">${block.content}</div>
+                                    ${block.buttonText ? `<a href="${block.buttonUrl}" target="_blank" class="fuel-info-button">${block.buttonText}</a>` : ''}
+                                </div>
+                            `;
+                        });
+                        categoryHtml += `</div>`;
+                    }
+                    categoryHtml += `</div>`;
+                    html += categoryHtml;
                 });
                 categoriesGrid.innerHTML = html;
             }
@@ -1066,7 +1149,7 @@
 
             // Registrar cliques
             document.addEventListener('click', (e) => {
-                const link = e.target.closest('.link-item, .daily-item, .project-item, .ad-button');
+                const link = e.target.closest('.link-item, .daily-item, .project-item, .ad-button, .fuel-info-button');
                 if (link && link.href) { const name = link.dataset.name || link.innerText.trim() || 'Link'; const url = link.href; if (name && url) addToHistory(name, url); }
             });
 
