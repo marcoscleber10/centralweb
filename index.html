@@ -861,6 +861,7 @@
             align-items: center;
             gap: 0.5rem;
             color: #ffd966;
+            flex-wrap: wrap;
         }
         .news-item {
             padding: 0.5rem 0;
@@ -2099,7 +2100,7 @@ function analyzeTextSentiment(text) {
     return Math.min(10, Math.max(-10, score));
 }
 
-// Buscar notícias via RSS (dados REAIS)
+// Buscar notícias via RSS (dados REAIS) - AGORA BUSCA ATÉ 10 POR FONTE E LIMITA A 10 NO TOTAL
 async function fetchRealNews() {
     const sources = [
         { name: "CoinDesk", url: "https://www.coindesk.com/arc/outboundfeeds/rss/", type: "global" },
@@ -2115,7 +2116,8 @@ async function fetchRealNews() {
             const parser = new DOMParser();
             const xml = parser.parseFromString(data.contents, "text/xml");
             const items = xml.querySelectorAll("item");
-            for (let i = 0; i < Math.min(5, items.length); i++) {
+            // Pegar até 10 itens por fonte (antes era 5)
+            for (let i = 0; i < Math.min(10, items.length); i++) {
                 const title = items[i].querySelector("title")?.textContent || "";
                 const link = items[i].querySelector("link")?.textContent || "";
                 if (title && title.length > 10) {
@@ -2130,7 +2132,12 @@ async function fetchRealNews() {
             }
         } catch(e) { console.error("Erro ao buscar", source.name); }
     }
-    return allNews;
+    // Embaralhar levemente e pegar os primeiros 10 (garantindo variedade)
+    for (let i = allNews.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allNews[i], allNews[j]] = [allNews[j], allNews[i]];
+    }
+    return allNews.slice(0, 10);
 }
 
 // Buscar Fear & Greed Index (dados REAIS)
@@ -2225,10 +2232,57 @@ function getRealSummary(sentimentScore, fearGreed, news) {
     }
 }
 
-// Função principal de atualização do Sentient Radar (dados REAIS)
+// Função para traduzir título usando MyMemory (gratuita, sem chave)
+async function translateTitle(title, targetLang = "pt") {
+    try {
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(title)}&langpair=en|${targetLang}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data && data.responseData && data.responseData.translatedText) {
+            return data.responseData.translatedText;
+        }
+    } catch (e) {
+        console.warn("Erro na tradução:", e);
+    }
+    return title; // fallback para original
+}
+
+// Função que traduz todos os títulos de notícias exibidos
+async function translateNewsToPortuguese() {
+    const newsItems = document.querySelectorAll('#sentientContent .news-item');
+    if (!newsItems.length) return;
+    // Desabilitar botão enquanto traduz
+    const translateBtn = document.getElementById('translateNewsBtn');
+    if (translateBtn) {
+        translateBtn.disabled = true;
+        translateBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Traduzindo...';
+    }
+    // Para cada item, pegar o texto atual (pode ser original ou já traduzido), mas vamos sempre pegar o original armazenado? 
+    // Vamos armazenar os títulos originais no dataset para evitar re-tradução desnecessária.
+    for (let item of newsItems) {
+        const originalTitle = item.dataset.originalTitle || item.innerText.split('(')[0].replace('📰', '').trim();
+        if (!item.dataset.originalTitle) {
+            item.dataset.originalTitle = originalTitle;
+        }
+        const translated = await translateTitle(originalTitle);
+        // Atualizar apenas o texto do título, mantendo a fonte (small)
+        const smallTag = item.querySelector('small');
+        if (smallTag) {
+            item.innerHTML = `📰 ${translated} <small>${smallTag.innerText}</small>`;
+        } else {
+            item.innerHTML = `📰 ${translated}`;
+        }
+    }
+    if (translateBtn) {
+        translateBtn.disabled = false;
+        translateBtn.innerHTML = '🌐 Traduzir para PT';
+    }
+}
+
+// Função principal de atualização do Sentient Radar (dados REAIS) - agora com 10 notícias
 async function updateRealSentientData() {
     try {
-        const news = await fetchRealNews();
+        const news = await fetchRealNews(); // já retorna até 10
         const fearGreed = await fetchRealFearGreed();
         const coingecko = await fetchRealCoinGeckoData();
         const sentimentScore = calculateRealSentimentScore(news, fearGreed);
@@ -2260,7 +2314,7 @@ async function updateRealSentientData() {
                 open_interest: coingecko.open_interest,
                 defi_dominance: coingecko.defi_dominance + "%"
             },
-            news: news.slice(0, 5)
+            news: news.slice(0, 10) // garantia de 10
         };
         renderRealSentientCard();
         document.getElementById("sentientUpdateInfo").innerHTML = `Última: ${new Date().toLocaleTimeString()} | Próxima em 15min (dados reais)`;
@@ -2294,11 +2348,19 @@ function renderRealSentientCard() {
         <div class="sentient-stats">
             ${Object.entries(sentientData.correlations).map(([k,v]) => `<div class="sentient-stat-item"><div class="label">${k.replace(/_/g,' ').toUpperCase()}</div><div class="value">${v}</div></div>`).join('')}
         </div>
-        <div class="news-list"><h4><i class="fas fa-rss"></i> Últimas notícias (CoinDesk, Cointelegraph, Portal Bitcoin, InfoMoney)</h4>
-            ${sentientData.news.map(n => `<div class="news-item" onclick="window.open('${n.link}', '_blank')">📰 ${n.title} <small>(${n.source})</small></div>`).join('')}
+        <div class="news-list">
+            <h4><i class="fas fa-rss"></i> Últimas notícias (10) 
+                <button id="translateNewsBtn" class="secundario" style="margin-left: 0.8rem; padding: 0.2rem 0.8rem; font-size: 0.8rem;"><i class="fas fa-language"></i> Traduzir para PT</button>
+            </h4>
+            ${sentientData.news.map(n => `<div class="news-item" data-original-title="${n.title.replace(/"/g, '&quot;')}" onclick="window.open('${n.link}', '_blank')">📰 ${n.title} <small>(${n.source})</small></div>`).join('')}
             ${sentientData.news.length === 0 ? '<div class="news-item">Carregando notícias...</div>' : ''}
         </div>
     `;
+    // Após renderizar, anexar evento do botão de traduzir
+    const translateBtn = document.getElementById('translateNewsBtn');
+    if (translateBtn) {
+        translateBtn.addEventListener('click', translateNewsToPortuguese);
+    }
 }
             // ==================== INICIALIZAÇÃO ====================
             function init() {
