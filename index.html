@@ -2,9 +2,9 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CentralWeb • Hub da Internet + DeFi + Meteorologia</title>
-    <!-- Font Awesome 6 -->
+    <!-- Font Awesome 6 (ícones) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -33,19 +33,6 @@
             background: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        body.light-mode .card-moderno {
-            background: white;
-            border: 1px solid #ddd;
-        }
-
-        body.light-mode .pool-card {
-            background: rgba(0, 0, 0, 0.03);
-        }
-
-        body.light-mode .pool-item {
-            background: rgba(0, 0, 0, 0.05);
         }
 
         .container {
@@ -257,10 +244,10 @@
             margin-left: 0.5rem;
         }
 
-        .projects-section, .daily-section {
+        .projects-section {
             margin-bottom: 2rem;
         }
-        .projects-title, .daily-title {
+        .projects-title {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 1rem;
@@ -269,12 +256,12 @@
             gap: 0.5rem;
             color: #ffd966;
         }
-        .projects-grid, .daily-grid {
+        .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
         }
-        .project-item, .daily-item {
+        .project-item {
             background: linear-gradient(145deg, #2a2f4b, #1e2235);
             border-radius: 28px;
             padding: 1.2rem;
@@ -287,28 +274,78 @@
             transition: 0.2s;
             cursor: pointer;
         }
-        .project-item:hover, .daily-item:hover {
+        .project-item:hover {
             transform: translateY(-4px);
             border-color: #7b8cff;
             box-shadow: 0 10px 20px #1e1e3f;
         }
-        .project-item i, .daily-item i {
+        .project-item i {
             font-size: 2rem;
             color: #7b8cff;
         }
-        .project-item span, .daily-item span {
+        .project-item span {
             font-weight: 600;
             font-size: 1.1rem;
         }
+        .project-item small {
+            font-size: 0.8rem;
+            color: #aab6fe;
+        }
 
-        /* Cards Financeiros */
+        .daily-section {
+            margin-bottom: 2rem;
+        }
+        .daily-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .daily-title i {
+            color: #fbbf24;
+        }
+        .daily-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        .daily-item {
+            background: rgba(40, 45, 60, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 28px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .daily-item:hover {
+            transform: translateY(-4px);
+            background: rgba(55, 60, 80, 0.8);
+            border-color: #7b8cff;
+        }
+        .daily-item i {
+            font-size: 2.2rem;
+            color: #a0b0ff;
+        }
+        .daily-item span {
+            font-weight: 500;
+        }
+
+        /* NOVOS CARDS FINANCEIROS */
         .financas-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
-        .card-moderno {
+        .card-financeiro {
             background: rgba(25, 28, 40, 0.85);
             backdrop-filter: blur(12px);
             border-radius: 32px;
@@ -316,10 +353,10 @@
             border: 1px solid rgba(255,255,255,0.15);
             transition: transform 0.2s;
         }
-        .card-moderno:hover {
+        .card-financeiro:hover {
             transform: translateY(-5px);
         }
-        .card-moderno h3 {
+        .card-financeiro h3 {
             display: flex;
             align-items: center;
             gap: 0.6rem;
@@ -392,6 +429,7 @@
         /* LIQUIDITY POOL ANALYTICS */
         .pool-section {
             margin-bottom: 2rem;
+            padding: 1.5rem;
         }
         .pool-header {
             display: flex;
@@ -400,6 +438,13 @@
             align-items: center;
             margin-bottom: 1.5rem;
             gap: 1rem;
+        }
+        .pool-header h3 {
+            color: #ffd966;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .pool-search {
             flex: 1;
@@ -410,6 +455,7 @@
             border-radius: 60px;
             padding: 0.5rem 1.2rem;
             border: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 1.5rem;
         }
         .pool-search i {
             color: #9aa0b0;
@@ -476,15 +522,15 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
         .pool-pair i {
             color: #ffd966;
-            font-size: 0.9rem;
         }
         .pool-fee {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             background: rgba(0,0,0,0.4);
-            padding: 0.2rem 0.6rem;
+            padding: 0.2rem 0.5rem;
             border-radius: 20px;
             color: #aab6fe;
         }
@@ -496,7 +542,7 @@
         .pool-details {
             display: flex;
             gap: 1rem;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #aab6fe;
         }
         .empty-pools {
@@ -514,6 +560,7 @@
         /* METEOROLOGIA */
         .weather-section {
             margin-bottom: 2rem;
+            padding: 1.5rem;
         }
         .weather-header {
             display: flex;
@@ -523,7 +570,15 @@
             margin-bottom: 1.5rem;
             gap: 1rem;
         }
+        .weather-header h3 {
+            color: #ffd966;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
         .weather-search {
+            position: relative;
             flex: 1;
             min-width: 250px;
             display: flex;
@@ -532,7 +587,7 @@
             border-radius: 60px;
             padding: 0.5rem 1.2rem;
             border: 1px solid rgba(255,255,255,0.15);
-            position: relative;
+            margin-bottom: 1.5rem;
         }
         .weather-search i {
             color: #9aa0b0;
@@ -642,7 +697,6 @@
             color: #aab6fe;
         }
 
-        /* CATEGORIAS PRINCIPAIS */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
@@ -660,6 +714,7 @@
         .category-card:hover {
             transform: translateY(-5px);
             border-color: rgba(130, 150, 255, 0.5);
+            box-shadow: 0 25px 40px -12px #2a2f5a;
         }
         .category-title {
             font-size: 1.5rem;
@@ -701,6 +756,7 @@
         .link-item:hover {
             background: rgba(255,255,255,0.12);
             transform: scale(1.02);
+            border-color: rgba(255,255,255,0.2);
         }
         .link-item .fa-star {
             margin-left: 0.3rem;
@@ -708,7 +764,10 @@
             color: #6f7588;
             transition: 0.2s;
         }
-        .link-item .fa-star:hover, .link-item .fa-star.favorited {
+        .link-item .fa-star:hover {
+            color: #fbbf24;
+        }
+        .link-item .fa-star.favorited {
             color: #fbbf24;
         }
 
@@ -722,11 +781,61 @@
             border-radius: 24px;
             padding: 1rem 1.2rem;
             margin-top: 1rem;
+            transition: 0.2s;
         }
+        .fuel-info-item:hover {
+            background: rgba(45, 50, 70, 0.7);
+            transform: translateY(-2px);
+        }
+        .fuel-info-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .fuel-info-title i {
+            color: #ffd966;
+        }
+        .fuel-info-desc {
+            font-size: 0.9rem;
+            color: #cbd5e6;
+            line-height: 1.4;
+        }
+        .fuel-info-desc strong {
+            color: #ffd966;
+        }
+        .fuel-info-button {
+            display: inline-block;
+            margin-top: 0.7rem;
+            background: #2a6f5c;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .fuel-info-button:hover {
+            background: #1e8f72;
+        }
+
         .ad-card {
             background: linear-gradient(145deg, #2a1f3a, #1a1f3a);
             border: 2px solid #ffd966;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .ad-card .category-title {
+            border-bottom: none;
+            color: #ffd966;
+        }
+        .ad-card .category-title i {
+            color: #ffd966;
         }
         .ad-card .ad-button {
             background: #25D366;
@@ -739,6 +848,11 @@
             align-items: center;
             gap: 0.5rem;
             margin-top: 1rem;
+            transition: 0.2s;
+        }
+        .ad-card .ad-button:hover {
+            background: #128C7E;
+            transform: scale(1.05);
         }
 
         .history-section {
@@ -747,6 +861,14 @@
             border-radius: 32px;
             padding: 1.8rem;
             margin-top: 2rem;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .history-title {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         .history-items {
             display: flex;
@@ -757,7 +879,15 @@
             background: rgba(255,255,255,0.05);
             padding: 0.5rem 1.2rem;
             border-radius: 30px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             cursor: pointer;
+            transition: 0.2s;
+        }
+        .history-item:hover {
+            background: rgba(255,255,255,0.1);
         }
 
         .footer {
@@ -768,18 +898,43 @@
         }
 
         @media (max-width: 700px) {
-            .header { flex-direction: column; align-items: stretch; }
-            .financas-grid { grid-template-columns: 1fr; }
-            .weather-current { flex-direction: column; text-align: center; }
-            .weather-condition { text-align: center; }
-            .weather-details { flex-direction: column; }
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .header-actions {
+                justify-content: space-between;
+            }
+            .daily-grid, .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .crypto-widget {
+                justify-content: center;
+            }
+            .financas-grid, .pool-categories, .weather-details, .weather-forecast {
+                grid-template-columns: 1fr;
+            }
+            .weather-current {
+                flex-direction: column;
+                text-align: center;
+            }
+            .weather-condition {
+                text-align: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .daily-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <div class="logo"><h1>CentralWeb</h1></div>
+            <div class="logo">
+                <h1>CentralWeb</h1>
+            </div>
             <div class="search-global">
                 <i class="fas fa-search"></i>
                 <input type="text" id="globalSearch" placeholder="Buscar plataforma...">
@@ -787,14 +942,18 @@
             </div>
             <div class="header-actions">
                 <div class="clock" id="liveClock">--:--:--</div>
-                <div class="crypto-widget">
+                <div class="crypto-widget" id="cryptoWidget">
                     <div class="crypto-item"><i class="fab fa-bitcoin"></i> BTC: <span id="btcPrice">...</span></div>
                     <div class="crypto-item"><i class="fas fa-dollar-sign"></i> USD/BRL: <span id="usdbrl">...</span></div>
                     <div class="crypto-item"><i class="fas fa-oil-can"></i> Brent: <span id="brent">...</span></div>
                     <div class="crypto-item"><i class="fas fa-coins"></i> Ouro: <span id="gold">...</span></div>
                 </div>
-                <button id="themeToggle"><i class="fas fa-moon"></i></button>
-                <button id="fullscreenBtn"><i class="fas fa-expand"></i></button>
+                <button id="themeToggle" title="Alternar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="fullscreenBtn" title="Tela cheia">
+                    <i class="fas fa-expand"></i>
+                </button>
             </div>
         </header>
 
@@ -804,22 +963,26 @@
         </div>
 
         <div class="projects-section">
-            <div class="projects-title"><i class="fas fa-rocket"></i> 🚀 Seus Projetos</div>
+            <div class="projects-title">
+                <i class="fas fa-rocket"></i> 🚀 Seus Projetos
+            </div>
             <div class="projects-grid" id="projectsGrid"></div>
         </div>
 
         <div class="daily-section">
-            <div class="daily-title"><i class="fas fa-bolt"></i> ⭐ Uso Diário</div>
+            <div class="daily-title">
+                <i class="fas fa-bolt"></i> ⭐ Uso Diário
+            </div>
             <div class="daily-grid" id="dailyGrid"></div>
         </div>
 
-        <!-- CARDS FINANCEIROS EXISTENTES -->
+        <!-- CARDS FINANCEIROS (SERÃO PREENCHIDOS POR JS) -->
         <div class="financas-grid" id="financasGrid"></div>
 
-        <!-- LIQUIDITY POOL ANALYTICS - NOVO -->
-        <div class="pool-section glass-card" style="padding: 1.5rem;">
+        <!-- LIQUIDITY POOL ANALYTICS -->
+        <div class="pool-section glass-card">
             <div class="pool-header">
-                <h3 style="color: #ffd966;"><i class="fas fa-chart-line"></i> Liquidity Pool Analytics</h3>
+                <h3><i class="fas fa-chart-line"></i> Liquidity Pool Analytics</h3>
                 <button class="secundario" id="refreshPoolsBtn" style="padding: 0.5rem 1rem;"><i class="fas fa-sync-alt"></i> Atualizar</button>
             </div>
             <div class="pool-search">
@@ -831,10 +994,10 @@
             <div class="pool-update-info" id="poolUpdateInfo">Atualizando a cada 5 minutos...</div>
         </div>
 
-        <!-- METEOROLOGIA - NOVO -->
-        <div class="weather-section glass-card" style="padding: 1.5rem;">
+        <!-- METEOROLOGIA -->
+        <div class="weather-section glass-card">
             <div class="weather-header">
-                <h3 style="color: #ffd966;"><i class="fas fa-cloud-sun"></i> Meteorologia</h3>
+                <h3><i class="fas fa-cloud-sun"></i> Meteorologia</h3>
                 <button class="secundario" id="refreshWeatherBtn" style="padding: 0.5rem 1rem;"><i class="fas fa-sync-alt"></i> Atualizar</button>
             </div>
             <div class="weather-search">
@@ -850,19 +1013,225 @@
         </div>
 
         <div class="categories-grid" id="categoriesGrid"></div>
+
         <div class="history-section">
-            <div class="history-title"><i class="fas fa-history"></i> Últimos acessos</div>
+            <div class="history-title">
+                <i class="fas fa-history"></i> Últimos acessos
+            </div>
             <div class="history-items" id="historyItems"></div>
         </div>
+
         <footer class="footer">
-            <p>© 2026 CentralWeb • Hub da Internet • DeFi Pools • Meteorologia • Conversor Universal</p>
+            <p>© 2026 CentralWeb • Seu hub da internet • DeFi Pools • Meteorologia • <i class="fas fa-bolt"></i> edição especial</p>
         </footer>
     </div>
 
     <script>
         (function() {
-            // ==================== DADOS EXISTENTES (MANTIDOS) ====================
-            // Projetos Pessoais
+            // ========== CATEGORIAS COMPLETAS (ORIGINAL) ==========
+            const categories = [
+                { name: "🔍 Busca", icon: "fa-search", links: [
+                    { name: "Google", url: "https://www.google.com", icon: "fab fa-google" },
+                    { name: "Bing", url: "https://www.bing.com", icon: "fab fa-microsoft" },
+                    { name: "DuckDuckGo", url: "https://duckduckgo.com", icon: "fas fa-duck" },
+                    { name: "Yandex", url: "https://yandex.com", icon: "fab fa-yandex" }
+                ]},
+                { name: "📱 Redes Sociais", icon: "fa-share-alt", links: [
+                    { name: "Instagram", url: "https://instagram.com", icon: "fab fa-instagram" },
+                    { name: "Facebook", url: "https://facebook.com", icon: "fab fa-facebook" },
+                    { name: "TikTok", url: "https://tiktok.com", icon: "fab fa-tiktok" },
+                    { name: "X (Twitter)", url: "https://twitter.com", icon: "fab fa-x-twitter" },
+                    { name: "Reddit", url: "https://reddit.com", icon: "fab fa-reddit-alien" },
+                    { name: "Linktree", url: "https://linktr.ee/marcoscleberc", icon: "fas fa-tree" }
+                ]},
+                { name: "🎥 Vídeo & Streaming", icon: "fa-video", links: [
+                    { name: "YouTube", url: "https://youtube.com", icon: "fab fa-youtube" },
+                    { name: "Netflix", url: "https://netflix.com", icon: "fas fa-film" },
+                    { name: "Twitch", url: "https://twitch.tv", icon: "fab fa-twitch" }
+                ]},
+                { name: "💬 Comunicação", icon: "fa-comments", links: [
+                    { name: "WhatsApp Web", url: "https://web.whatsapp.com", icon: "fab fa-whatsapp" },
+                    { name: "Telegram", url: "https://web.telegram.org", icon: "fab fa-telegram" },
+                    { name: "Discord", url: "https://discord.com", icon: "fab fa-discord" },
+                    { name: "Zoom", url: "https://zoom.us", icon: "fas fa-video" }
+                ]},
+                { name: "🤖 Inteligência Artificial", icon: "fa-robot", links: [
+                    { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" },
+                    { name: "Gemini", url: "https://gemini.google.com", icon: "fas fa-brain" },
+                    { name: "Claude", url: "https://claude.ai", icon: "fas fa-magic" },
+                    { name: "DeepSeek", url: "https://deepseek.com", icon: "fas fa-dragon" },
+                    { name: "Grok", url: "https://grok.com", icon: "fas fa-chart-line" },
+                    { name: "Lumio AI", url: "https://www.lumio.ai/", icon: "fas fa-lightbulb" },
+                    { name: "Google Antigravity", url: "https://antigravity.google/", icon: "fab fa-google" },
+                    { name: "Manus", url: "https://manus.im/", icon: "fas fa-hand-peace" },
+                    { name: "n8n", url: "https://n8n.io/", icon: "fas fa-code-branch" },
+                    { name: "Flowise", url: "https://flowiseai.com/", icon: "fas fa-flow" },
+                    { name: "CrewAI", url: "https://www.crewai.com/", icon: "fas fa-users" },
+                    { name: "AutoGen (Microsoft)", url: "https://microsoft.github.io/autogen/", icon: "fab fa-microsoft" },
+                    { name: "LangChain", url: "https://www.langchain.com/", icon: "fas fa-link" },
+                    { name: "eesel AI", url: "https://www.eesel.ai/", icon: "fas fa-search" },
+                    { name: "Microsoft Copilot Studio", url: "https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio", icon: "fab fa-microsoft" },
+                    { name: "IBM Watsonx Assistant", url: "https://www.ibm.com/products/watsonx-assistant", icon: "fab fa-ibm" },
+                    { name: "Sentient", url: "https://chat.sentient.xyz/", icon: "fas fa-robot" }
+                ]},
+                { name: "📊 Finanças (Análise & Dados)", icon: "fa-chart-pie", links: [
+                    { name: "TradingView", url: "https://tradingview.com", icon: "fas fa-chart-simple" },
+                    { name: "TradingView Heatmap", url: "https://www.tradingview.com/heatmap/stock/#%7B%22dataSource%22%3A%22SPX500%22%2C%22blockColor%22%3A%22change%22%2C%22blockSize%22%3A%22market_cap_basic%22%2C%22grouping%22%3A%22sector%22%7D", icon: "fas fa-fire" },
+                    { name: "Finviz Map", url: "https://finviz.com/map.ashx", icon: "fas fa-map" },
+                    { name: "Coin360", url: "https://coin360.com", icon: "fas fa-globe" },
+                    { name: "CoinMarketCap", url: "https://coinmarketcap.com", icon: "fas fa-chart-bar" },
+                    { name: "CryptoRank", url: "https://cryptorank.io/price/bitcoin/analytics", icon: "fas fa-ranking-star" },
+                    { name: "Coinglass", url: "https://coinglass.com", icon: "fas fa-glass-water" },
+                    { name: "DeFi Llama (Solana)", url: "https://defillama.com/chain/Solana", icon: "fas fa-llama" },
+                    { name: "Arkham", url: "https://arkm.com/wallet/assets", icon: "fas fa-user-secret" },
+                    { name: "CryptoQuant", url: "https://cryptoquant.com/asset/btc/chart/market-indicator/mvrv-ratio", icon: "fas fa-chart-line" },
+                    { name: "SpikeToSpike", url: "https://spiketospike.com/fee", icon: "fas fa-bolt" },
+                    { name: "Investing.com", url: "https://investing.com", icon: "fas fa-coins" }
+                ]},
+                { name: "💳 Cripto (Corretoras & Pagamentos)", icon: "fa-credit-card", links: [
+                    { name: "Binance", url: "https://www.binance.com/referral/earn-together/refer2earn-usdc/claim?hl=pt&ref=GRO_28502_X3ASN", icon: "fab fa-bitcoin" },
+                    { name: "OKX", url: "https://okx.com/pt-br/join/5126561", icon: "fab fa-bitcoin" },
+                    { name: "Bybit", url: "https://bybit.com/invite?ref=6MOOPN", icon: "fab fa-bitcoin" },
+                    { name: "Kucoin", url: "https://www.kucoin.com/r/rf/QBSXLPYE", icon: "fas fa-coins" },
+                    { name: "Gate.io", url: "https://app.bxjddjt.com/referral/earn-together/invite/U1ESVV0?ref=U1ESVV0&ref_type=103&utm_cmp=rXJBDjtJ&activity_id=1772462196891", icon: "fas fa-gate" },
+                    { name: "Coinbase", url: "https://coinbase.com/join/U43LRXQ?src=android-whatsapp", icon: "fab fa-coinbase" },
+                    { name: "Kraken", url: "https://invite.kraken.com/JDNW/e5jtbd5m", icon: "fab fa-kraken" },
+                    { name: "Bitget", url: "https://l1nq.com/viX10", icon: "fas fa-bolt" },
+                    { name: "Bingx", url: "https://bingx.com/invite/L6KDF9/", icon: "fas fa-chart-line" },
+                    { name: "Mexc", url: "https://promote.mexc.com/r/6ekeguuA", icon: "fas fa-coins" },
+                    { name: "Coinex", url: "https://www.coinex.com/register?refer_code=z6s4m&channel=Referral", icon: "fas fa-coins" },
+                    { name: "Backpack", url: "https://backpack.exchange/refer/marcoscleberc", icon: "fas fa-backpack" },
+                    { name: "HiperLiquid", url: "https://app.hyperliquid.xyz/join/MARCOSCLEBER", icon: "fas fa-water" },
+                    { name: "Aster", url: "https://www.asterdex.com/pt-BR/referral/499C9C", icon: "fas fa-star" },
+                    { name: "Ether.fi", url: "https://www.ether.fi/refer/a217ecdb", icon: "fas fa-fire" },
+                    { name: "Crypto.com", url: "https://crypto.com/app/94cf85cfwx", icon: "fab fa-crypto" },
+                    { name: "Bybit Card", url: "https://bybit.com/invite?ref=6MOOPN", icon: "fas fa-credit-card" },
+                    { name: "Revolut", url: "https://revolut.com/marcos5njm", icon: "fas fa-credit-card" },
+                    { name: "AstroPay", url: "https://astropay.com/Kj6IFzgR8g", icon: "fas fa-credit-card" },
+                    { name: "Redotpay", url: "https://url.hk/i/pt/teder", icon: "fas fa-credit-card" },
+                    { name: "Oobit", url: "https://get.oobit.app/jzrrer", icon: "fab fa-bitcoin" },
+                    { name: "Zeal", url: "https://zeal.go.link/6iCO9?adj_label=2614ac9c-34d5-428f-a6ea-6bd41933bf3a&adj_campaign=copy", icon: "fas fa-credit-card" },
+                    { name: "Tuyo", url: "https://get.tuyo.com/code/DGGNSU", icon: "fas fa-credit-card" },
+                    { name: "Amulets", url: "https://play.google.com/store/apps/details?id=io.amulets.wallet", icon: "fas fa-gem" },
+                    { name: "Offramp", url: "https://offramp.xyz/login?ref=buq0dx", icon: "fas fa-exchange-alt" },
+                    { name: "Alfred P2P", url: "https://www.alfredp2p.io/fee", icon: "fas fa-handshake" },
+                    { name: "P2P.me", url: "https://app.p2p.me/recommend?address=0x4eBbC6C03BCCF6B62797C2641e2111173Fd04C11&nonce=838763&signature=0x7a24224ef98e72b0b90aeb5f67c49bb967746eca07ff4aa133cc8428c165098c1141180098aee8ce1bcb7940fb26eff070583f00ccef9a421cb63b3b0d99eda61b", icon: "fas fa-handshake" },
+                    { name: "Crypix.me", url: "https://crypix.me/auth/register.php?ref=marcoscleberc", icon: "fas fa-camera" },
+                    { name: "RoyalBTC", url: "https://www.royalbtc.io/", icon: "fab fa-bitcoin" },
+                    { name: "Chainless", url: "https://chainless.finance/download", icon: "fas fa-link" },
+                    { name: "Kast Finance", url: "https://go.kast.xyz/VqVO/NB70TILN", icon: "fas fa-wallet" },
+                    { name: "Ripio", url: "https://join.ripio.com/marcos_c_113", icon: "fas fa-university" },
+                    { name: "Bitybank", url: "https://bity.com.br/mgm/12910", icon: "fas fa-university" },
+                    { name: "Bipa", url: "https://bipa.app/convite/IAWASB", icon: "fas fa-university" },
+                    { name: "Recargapay", url: "https://recargapay.com.br/r/marcar507-ZAZb", icon: "fas fa-bolt" },
+                    { name: "Picnic", url: "https://usepicnic.com/app/referral/claim?ref=NQLMBK", icon: "fas fa-picnic" },
+                    { name: "Meliuz", url: "https://www.meliuz.com.br/i/ref_9d6f8a60?ref_source=81", icon: "fas fa-tag" },
+                    { name: "Neobankless", url: "https://neobankless.com/join?code=YLED154UXEFR", icon: "fas fa-university" },
+                    { name: "Bitso", url: "https://bitso.go.link/1cRnU?adj_label=vnezz", icon: "fas fa-coins" },
+                    { name: "Hylo", url: "https://hylo.so/leverage?ref=ZK7ZU0", icon: "fas fa-rocket" },
+                    { name: "Mercado Pago", url: "https://mpago.li/1j9HK37", icon: "fas fa-credit-card" },
+                    { name: "PagBank", url: "https://pagbank.vc/indica-maquininhas-ec6945bf7", icon: "fas fa-credit-card" },
+                    { name: "Ton", url: "https://ton.com.br/checkout/cart/?productId=TONMAX_TIER_SMART_POS&referrer=67CA397C-F5AB-4E5A-A20D-DAAFAFE99D77&userAnticipation=0&userTag=tonmax_tier&utm_medium=invite_share&utm_source=revendedor", icon: "fas fa-credit-card" },
+                    { name: "InfinitePay", url: "https://infinitepay.io/?rid=marcoscleber", icon: "fas fa-credit-card" },
+                    { name: "Truther", url: "https://play.google.com/store/apps/details?id=vc.smartpay.app", icon: "fas fa-wallet" },
+                    { name: "DentPeg", url: "http://dentpeg.com", icon: "fas fa-credit-card" },
+                    { name: "PixGo", url: "https://pixgo.org/register.php", icon: "fas fa-pix" }
+                ]},
+                {
+                    name: "⛽ Economize Combustível",
+                    icon: "fa-gas-pump",
+                    links: [
+                        { name: "Shell Box (R$15 desconto)", url: "https://shellbox.onelink.me/0Eik/6c597fbb?autofill=TRUE&automaticInsertion=TRUE&voucherCode=SFO5024", icon: "fas fa-gas-pump" },
+                        { name: "Petrobras App", url: "https://play.google.com/store/apps/details?id=br.com.petrobras.br.ma02", icon: "fab fa-android" },
+                        { name: "Baratão Combustíveis (Android)", url: "https://play.google.com/store/apps/details?id=com.barataoapp&referrer=00296621774", icon: "fab fa-android" },
+                        { name: "Baratão Combustíveis (iOS)", url: "https://apps.apple.com/app/id1613535824?at=00296621774", icon: "fab fa-apple" },
+                        { name: "Egasosa", url: "https://www.egasosa.com.br", icon: "fas fa-gas-pump" },
+                        { name: "Abastece Aí (Ipiranga)", url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", icon: "fas fa-gas-pump" },
+                        { name: "Livelo – Pontos ALE", url: "https://www.livelo.com.br", icon: "fas fa-star" }
+                    ],
+                    extraBlocks: [
+                        {
+                            title: "💡 Dica: Pontos Livelo nos Postos ALE",
+                            icon: "fa-lightbulb",
+                            content: "Abasteça em postos ALE e pague com pontos Livelo via QR Code. Ganhe pontos a cada R$3. Use cupons como <strong>ALE20</strong> para bônus. Combine com cashback do cartão e o desconto pode passar de <strong>R$1 por litro</strong>!"
+                        },
+                        {
+                            title: "📍 Preço Justo – Compare por geolocalização",
+                            icon: "fa-map-marker-alt",
+                            content: "Encontre o menor preço da gasolina, etanol e diesel perto de você. Atualizado em tempo real com base na sua região.",
+                            buttonText: "Ver preços agora",
+                            buttonUrl: "https://site-combustai-620634786284.southamerica-east1.run.app/"
+                        }
+                    ]
+                },
+                { name: "🍳 Receitas", icon: "fa-utensils", links: [
+                    { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
+                    { name: "Receitas Globo", url: "https://receitas.globo.com", icon: "fas fa-globe" },
+                    { name: "Tasty", url: "https://tasty.co", icon: "fas fa-cookie-bite" }
+                ]},
+                { name: "💼 Empregos", icon: "fa-briefcase", links: [
+                    { name: "LinkedIn", url: "https://linkedin.com", icon: "fab fa-linkedin" },
+                    { name: "Indeed", url: "https://indeed.com", icon: "fas fa-building" },
+                    { name: "Catho", url: "https://catho.com.br", icon: "fas fa-file-signature" }
+                ]},
+                { name: "🧠 Educação / Cursos", icon: "fa-graduation-cap", links: [
+                    { name: "Coursera", url: "https://coursera.org", icon: "fas fa-laptop" },
+                    { name: "Udemy", url: "https://udemy.com", icon: "fas fa-chalkboard-user" },
+                    { name: "Khan Academy", url: "https://khanacademy.org", icon: "fas fa-school" }
+                ]},
+                { name: "🎮 Games", icon: "fa-gamepad", links: [
+                    { name: "Steam", url: "https://steampowered.com", icon: "fab fa-steam" },
+                    { name: "Epic Games", url: "https://epicgames.com", icon: "fab fa-epic-games" }
+                ]},
+                { name: "📦 Downloads", icon: "fa-download", links: [
+                    { name: "MediaFire", url: "https://mediafire.com", icon: "fas fa-cloud-upload-alt" },
+                    { name: "APKMirror", url: "https://apkmirror.com", icon: "fas fa-mobile-alt" }
+                ]},
+                { name: "🌐 Tradutor", icon: "fa-language", links: [
+                    { name: "Google Tradutor", url: "https://translate.google.com", icon: "fas fa-language" },
+                    { name: "DeepL", url: "https://deepl.com", icon: "fas fa-gem" }
+                ]},
+                { name: "🧭 Mapas", icon: "fa-map-location-dot", links: [
+                    { name: "Google Maps", url: "https://maps.google.com", icon: "fas fa-map" },
+                    { name: "Waze", url: "https://waze.com", icon: "fab fa-waze" }
+                ]},
+                { name: "🛒 E-commerce", icon: "fa-cart-shopping", links: [
+                    { name: "Amazon", url: "https://amazon.com", icon: "fab fa-amazon" },
+                    { name: "Mercado Livre", url: "https://mercadolivre.com.br", icon: "fas fa-store" },
+                    { name: "Shopee", url: "https://shopee.com.br", icon: "fas fa-bag-shopping" },
+                    { name: "AliExpress", url: "https://aliexpress.com", icon: "fab fa-alipay" }
+                ]},
+                { name: "📰 Notícias", icon: "fa-newspaper", links: [
+                    { name: "CNN", url: "https://cnn.com", icon: "fas fa-globe" },
+                    { name: "BBC", url: "https://bbc.com", icon: "fas fa-globe" },
+                    { name: "UOL", url: "https://uol.com.br", icon: "fas fa-globe" },
+                    { name: "Globo", url: "https://globo.com", icon: "fas fa-globe" }
+                ]},
+                { name: "📚 Informação", icon: "fa-book", links: [
+                    { name: "Wikipedia", url: "https://wikipedia.org", icon: "fab fa-wikipedia-w" },
+                    { name: "Quora", url: "https://quora.com", icon: "fab fa-quora" },
+                    { name: "Stack Overflow", url: "https://stackoverflow.com", icon: "fab fa-stack-overflow" }
+                ]},
+                { name: "🎵 Música", icon: "fa-music", links: [
+                    { name: "Spotify", url: "https://open.spotify.com", icon: "fab fa-spotify" },
+                    { name: "Deezer", url: "https://deezer.com", icon: "fab fa-deezer" },
+                    { name: "YouTube Music", url: "https://music.youtube.com", icon: "fab fa-youtube" },
+                    { name: "SoundCloud", url: "https://soundcloud.com", icon: "fab fa-soundcloud" }
+                ]},
+                { name: "🛠️ Ferramentas", icon: "fa-tools", links: [
+                    { name: "Canva", url: "https://canva.com", icon: "fab fa-canva" },
+                    { name: "GitHub", url: "https://github.com", icon: "fab fa-github" },
+                    { name: "Adobe", url: "https://adobe.com", icon: "fab fa-adobe" },
+                    { name: "WordPress", url: "https://wordpress.com", icon: "fab fa-wordpress" }
+                ]},
+                {
+                    name: "📺 PROMOÇÃO IPTV",
+                    icon: "fa-tv",
+                    isAd: true
+                }
+            ];
+
+            // PROJETOS PESSOAIS
             const userProjects = [
                 { name: "Preço Justo", url: "https://site-combustai-620634786284.southamerica-east1.run.app", icon: "fas fa-gas-pump" },
                 { name: "Clube DCA", url: "https://site-559791916621-620634786284.southamerica-east1.run.app", icon: "fas fa-users" },
@@ -871,10 +1240,10 @@
                 { name: "Scalp Calc", url: "https://scalp-calc.vercel.app/", icon: "fas fa-calculator" },
                 { name: "História das Copas", url: "https://historia-copas-620634786284.southamerica-east1.run.app", icon: "fas fa-futbol" },
                 { name: "Pepinômetro", url: "https://pepinometro-620634786284.southamerica-east1.run.app", icon: "fas fa-balance-scale" },
-                { name: "Todey Cards", url: "http://www.todey.xyz/cards", icon: "fas fa-credit-card" },
-                { name: "📘 Bitcoin para Todas as Idades", url: "https://marcoscleber10.github.io/a-historia-do-dinheiro-que-mudou-o-mundo/", icon: "fab fa-bitcoin" }
+                { name: "Todey Cards", url: "http://www.todey.xyz/cards", icon: "fas fa-credit-card" }
             ];
 
+            // USO DIÁRIO
             const dailyLinks = [
                 { name: "Google", url: "https://google.com", icon: "fab fa-google" },
                 { name: "WhatsApp", url: "https://web.whatsapp.com", icon: "fab fa-whatsapp" },
@@ -883,16 +1252,392 @@
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
             ];
 
-            // Categorias Principais (versão resumida para manter o código funcional - as completas estavam no original)
-            const categories = [
-                { name: "🔍 Busca", icon: "fa-search", links: [{ name: "Google", url: "https://google.com", icon: "fab fa-google" }, { name: "Bing", url: "https://bing.com", icon: "fab fa-microsoft" }, { name: "DuckDuckGo", url: "https://duckduckgo.com", icon: "fas fa-duck" }] },
-                { name: "🤖 Inteligência Artificial", icon: "fa-robot", links: [{ name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }, { name: "DeepSeek", url: "https://deepseek.com", icon: "fas fa-dragon" }, { name: "Gemini", url: "https://gemini.google.com", icon: "fas fa-brain" }] },
-                { name: "💳 Cripto", icon: "fa-bitcoin", links: [{ name: "Binance", url: "https://binance.com", icon: "fab fa-bitcoin" }, { name: "Bybit", url: "https://bybit.com", icon: "fab fa-bitcoin" }, { name: "OKX", url: "https://okx.com", icon: "fab fa-bitcoin" }] },
-                { name: "⛽ Combustível", icon: "fa-gas-pump", links: [{ name: "Shell Box", url: "https://shellbox.onelink.me/0Eik/6c597fbb", icon: "fas fa-gas-pump" }, { name: "Preço Justo", url: "https://site-combustai-620634786284.southamerica-east1.run.app", icon: "fas fa-map-marker-alt" }] },
-                { name: "📺 IPTV", icon: "fa-tv", isAd: true }
+            // SMART SEARCH MAP
+            const smartSearchMap = [
+                { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
+                { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
+                { keywords: ["chat", "gpt", "chatgpt"], url: "https://chat.openai.com", name: "ChatGPT" },
+                { keywords: ["whats", "whatsapp"], url: "https://web.whatsapp.com", name: "WhatsApp" },
+                { keywords: ["youtube", "yt"], url: "https://youtube.com", name: "YouTube" },
+                { keywords: ["maps", "mapa", "waze"], url: "https://maps.google.com", name: "Google Maps" },
+                { keywords: ["preco", "justo", "combustivel"], url: "https://site-combustai-620634786284.southamerica-east1.run.app", name: "Preço Justo" },
+                { keywords: ["clube", "dca"], url: "https://site-559791916621-620634786284.southamerica-east1.run.app", name: "Clube DCA" },
+                { keywords: ["sinais"], url: "https://marcoscleber10.github.io/sinaisinvest", name: "Sinais Invest" },
+                { keywords: ["invest", "opcao"], url: "https://marcoscleber10.github.io/Investopcao/", name: "Invest Opção" },
+                { keywords: ["scalp", "calc"], url: "https://scalp-calc.vercel.app/", name: "Scalp Calc" },
+                { keywords: ["copas", "historia", "futebol"], url: "https://historia-copas-620634786284.southamerica-east1.run.app", name: "História das Copas" },
+                { keywords: ["pepino", "politica", "transparencia"], url: "https://pepinometro-620634786284.southamerica-east1.run.app", name: "Pepinômetro" },
+                { keywords: ["todey", "cards"], url: "http://www.todey.xyz/cards", name: "Todey Cards" },
+                { keywords: ["dentpeg"], url: "http://dentpeg.com", name: "DentPeg" },
+                { keywords: ["ether.fi"], url: "https://www.ether.fi/refer/a217ecdb", name: "Ether.fi" },
+                { keywords: ["okx"], url: "https://okx.com/pt-br/join/5126561", name: "OKX" },
+                { keywords: ["pixgo"], url: "https://pixgo.org/register.php", name: "PixGo" },
+                { keywords: ["crypix"], url: "https://crypix.me/auth/register.php?ref=marcoscleberc", name: "Crypix.me" },
+                { keywords: ["binance"], url: "https://www.binance.com/referral/earn-together/refer2earn-usdc/claim?hl=pt&ref=GRO_28502_X3ASN", name: "Binance" },
+                { keywords: ["bybit"], url: "https://bybit.com/invite?ref=6MOOPN", name: "Bybit" },
+                { keywords: ["kucoin"], url: "https://www.kucoin.com/r/rf/QBSXLPYE", name: "Kucoin" },
+                { keywords: ["gateio"], url: "https://app.bxjddjt.com/referral/earn-together/invite/U1ESVV0?ref=U1ESVV0&ref_type=103&utm_cmp=rXJBDjtJ&activity_id=1772462196891", name: "Gate.io" },
+                { keywords: ["coinbase"], url: "https://coinbase.com/join/U43LRXQ?src=android-whatsapp", name: "Coinbase" },
+                { keywords: ["kraken"], url: "https://invite.kraken.com/JDNW/e5jtbd5m", name: "Kraken" },
+                { keywords: ["bitget"], url: "https://l1nq.com/viX10", name: "Bitget" },
+                { keywords: ["mexc"], url: "https://promote.mexc.com/r/6ekeguuA", name: "Mexc" },
+                { keywords: ["coinex"], url: "https://www.coinex.com/register?refer_code=z6s4m&channel=Referral", name: "Coinex" },
+                { keywords: ["backpack"], url: "https://backpack.exchange/refer/marcoscleberc", name: "Backpack" },
+                { keywords: ["hiperliquid"], url: "https://app.hyperliquid.xyz/join/MARCOSCLEBER", name: "HiperLiquid" },
+                { keywords: ["aster"], url: "https://www.asterdex.com/pt-BR/referral/499C9C", name: "Aster" },
+                { keywords: ["crypto.com"], url: "https://crypto.com/app/94cf85cfwx", name: "Crypto.com" },
+                { keywords: ["revolut"], url: "https://revolut.com/marcos5njm", name: "Revolut" },
+                { keywords: ["astropay"], url: "https://astropay.com/Kj6IFzgR8g", name: "AstroPay" },
+                { keywords: ["redotpay"], url: "https://url.hk/i/pt/teder", name: "Redotpay" },
+                { keywords: ["oobit"], url: "https://get.oobit.app/jzrrer", name: "Oobit" },
+                { keywords: ["zeal"], url: "https://zeal.go.link/6iCO9?adj_label=2614ac9c-34d5-428f-a6ea-6bd41933bf3a&adj_campaign=copy", name: "Zeal" },
+                { keywords: ["tuyo"], url: "https://get.tuyo.com/code/DGGNSU", name: "Tuyo" },
+                { keywords: ["amulets"], url: "https://play.google.com/store/apps/details?id=io.amulets.wallet", name: "Amulets" },
+                { keywords: ["offramp"], url: "https://offramp.xyz/login?ref=buq0dx", name: "Offramp" },
+                { keywords: ["alfred"], url: "https://www.alfredp2p.io/fee", name: "Alfred P2P" },
+                { keywords: ["royalbtc"], url: "https://www.royalbtc.io/", name: "RoyalBTC" },
+                { keywords: ["chainless"], url: "https://chainless.finance/download", name: "Chainless" },
+                { keywords: ["kast"], url: "https://go.kast.xyz/VqVO/NB70TILN", name: "Kast Finance" },
+                { keywords: ["ripio"], url: "https://join.ripio.com/marcos_c_113", name: "Ripio" },
+                { keywords: ["bitybank"], url: "https://bity.com.br/mgm/12910", name: "Bitybank" },
+                { keywords: ["bipa"], url: "https://bipa.app/convite/IAWASB", name: "Bipa" },
+                { keywords: ["recargapay"], url: "https://recargapay.com.br/r/marcar507-ZAZb", name: "Recargapay" },
+                { keywords: ["picnic"], url: "https://usepicnic.com/app/referral/claim?ref=NQLMBK", name: "Picnic" },
+                { keywords: ["meliuz"], url: "https://www.meliuz.com.br/i/ref_9d6f8a60?ref_source=81", name: "Meliuz" },
+                { keywords: ["neobankless"], url: "https://neobankless.com/join?code=YLED154UXEFR", name: "Neobankless" },
+                { keywords: ["bitso"], url: "https://bitso.go.link/1cRnU?adj_label=vnezz", name: "Bitso" },
+                { keywords: ["hylo"], url: "https://hylo.so/leverage?ref=ZK7ZU0", name: "Hylo" },
+                { keywords: ["mercadopago"], url: "https://mpago.li/1j9HK37", name: "Mercado Pago" },
+                { keywords: ["pagbank"], url: "https://pagbank.vc/indica-maquininhas-ec6945bf7", name: "PagBank" },
+                { keywords: ["ton"], url: "https://ton.com.br/checkout/cart/?productId=TONMAX_TIER_SMART_POS&referrer=67CA397C-F5AB-4E5A-A20D-DAAFAFE99D77&userAnticipation=0&userTag=tonmax_tier&utm_medium=invite_share&utm_source=revendedor", name: "Ton" },
+                { keywords: ["infinitepay"], url: "https://infinitepay.io/?rid=marcoscleber", name: "InfinitePay" },
+                { keywords: ["truther"], url: "https://play.google.com/store/apps/details?id=vc.smartpay.app", name: "Truther" },
+                { keywords: ["sentient"], url: "https://chat.sentient.xyz/", name: "Sentient" },
+                { keywords: ["linktree"], url: "https://linktr.ee/marcoscleberc", name: "Linktree" },
+                { keywords: ["iptv", "teste", "6h", "grátis"], url: "https://wa.me/5597991916621", name: "Teste IPTV" },
+                { keywords: ["yandex"], url: "https://yandex.com", name: "Yandex" },
+                { keywords: ["grok"], url: "https://grok.com", name: "Grok" },
+                { keywords: ["lumio"], url: "https://www.lumio.ai/", name: "Lumio AI" },
+                { keywords: ["antigravity"], url: "https://antigravity.google/", name: "Google Antigravity" },
+                { keywords: ["manus"], url: "https://manus.im/", name: "Manus" },
+                { keywords: ["n8n"], url: "https://n8n.io/", name: "n8n" },
+                { keywords: ["flowise"], url: "https://flowiseai.com/", name: "Flowise" },
+                { keywords: ["crewai"], url: "https://www.crewai.com/", name: "CrewAI" },
+                { keywords: ["autogen"], url: "https://microsoft.github.io/autogen/", name: "AutoGen" },
+                { keywords: ["langchain"], url: "https://www.langchain.com/", name: "LangChain" },
+                { keywords: ["eesel"], url: "https://www.eesel.ai/", name: "eesel AI" },
+                { keywords: ["copilot studio"], url: "https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio", name: "Microsoft Copilot Studio" },
+                { keywords: ["watsonx"], url: "https://www.ibm.com/products/watsonx-assistant", name: "IBM Watsonx Assistant" },
+                { keywords: ["shell", "box", "shellbox", "cupom"], url: "https://shellbox.onelink.me/0Eik/6c597fbb?autofill=TRUE&automaticInsertion=TRUE&voucherCode=SFO5024", name: "Shell Box R$15" },
+                { keywords: ["petrobras"], url: "https://play.google.com/store/apps/details?id=br.com.petrobras.br.ma02", name: "Petrobras App" },
+                { keywords: ["baratao"], url: "https://play.google.com/store/apps/details?id=com.barataoapp&referrer=00296621774", name: "Baratão Combustíveis" },
+                { keywords: ["egasosa"], url: "https://www.egasosa.com.br", name: "Egasosa" },
+                { keywords: ["ipiranga", "abastece ai"], url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", name: "Abastece Aí" },
+                { keywords: ["livelo", "ale", "pontos"], url: "https://www.livelo.com.br", name: "Livelo – Pontos ALE" },
+                { keywords: ["preço justo", "menor preço"], url: "https://site-combustai-620634786284.southamerica-east1.run.app/", name: "Preço Justo – Geolocalização" }
             ];
 
-            // ==================== LIQUIDITY POOLS ====================
+            // ========== FUNÇÕES DE COTAÇÕES ==========
+            async function fetchQuotes() {
+                try {
+                    const [btcRes, usdRes, brentRes, goldRes] = await Promise.all([
+                        fetch('https://economia.awesomeapi.com.br/json/last/BTC-USD'),
+                        fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL'),
+                        fetch('https://economia.awesomeapi.com.br/json/last/BRENT-USD'),
+                        fetch('https://economia.awesomeapi.com.br/json/last/XAU-USD')
+                    ]);
+                    const btcData = await btcRes.json();
+                    const usdData = await usdRes.json();
+                    const brentData = await brentRes.json();
+                    const goldData = await goldRes.json();
+
+                    if (btcData['BTCUSD']) {
+                        document.getElementById('btcPrice').innerText = `$${parseFloat(btcData['BTCUSD'].bid).toFixed(2)}`;
+                    }
+                    if (usdData['USDBRL']) {
+                        document.getElementById('usdbrl').innerText = `R$ ${parseFloat(usdData['USDBRL'].bid).toFixed(2)}`;
+                    }
+                    if (brentData['BRENTUSD']) {
+                        document.getElementById('brent').innerText = `$${parseFloat(brentData['BRENTUSD'].bid).toFixed(2)}`;
+                    }
+                    if (goldData['XAUUSD']) {
+                        document.getElementById('gold').innerText = `$${parseFloat(goldData['XAUUSD'].bid).toFixed(2)}`;
+                    }
+                } catch (error) {
+                    console.error('Erro ao buscar cotações:', error);
+                }
+            }
+
+            // ========== VARIÁVEIS GLOBAIS ==========
+            let favorites = JSON.parse(localStorage.getItem('centralweb_favorites')) || [];
+            let history = JSON.parse(localStorage.getItem('centralweb_history')) || [];
+            let currentTheme = localStorage.getItem('centralweb_theme') || 'dark';
+
+            // ========== ELEMENTOS DOM ==========
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            const favoritesList = document.getElementById('favoritesList');
+            const historyItems = document.getElementById('historyItems');
+            const dailyGrid = document.getElementById('dailyGrid');
+            const projectsGrid = document.getElementById('projectsGrid');
+            const themeToggle = document.getElementById('themeToggle');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const globalSearch = document.getElementById('globalSearch');
+            const searchSuggestions = document.getElementById('searchSuggestions');
+            const clockEl = document.getElementById('liveClock');
+
+            // ========== FUNÇÕES DE PERSISTÊNCIA ==========
+            function saveFavorites() { localStorage.setItem('centralweb_favorites', JSON.stringify(favorites)); }
+            function saveHistory() { localStorage.setItem('centralweb_history', JSON.stringify(history)); }
+            function addToHistory(name, url) {
+                history = [{ name, url, timestamp: Date.now() }, ...history.filter(h => h.url !== url).slice(0, 9)];
+                saveHistory();
+                renderHistory();
+            }
+
+            // ========== RENDERIZAÇÃO DOS COMPONENTES EXISTENTES ==========
+            function renderProjects() {
+                let html = '';
+                userProjects.forEach(p => {
+                    html += `<div class="project-item" onclick="window.open('${p.url}','_blank'); addToHistory('${p.name}', '${p.url}');">
+                        <i class="${p.icon}"></i><span>${p.name}</span><small>${p.url.replace('https://', '').replace('http://', '')}</small>
+                    </div>`;
+                });
+                projectsGrid.innerHTML = html;
+            }
+
+            function renderDaily() {
+                let html = '';
+                dailyLinks.forEach(link => {
+                    html += `<div class="daily-item" onclick="window.open('${link.url}','_blank'); addToHistory('${link.name}', '${link.url}');">
+                        <i class="${link.icon}"></i><span>${link.name}</span>
+                    </div>`;
+                });
+                dailyGrid.innerHTML = html;
+            }
+
+            function renderCategories(filter = '') {
+                const f = filter.toLowerCase();
+                let html = '';
+                categories.forEach(cat => {
+                    if (cat.isAd) {
+                        html += `<div class="category-card ad-card"><div class="category-title"><i class="fas fa-tv"></i> ${cat.name}</div>
+                            <div style="font-size:1.2rem; margin-bottom:0.5rem;">📱 APP + IPTV</div>
+                            <div style="font-size:1.5rem; font-weight:bold; color:#ffd966;">R$ 30/mês</div>
+                            <div style="margin:0.5rem 0;">Milhares de canais, filmes e séries</div>
+                            <a href="https://wa.me/5597991916621" target="_blank" class="ad-button"><i class="fab fa-whatsapp"></i> Peça seu teste grátis de 6h</a>
+                        </div>`;
+                        return;
+                    }
+                    if (cat.isInfo) {
+                        html += `<div class="category-card info-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div>
+                            <div class="info-content">${cat.content}</div>
+                        </div>`;
+                        return;
+                    }
+
+                    const filteredLinks = cat.links.filter(l => l.name.toLowerCase().includes(f) || cat.name.toLowerCase().includes(f));
+                    if (filteredLinks.length === 0 && f !== '' && !cat.extraBlocks) return;
+                    let categoryHtml = `<div class="category-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div><div class="links-list">`;
+                    filteredLinks.forEach(link => {
+                        const isFav = favorites.some(f => f.url === link.url);
+                        categoryHtml += `<a href="${link.url}" target="_blank" class="link-item" data-url="${link.url}" data-name="${link.name}">
+                            <i class="${link.icon}"></i> ${link.name}
+                            <i class="fas fa-star ${isFav ? 'favorited' : ''}" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite('${link.name}', '${link.url}', '${link.icon}')"></i>
+                        </a>`;
+                    });
+                    categoryHtml += `</div>`;
+
+                    if (cat.extraBlocks && cat.extraBlocks.length) {
+                        categoryHtml += `<div class="fuel-info-block">`;
+                        cat.extraBlocks.forEach(block => {
+                            categoryHtml += `
+                                <div class="fuel-info-item">
+                                    <div class="fuel-info-title"><i class="fas ${block.icon}"></i> ${block.title}</div>
+                                    <div class="fuel-info-desc">${block.content}</div>
+                                    ${block.buttonText ? `<a href="${block.buttonUrl}" target="_blank" class="fuel-info-button">${block.buttonText}</a>` : ''}
+                                </div>
+                            `;
+                        });
+                        categoryHtml += `</div>`;
+                    }
+                    categoryHtml += `</div>`;
+                    html += categoryHtml;
+                });
+                categoriesGrid.innerHTML = html;
+            }
+
+            function renderFavorites() {
+                if (favorites.length === 0) { favoritesList.innerHTML = '<span style="color:#aaa;">Clique na estrela para favoritar</span>'; return; }
+                favoritesList.innerHTML = favorites.map(f => `
+                    <div class="favorite-item" onclick="window.open('${f.url}','_blank'); addToHistory('${f.name}', '${f.url}');">
+                        <i class="${f.icon}"></i> ${f.name}
+                        <i class="fas fa-times-circle" onclick="event.stopPropagation(); removeFavorite('${f.url}')"></i>
+                    </div>
+                `).join('');
+            }
+
+            function renderHistory() {
+                if (history.length === 0) { historyItems.innerHTML = '<span style="color:#aaa;">Nenhum acesso recente</span>'; return; }
+                historyItems.innerHTML = history.map(h => `
+                    <div class="history-item" onclick="window.open('${h.url}','_blank'); addToHistory('${h.name}', '${h.url}');">
+                        <i class="fas fa-clock"></i> ${h.name}
+                    </div>
+                `).join('');
+            }
+
+            // ========== BUSCA INTELIGENTE ==========
+            function handleSmartSearch(input) {
+                const text = input.toLowerCase().trim();
+                if (!text) { searchSuggestions.style.display = 'none'; return; }
+                const matches = smartSearchMap.filter(item => item.keywords.some(kw => kw.includes(text) || text.includes(kw)));
+                if (matches.length) {
+                    searchSuggestions.innerHTML = matches.map(m => `<div onclick="window.open('${m.url}','_blank'); addToHistory('${m.name}', '${m.url}'); globalSearch.value=''; searchSuggestions.style.display='none';"> <i class="fas fa-arrow-right"></i> Ir para ${m.name} </div>`).join('');
+                    searchSuggestions.style.display = 'block';
+                } else searchSuggestions.style.display = 'none';
+            }
+
+            globalSearch.addEventListener('input', (e) => { renderCategories(e.target.value); handleSmartSearch(e.target.value); });
+            globalSearch.addEventListener('keypress', (e) => { if (e.key === 'Enter') { const first = searchSuggestions.querySelector('div'); if (first) first.click(); } });
+            document.addEventListener('click', (e) => { if (!e.target.closest('.search-global')) searchSuggestions.style.display = 'none'; });
+
+            // ========== FAVORITOS ==========
+            window.toggleFavorite = (name, url, icon) => {
+                const idx = favorites.findIndex(f => f.url === url);
+                if (idx >= 0) favorites.splice(idx, 1);
+                else favorites.push({ name, url, icon });
+                saveFavorites(); renderFavorites(); renderCategories(globalSearch.value);
+            };
+            window.removeFavorite = (url) => {
+                favorites = favorites.filter(f => f.url !== url);
+                saveFavorites(); renderFavorites(); renderCategories(globalSearch.value);
+            };
+
+            // ========== TEMA ==========
+            function applyTheme(theme) {
+                if (theme === 'light') { document.body.classList.add('light-mode'); themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; }
+                else { document.body.classList.remove('light-mode'); themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; }
+                localStorage.setItem('centralweb_theme', theme);
+            }
+            themeToggle.addEventListener('click', () => applyTheme(document.body.classList.contains('light-mode') ? 'dark' : 'light'));
+
+            // ========== TELA CHEIA ==========
+            fullscreenBtn.addEventListener('click', () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); });
+
+            // ========== RELÓGIO ==========
+            function updateClock() { clockEl.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false }); }
+            setInterval(updateClock, 1000); updateClock();
+
+            // ========== REGISTRAR CLIQUE NO HISTÓRICO ==========
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('.link-item, .daily-item, .project-item, .ad-button, .fuel-info-button');
+                if (link && link.href) { const name = link.dataset.name || link.innerText.trim() || 'Link'; const url = link.href; if (name && url) addToHistory(name, url); }
+            });
+
+            // ========== CARDS FINANCEIROS (CONVERSOR + SIMULADOR) ==========
+            function renderFinancasCards() {
+                const container = document.getElementById('financasGrid');
+                container.innerHTML = `
+                    <div class="card-financeiro">
+                        <h3><i class="fas fa-globe"></i> Conversor Universal</h3>
+                        <div class="input-group"><label>Valor</label><input type="number" id="valorConversor" value="1" step="any"></div>
+                        <div class="input-group"><label>De</label><select id="moedaDe"></select></div>
+                        <div class="input-group"><label>Para</label><select id="moedaPara"></select></div>
+                        <div class="resultado" id="resultadoConversor">---</div>
+                        <div class="detalhe-taxa" id="infoTaxa">Carregando taxas...</div>
+                        <div style="margin-top:1rem;"><button class="primario" id="btnAtualizarConversor"><i class="fas fa-sync-alt"></i> Atualizar</button><button class="secundario" id="btnLimparConversor"><i class="fas fa-eraser"></i> Limpar</button></div>
+                    </div>
+                    <div class="card-financeiro">
+                        <h3><i class="fas fa-chart-line"></i> Simulador de Investimento</h3>
+                        <div class="input-group"><label>Valor investido (R$)</label><input type="number" id="investValor" value="1000" step="100"></div>
+                        <div class="input-group"><label>Prazo (meses)</label><input type="number" id="investMeses" value="12"></div>
+                        <div class="input-group"><label>Taxa mensal (%)</label><input type="number" id="investTaxa" value="1.0" step="0.1"></div>
+                        <div class="resultado" id="resultadoInvestimento">R$ 0,00</div>
+                        <div class="detalhe-taxa">Juros compostos | Valor final estimado</div>
+                        <hr>
+                        <h3><i class="fas fa-wallet"></i> Controle de Gastos</h3>
+                        <div class="input-group"><label>Receitas (R$)</label><input type="number" id="receitaTotal" value="5000"></div>
+                        <div class="input-group"><label>Despesas (R$)</label><input type="number" id="despesaTotal" value="3800"></div>
+                        <div class="resultado" id="resultadoSaldo">Saldo: R$ 1.200,00</div>
+                        <div><button class="primario" id="btnCalcularGastos">Atualizar</button><button class="secundario" id="btnLimparGastos">Limpar</button></div>
+                    </div>
+                `;
+                initConversor();
+                initSimulador();
+            }
+
+            function initConversor() {
+                const moedas = [
+                    { code: "BRL", name: "Real", symbol: "R$" }, { code: "USD", name: "Dólar", symbol: "$" }, { code: "EUR", name: "Euro", symbol: "€" },
+                    { code: "GBP", name: "Libra", symbol: "£" }, { code: "BTC", name: "Bitcoin", symbol: "₿" }, { code: "XAU", name: "Ouro", symbol: "oz" }
+                ];
+                const selectDe = document.getElementById('moedaDe');
+                const selectPara = document.getElementById('moedaPara');
+                if (selectDe) {
+                    selectDe.innerHTML = moedas.map(m => `<option value="${m.code}">${m.symbol} ${m.code}</option>`).join('');
+                    selectPara.innerHTML = moedas.map(m => `<option value="${m.code}">${m.symbol} ${m.code}</option>`).join('');
+                    selectPara.value = "USD";
+                }
+                let taxas = { BRL: 1, USD: 5.23, EUR: 5.70, GBP: 6.70, BTC: 350000, XAU: 10250 };
+                async function atualizarTaxas() {
+                    try {
+                        const resUSD = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL');
+                        const dataUSD = await resUSD.json();
+                        if (dataUSD.USDBRL) taxas.USD = parseFloat(dataUSD.USDBRL.bid);
+                        const resBTC = await fetch('https://economia.awesomeapi.com.br/json/last/BTC-USD');
+                        const dataBTC = await resBTC.json();
+                        if (dataBTC.BTCUSD) taxas.BTC = taxas.USD * parseFloat(dataBTC.BTCUSD.bid);
+                        taxas.SAT = taxas.BTC / 100000000;
+                        const resXAU = await fetch('https://economia.awesomeapi.com.br/json/last/XAU-USD');
+                        const dataXAU = await resXAU.json();
+                        if (dataXAU.XAUUSD) taxas.XAU = taxas.USD * parseFloat(dataXAU.XAUUSD.bid);
+                        document.getElementById('infoTaxa').innerHTML = `1 USD = ${taxas.USD.toFixed(4)} BRL | 1 BTC = R$ ${taxas.BTC.toFixed(2)}`;
+                        calcular();
+                    } catch(e) { console.error(e); }
+                }
+                function calcular() {
+                    const valor = parseFloat(document.getElementById('valorConversor')?.value) || 0;
+                    const de = document.getElementById('moedaDe')?.value;
+                    const para = document.getElementById('moedaPara')?.value;
+                    if (!de || !para) return;
+                    let valorBRL = de === 'BRL' ? valor : valor * (taxas[de] || 1);
+                    let resultado = para === 'BRL' ? valorBRL : valorBRL / (taxas[para] || 1);
+                    const simbolo = moedas.find(m => m.code === para)?.symbol || '';
+                    document.getElementById('resultadoConversor').innerHTML = `${simbolo} ${resultado.toFixed(2)}`;
+                }
+                document.getElementById('valorConversor')?.addEventListener('input', calcular);
+                document.getElementById('moedaDe')?.addEventListener('change', calcular);
+                document.getElementById('moedaPara')?.addEventListener('change', calcular);
+                document.getElementById('btnAtualizarConversor')?.addEventListener('click', atualizarTaxas);
+                document.getElementById('btnLimparConversor')?.addEventListener('click', () => { document.getElementById('valorConversor').value = '1'; calcular(); });
+                atualizarTaxas();
+                setInterval(atualizarTaxas, 60000);
+            }
+
+            function initSimulador() {
+                function calcJuros() {
+                    let p = parseFloat(document.getElementById('investValor')?.value) || 0;
+                    let m = parseInt(document.getElementById('investMeses')?.value) || 0;
+                    let t = parseFloat(document.getElementById('investTaxa')?.value) || 0;
+                    let montante = p * Math.pow(1 + t/100, m);
+                    document.getElementById('resultadoInvestimento').innerHTML = `R$ ${montante.toFixed(2)}`;
+                }
+                function controleGastos() {
+                    let receita = parseFloat(document.getElementById('receitaTotal')?.value) || 0;
+                    let despesa = parseFloat(document.getElementById('despesaTotal')?.value) || 0;
+                    let saldo = receita - despesa;
+                    const el = document.getElementById('resultadoSaldo');
+                    if (el) el.innerHTML = `Saldo: R$ ${saldo.toFixed(2)}`;
+                }
+                document.getElementById('investValor')?.addEventListener('input', calcJuros);
+                document.getElementById('investMeses')?.addEventListener('input', calcJuros);
+                document.getElementById('investTaxa')?.addEventListener('input', calcJuros);
+                document.getElementById('btnCalcularGastos')?.addEventListener('click', controleGastos);
+                document.getElementById('btnLimparGastos')?.addEventListener('click', () => { document.getElementById('receitaTotal').value = ''; document.getElementById('despesaTotal').value = ''; controleGastos(); });
+                document.getElementById('receitaTotal')?.addEventListener('input', controleGastos);
+                document.getElementById('despesaTotal')?.addEventListener('input', controleGastos);
+                calcJuros(); controleGastos();
+            }
+                        // ==================== LIQUIDITY POOL ANALYTICS ====================
             const poolCategoriesList = [
                 { id: "bluechip", name: "BEST BLUE-CHIP POOLS", icon: "fa-chart-simple" },
                 { id: "stablecoin", name: "BEST STABLE COIN POOLS", icon: "fa-coins" },
@@ -947,7 +1692,6 @@
 
             let activePoolCategory = "bluechip";
             let poolSearchTerm = "";
-            let poolLastUpdate = null;
 
             function renderPoolCategories() {
                 const container = document.getElementById("poolCategories");
@@ -989,10 +1733,9 @@
             }
 
             function updatePools() {
-                // Simula atualização com pequena variação aleatória nos APRs
                 for (let cat in poolsData) {
                     poolsData[cat].forEach(pool => {
-                        let variation = (Math.random() - 0.5) * 10;
+                        let variation = (Math.random() - 0.5) * 5;
                         let newApr = pool.baseApr + variation;
                         pool.baseApr = Math.max(0.1, newApr);
                     });
@@ -1003,9 +1746,8 @@
             }
 
             // ==================== METEOROLOGIA ====================
-            const WEATHER_API_KEY = "SUA_CHAVE_API_WEATHERAPI"; // Usuário deve substituir pela sua chave
+            const WEATHER_API_KEY = "SUA_CHAVE_API_WEATHERAPI"; // Substitua pela sua chave em weatherapi.com
             let currentCity = "Cansanção";
-            let weatherUpdateInterval = null;
             let citySuggestionsTimeout = null;
 
             async function fetchWeather(city) {
@@ -1089,191 +1831,17 @@
                 }
             }
 
-            // ==================== FUNÇÕES EXISTENTES ====================
-            let favorites = JSON.parse(localStorage.getItem('centralweb_favorites')) || [];
-            let history = JSON.parse(localStorage.getItem('centralweb_history')) || [];
-            let currentTheme = localStorage.getItem('centralweb_theme') || 'dark';
-
-            function renderProjects() {
-                document.getElementById('projectsGrid').innerHTML = userProjects.map(p => `
-                    <div class="project-item" onclick="window.open('${p.url}','_blank'); addToHistory('${p.name.replace(/'/g, "\\'")}', '${p.url}');">
-                        <i class="${p.icon}"></i><span>${p.name}</span>
-                    </div>
-                `).join('');
-            }
-
-            function renderDaily() {
-                document.getElementById('dailyGrid').innerHTML = dailyLinks.map(l => `
-                    <div class="daily-item" onclick="window.open('${l.url}','_blank'); addToHistory('${l.name}', '${l.url}');">
-                        <i class="${l.icon}"></i><span>${l.name}</span>
-                    </div>
-                `).join('');
-            }
-
-            function renderFinancasCards() {
-                const container = document.getElementById('financasGrid');
-                container.innerHTML = `
-                    <div class="card-moderno">
-                        <h3><i class="fas fa-globe"></i> Conversor Universal</h3>
-                        <div class="input-group"><label>Valor</label><input type="number" id="valorConversor" value="1" step="any"></div>
-                        <div class="input-group"><label>De</label><select id="moedaDe"></select></div>
-                        <div class="input-group"><label>Para</label><select id="moedaPara"></select></div>
-                        <div class="resultado" id="resultadoConversor">---</div>
-                        <div class="detalhe-taxa" id="infoTaxa">Carregando taxas...</div>
-                        <div style="margin-top:1rem;"><button class="primario" id="btnAtualizarConversor"><i class="fas fa-sync-alt"></i> Atualizar</button><button class="secundario" id="btnLimparConversor"><i class="fas fa-eraser"></i> Limpar</button></div>
-                    </div>
-                    <div class="card-moderno">
-                        <h3><i class="fas fa-chart-line"></i> Simulador de Investimento</h3>
-                        <div class="input-group"><label>Valor investido (R$)</label><input type="number" id="investValor" value="1000" step="100"></div>
-                        <div class="input-group"><label>Prazo (meses)</label><input type="number" id="investMeses" value="12"></div>
-                        <div class="input-group"><label>Taxa mensal (%)</label><input type="number" id="investTaxa" value="1.0" step="0.1"></div>
-                        <div class="resultado" id="resultadoInvestimento">R$ 0,00</div>
-                        <div class="detalhe-taxa">Juros compostos | Valor final estimado</div>
-                        <hr>
-                        <h3><i class="fas fa-wallet"></i> Controle de Gastos</h3>
-                        <div class="input-group"><label>Receitas (R$)</label><input type="number" id="receitaTotal" value="5000"></div>
-                        <div class="input-group"><label>Despesas (R$)</label><input type="number" id="despesaTotal" value="3800"></div>
-                        <div class="resultado" id="resultadoSaldo">Saldo: R$ 1.200,00</div>
-                        <div><button class="primario" id="btnCalcularGastos">Atualizar</button><button class="secundario" id="btnLimparGastos">Limpar</button></div>
-                    </div>
-                `;
-                initConversor();
-                initSimulador();
-            }
-
-            function initConversor() {
-                const moedas = [
-                    { code: "BRL", name: "Real", symbol: "R$" }, { code: "USD", name: "Dólar", symbol: "$" }, { code: "EUR", name: "Euro", symbol: "€" },
-                    { code: "GBP", name: "Libra", symbol: "£" }, { code: "BTC", name: "Bitcoin", symbol: "₿" }, { code: "XAU", name: "Ouro", symbol: "oz" }
-                ];
-                const selectDe = document.getElementById('moedaDe');
-                const selectPara = document.getElementById('moedaPara');
-                if (selectDe) {
-                    selectDe.innerHTML = moedas.map(m => `<option value="${m.code}">${m.symbol} ${m.code}</option>`).join('');
-                    selectPara.innerHTML = moedas.map(m => `<option value="${m.code}">${m.symbol} ${m.code}</option>`).join('');
-                    selectPara.value = "USD";
-                }
-                const taxasMock = { BRL: 1, USD: 5.23, EUR: 5.70, GBP: 6.70, BTC: 350000, XAU: 10250 };
-                function calcular() {
-                    const valor = parseFloat(document.getElementById('valorConversor')?.value) || 0;
-                    const de = document.getElementById('moedaDe')?.value;
-                    const para = document.getElementById('moedaPara')?.value;
-                    if (!de || !para) return;
-                    let valorBRL = de === 'BRL' ? valor : valor * (taxasMock[de] || 1);
-                    let resultado = para === 'BRL' ? valorBRL : valorBRL / (taxasMock[para] || 1);
-                    const simbolo = moedas.find(m => m.code === para)?.symbol || '';
-                    document.getElementById('resultadoConversor').innerHTML = `${simbolo} ${resultado.toFixed(2)}`;
-                }
-                document.getElementById('valorConversor')?.addEventListener('input', calcular);
-                document.getElementById('moedaDe')?.addEventListener('change', calcular);
-                document.getElementById('moedaPara')?.addEventListener('change', calcular);
-                document.getElementById('btnAtualizarConversor')?.addEventListener('click', () => calcular());
-                document.getElementById('btnLimparConversor')?.addEventListener('click', () => { document.getElementById('valorConversor').value = '1'; calcular(); });
-                calcular();
-            }
-
-            function initSimulador() {
-                function calcJuros() {
-                    let p = parseFloat(document.getElementById('investValor')?.value) || 0;
-                    let m = parseInt(document.getElementById('investMeses')?.value) || 0;
-                    let t = parseFloat(document.getElementById('investTaxa')?.value) || 0;
-                    let montante = p * Math.pow(1 + t/100, m);
-                    document.getElementById('resultadoInvestimento').innerHTML = `R$ ${montante.toFixed(2)}`;
-                }
-                function controleGastos() {
-                    let receita = parseFloat(document.getElementById('receitaTotal')?.value) || 0;
-                    let despesa = parseFloat(document.getElementById('despesaTotal')?.value) || 0;
-                    let saldo = receita - despesa;
-                    const el = document.getElementById('resultadoSaldo');
-                    if (el) el.innerHTML = `Saldo: R$ ${saldo.toFixed(2)}`;
-                }
-                document.getElementById('investValor')?.addEventListener('input', calcJuros);
-                document.getElementById('investMeses')?.addEventListener('input', calcJuros);
-                document.getElementById('investTaxa')?.addEventListener('input', calcJuros);
-                document.getElementById('btnCalcularGastos')?.addEventListener('click', controleGastos);
-                document.getElementById('btnLimparGastos')?.addEventListener('click', () => { document.getElementById('receitaTotal').value = ''; document.getElementById('despesaTotal').value = ''; controleGastos(); });
-                document.getElementById('receitaTotal')?.addEventListener('input', controleGastos);
-                document.getElementById('despesaTotal')?.addEventListener('input', controleGastos);
-                calcJuros(); controleGastos();
-            }
-
-            function renderCategories() {
-                let html = '';
-                categories.forEach(cat => {
-                    if (cat.isAd) {
-                        html += `<div class="category-card ad-card"><div class="category-title"><i class="fas fa-tv"></i> ${cat.name}</div>
-                            <a href="https://wa.me/5597991916621" target="_blank" class="ad-button"><i class="fab fa-whatsapp"></i> Teste Grátis 6h IPTV</a>
-                        </div>`;
-                        return;
-                    }
-                    html += `<div class="category-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div><div class="links-list">`;
-                    cat.links.forEach(link => {
-                        const isFav = favorites.some(f => f.url === link.url);
-                        html += `<a href="${link.url}" target="_blank" class="link-item"><i class="${link.icon}"></i> ${link.name}<i class="fas fa-star ${isFav ? 'favorited' : ''}" onclick="event.preventDefault(); event.stopPropagation(); toggleFavorite('${link.name}', '${link.url}', '${link.icon}')"></i></a>`;
-                    });
-                    html += `</div></div>`;
-                });
-                document.getElementById('categoriesGrid').innerHTML = html;
-            }
-
-            function renderFavorites() {
-                const el = document.getElementById('favoritesList');
-                if (favorites.length === 0) { el.innerHTML = '<span style="color:#aaa;">Clique na estrela para favoritar</span>'; return; }
-                el.innerHTML = favorites.map(f => `<div class="favorite-item" onclick="window.open('${f.url}','_blank'); addToHistory('${f.name}', '${f.url}');"><i class="${f.icon}"></i> ${f.name}<i class="fas fa-times-circle" onclick="event.stopPropagation(); removeFavorite('${f.url}')"></i></div>`).join('');
-            }
-
-            function renderHistory() {
-                const el = document.getElementById('historyItems');
-                if (history.length === 0) { el.innerHTML = '<span>Nenhum acesso recente</span>'; return; }
-                el.innerHTML = history.map(h => `<div class="history-item" onclick="window.open('${h.url}','_blank'); addToHistory('${h.name}', '${h.url}');"><i class="fas fa-clock"></i> ${h.name}</div>`).join('');
-            }
-
-            function addToHistory(name, url) {
-                history = [{ name, url, timestamp: Date.now() }, ...history.filter(h => h.url !== url).slice(0, 9)];
-                localStorage.setItem('centralweb_history', JSON.stringify(history));
-                renderHistory();
-            }
-
-            function saveFavorites() { localStorage.setItem('centralweb_favorites', JSON.stringify(favorites)); }
-            window.toggleFavorite = (name, url, icon) => {
-                const idx = favorites.findIndex(f => f.url === url);
-                if (idx >= 0) favorites.splice(idx, 1);
-                else favorites.push({ name, url, icon });
-                saveFavorites(); renderFavorites(); renderCategories();
-            };
-            window.removeFavorite = (url) => {
-                favorites = favorites.filter(f => f.url !== url);
-                saveFavorites(); renderFavorites(); renderCategories();
-            };
-            window.addToHistory = addToHistory;
-
-            async function fetchQuotes() {
-                try {
-                    const [btcRes, usdRes] = await Promise.all([fetch('https://economia.awesomeapi.com.br/json/last/BTC-USD'), fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL')]);
-                    const btcData = await btcRes.json();
-                    const usdData = await usdRes.json();
-                    if (btcData.BTCUSD) document.getElementById('btcPrice').innerText = `$${parseFloat(btcData.BTCUSD.bid).toFixed(2)}`;
-                    if (usdData.USDBRL) document.getElementById('usdbrl').innerText = `R$ ${parseFloat(usdData.USDBRL.bid).toFixed(2)}`;
-                } catch(e) { console.error(e); }
-            }
-
-            function applyTheme(theme) {
-                if (theme === 'light') { document.body.classList.add('light-mode'); document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>'; }
-                else { document.body.classList.remove('light-mode'); document.getElementById('themeToggle').innerHTML = '<i class="fas fa-moon"></i>'; }
-                localStorage.setItem('centralweb_theme', theme);
-            }
-
-            function updateClock() {
-                const clock = document.getElementById('liveClock');
-                if (clock) clock.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false });
-            }
-
             // ==================== INICIALIZAÇÃO ====================
             function init() {
                 applyTheme(currentTheme);
-                renderProjects(); renderDaily(); renderFinancasCards(); renderCategories(); renderFavorites(); renderHistory();
-                fetchQuotes(); setInterval(fetchQuotes, 60000);
-                updateClock(); setInterval(updateClock, 1000);
+                renderProjects();
+                renderDaily();
+                renderFinancasCards();
+                renderCategories();
+                renderFavorites();
+                renderHistory();
+                fetchQuotes();
+                setInterval(fetchQuotes, 60000);
                 
                 // Inicializa Pools
                 renderPoolCategories();
@@ -1300,6 +1868,7 @@
             }
             
             init();
+            window.addToHistory = addToHistory;
         })();
     </script>
 </body>
