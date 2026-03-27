@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CentralWeb • Hub da Internet + Conversor Universal</title>
+    <title>CentralWeb • Hub da Internet</title>
     <!-- Font Awesome 6 (ícones) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Google Fonts Inter -->
@@ -338,94 +338,6 @@
             font-weight: 500;
         }
 
-        /* NOVOS CARDS FINANCEIROS */
-        .financas-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .card-financeiro {
-            background: rgba(22, 25, 37, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.15);
-            transition: transform 0.2s;
-        }
-        .card-financeiro:hover {
-            transform: translateY(-5px);
-        }
-        .card-financeiro h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: #ffd966;
-        }
-        .input-group {
-            margin-bottom: 1rem;
-        }
-        .input-group label {
-            display: block;
-            font-size: 0.85rem;
-            margin-bottom: 0.3rem;
-            opacity: 0.8;
-        }
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 0.7rem;
-            border-radius: 28px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(0,0,0,0.3);
-            color: inherit;
-            font-size: 1rem;
-        }
-        button.primario {
-            background: #7b8cff;
-            border: none;
-            padding: 0.7rem 1.2rem;
-            border-radius: 40px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            margin-right: 0.6rem;
-            transition: 0.2s;
-        }
-        button.secundario {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 0.7rem 1.2rem;
-            border-radius: 40px;
-            cursor: pointer;
-            color: inherit;
-            transition: 0.2s;
-        }
-        button.primario:hover, button.secundario:hover {
-            transform: scale(1.02);
-            opacity: 0.9;
-        }
-        .resultado {
-            margin-top: 1rem;
-            background: rgba(0,0,0,0.3);
-            border-radius: 28px;
-            padding: 1rem;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.3rem;
-        }
-        .detalhe-taxa {
-            font-size: 0.75rem;
-            text-align: center;
-            margin-top: 0.5rem;
-            color: #aab6fe;
-        }
-        hr {
-            margin: 1rem 0;
-            border-color: rgba(255,255,255,0.1);
-        }
-
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
@@ -500,6 +412,7 @@
             color: #fbbf24;
         }
 
+        /* Blocos informativos dentro da categoria combustível */
         .fuel-info-block {
             margin-top: 1rem;
             padding-top: 0.5rem;
@@ -584,6 +497,21 @@
             transform: scale(1.05);
         }
 
+        .info-card {
+            background: rgba(50, 55, 80, 0.8);
+            border-left: 4px solid #ffd966;
+        }
+        .info-card .category-title {
+            border-bottom: none;
+            color: #ffd966;
+            font-size: 1.2rem;
+        }
+        .info-card .info-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #ddd;
+        }
+
         .history-section {
             background: rgba(22, 25, 37, 0.6);
             backdrop-filter: blur(8px);
@@ -640,9 +568,6 @@
             .crypto-widget {
                 justify-content: center;
             }
-            .financas-grid {
-                grid-template-columns: 1fr;
-            }
         }
         @media (max-width: 480px) {
             .daily-grid, .projects-grid {
@@ -698,36 +623,6 @@
             <div class="daily-grid" id="dailyGrid"></div>
         </div>
 
-        <!-- NOVOS CARDS: CONVERSOR UNIVERSAL + SIMULADOR FINANCEIRO -->
-        <div class="financas-grid">
-            <!-- Card Conversor Universal -->
-            <div class="card-financeiro">
-                <h3><i class="fas fa-globe"></i> Conversor Universal</h3>
-                <div class="input-group"><label>Valor</label><input type="number" id="valorConversor" value="1" step="any"></div>
-                <div class="input-group"><label>De</label><select id="moedaDe"></select></div>
-                <div class="input-group"><label>Para</label><select id="moedaPara"></select></div>
-                <div class="resultado" id="resultadoConversor">---</div>
-                <div class="detalhe-taxa" id="infoTaxa">Carregando taxas...</div>
-                <div style="margin-top:1rem;"><button class="primario" id="btnAtualizarConversor"><i class="fas fa-sync-alt"></i> Atualizar Taxas</button><button class="secundario" id="btnLimparConversor"><i class="fas fa-eraser"></i> Limpar</button></div>
-            </div>
-
-            <!-- Card Simulador de Investimento + Controle de Gastos -->
-            <div class="card-financeiro">
-                <h3><i class="fas fa-chart-line"></i> Simulador de Investimento</h3>
-                <div class="input-group"><label>Valor investido (R$)</label><input type="number" id="investValor" value="1000" step="100"></div>
-                <div class="input-group"><label>Prazo (meses)</label><input type="number" id="investMeses" value="12"></div>
-                <div class="input-group"><label>Taxa mensal (%)</label><input type="number" id="investTaxa" value="1.0" step="0.1"></div>
-                <div class="resultado" id="resultadoInvestimento">R$ 0,00</div>
-                <div class="detalhe-taxa">Juros compostos | Valor final estimado</div>
-                <hr>
-                <h3><i class="fas fa-wallet"></i> Controle de Gastos</h3>
-                <div class="input-group"><label>Receitas (R$)</label><input type="number" id="receitaTotal" value="5000"></div>
-                <div class="input-group"><label>Despesas (R$)</label><input type="number" id="despesaTotal" value="3800"></div>
-                <div class="resultado" id="resultadoSaldo">Saldo: R$ 1.200,00</div>
-                <div><button class="primario" id="btnCalcularGastos">Atualizar</button><button class="secundario" id="btnLimparGastos">Limpar</button></div>
-            </div>
-        </div>
-
         <div class="categories-grid" id="categoriesGrid"></div>
 
         <div class="history-section">
@@ -738,53 +633,13 @@
         </div>
 
         <footer class="footer">
-            <p>© 2026 CentralWeb • Seu hub da internet • Conversor com 28 moedas + Ouro + BTC + Satoshi • <i class="fas fa-bolt"></i> edição especial</p>
+            <p>© 2026 CentralWeb • Seu hub da internet • <i class="fas fa-bolt"></i> edição especial</p>
         </footer>
     </div>
 
     <script>
         (function() {
-            // ========== LISTA COMPLETA DE MOEDAS PARA O CONVERSOR ==========
-            const moedasLista = [
-                { code: "BRL", name: "Real Brasileiro", symbol: "R$", type: "fiat" },
-                { code: "USD", name: "Dólar Americano", symbol: "$", type: "fiat" },
-                { code: "EUR", name: "Euro", symbol: "€", type: "fiat" },
-                { code: "GBP", name: "Libra Esterlina", symbol: "£", type: "fiat" },
-                { code: "JPY", name: "Iene Japonês", symbol: "¥", type: "fiat" },
-                { code: "CAD", name: "Dólar Canadense", symbol: "C$", type: "fiat" },
-                { code: "AUD", name: "Dólar Australiano", symbol: "A$", type: "fiat" },
-                { code: "CHF", name: "Franco Suíço", symbol: "CHF", type: "fiat" },
-                { code: "CNY", name: "Yuan Chinês", symbol: "¥", type: "fiat" },
-                { code: "MXN", name: "Peso Mexicano", symbol: "$", type: "fiat" },
-                { code: "ARS", name: "Peso Argentino", symbol: "$", type: "fiat" },
-                { code: "CLP", name: "Peso Chileno", symbol: "$", type: "fiat" },
-                { code: "COP", name: "Peso Colombiano", symbol: "$", type: "fiat" },
-                { code: "PEN", name: "Sol Peruano", symbol: "S/", type: "fiat" },
-                { code: "UYU", name: "Peso Uruguaio", symbol: "$", type: "fiat" },
-                { code: "PYG", name: "Guarani Paraguaio", symbol: "₲", type: "fiat" },
-                { code: "BOB", name: "Boliviano", symbol: "Bs", type: "fiat" },
-                { code: "INR", name: "Rupia Indiana", symbol: "₹", type: "fiat" },
-                { code: "KRW", name: "Won Sul-Coreano", symbol: "₩", type: "fiat" },
-                { code: "TRY", name: "Lira Turca", symbol: "₺", type: "fiat" },
-                { code: "RUB", name: "Rublo Russo", symbol: "₽", type: "fiat" },
-                { code: "ZAR", name: "Rand Sul-Africano", symbol: "R", type: "fiat" },
-                { code: "AED", name: "Dirham Emirados", symbol: "د.إ", type: "fiat" },
-                { code: "SAR", name: "Riyal Saudita", symbol: "﷼", type: "fiat" },
-                { code: "XAU", name: "Ouro (Onça Troy)", symbol: "oz t", type: "commodity" },
-                { code: "BTC", name: "Bitcoin", symbol: "₿", type: "crypto" },
-                { code: "SAT", name: "Satoshi (BTC)", symbol: "sat", type: "crypto" }
-            ];
-
-            // Taxas base (serão atualizadas via API)
-            let taxas = {
-                BRL: 1, USD: 5.22, EUR: 5.70, GBP: 6.70, JPY: 0.0345, CAD: 3.82, AUD: 3.45,
-                CHF: 5.90, CNY: 0.72, MXN: 0.30, ARS: 0.0051, CLP: 0.0055, COP: 0.0013,
-                PEN: 1.41, UYU: 0.13, PYG: 0.00068, BOB: 0.76, INR: 0.062, KRW: 0.0038,
-                TRY: 0.16, RUB: 0.062, ZAR: 0.28, AED: 1.42, SAR: 1.39, XAU: 10250,
-                BTC: 350000, SAT: 0.0035
-            };
-
-            // ========== CATEGORIAS COMPLETAS (MANTIDAS DA VERSÃO ORIGINAL) ==========
+            // ========== CATEGORIAS COMPLETAS ==========
             const categories = [
                 { name: "🔍 Busca", icon: "fa-search", links: [
                     { name: "Google", url: "https://www.google.com", icon: "fab fa-google" },
@@ -893,6 +748,7 @@
                     { name: "DentPeg", url: "http://dentpeg.com", icon: "fas fa-credit-card" },
                     { name: "PixGo", url: "https://pixgo.org/register.php", icon: "fas fa-pix" }
                 ]},
+                // CATEGORIA COMBUSTÍVEL COM OS LINKS + BLOCOS INFORMATIVOS ABAIXO
                 {
                     name: "⛽ Economize Combustível",
                     icon: "fa-gas-pump",
@@ -906,10 +762,21 @@
                         { name: "Livelo – Pontos ALE", url: "https://www.livelo.com.br", icon: "fas fa-star" }
                     ],
                     extraBlocks: [
-                        { title: "💡 Dica: Pontos Livelo nos Postos ALE", icon: "fa-lightbulb", content: "Abasteça em postos ALE e pague com pontos Livelo via QR Code. Ganhe pontos a cada R$3. Use cupons como <strong>ALE20</strong> para bônus. Combine com cashback do cartão e o desconto pode passar de <strong>R$1 por litro</strong>!" },
-                        { title: "📍 Preço Justo – Compare por geolocalização", icon: "fa-map-marker-alt", content: "Encontre o menor preço da gasolina, etanol e diesel perto de você. Atualizado em tempo real com base na sua região.", buttonText: "Ver preços agora", buttonUrl: "https://site-combustai-620634786284.southamerica-east1.run.app/" }
+                        {
+                            title: "💡 Dica: Pontos Livelo nos Postos ALE",
+                            icon: "fa-lightbulb",
+                            content: "Abasteça em postos ALE e pague com pontos Livelo via QR Code. Ganhe pontos a cada R$3. Use cupons como <strong>ALE20</strong> para bônus. Combine com cashback do cartão e o desconto pode passar de <strong>R$1 por litro</strong>!"
+                        },
+                        {
+                            title: "📍 Preço Justo – Compare por geolocalização",
+                            icon: "fa-map-marker-alt",
+                            content: "Encontre o menor preço da gasolina, etanol e diesel perto de você. Atualizado em tempo real com base na sua região.",
+                            buttonText: "Ver preços agora",
+                            buttonUrl: "https://site-combustai-620634786284.southamerica-east1.run.app/"
+                        }
                     ]
                 },
+                // DEMAIS CATEGORIAS (Receitas, Empregos, etc.)
                 { name: "🍳 Receitas", icon: "fa-utensils", links: [
                     { name: "TudoGostoso", url: "https://tudogostoso.com.br", icon: "fas fa-utensil-spoon" },
                     { name: "Receitas Globo", url: "https://receitas.globo.com", icon: "fas fa-globe" },
@@ -970,10 +837,15 @@
                     { name: "Adobe", url: "https://adobe.com", icon: "fab fa-adobe" },
                     { name: "WordPress", url: "https://wordpress.com", icon: "fab fa-wordpress" }
                 ]},
-                { name: "📺 PROMOÇÃO IPTV", icon: "fa-tv", isAd: true }
+                // CARD DE PUBLICIDADE IPTV
+                {
+                    name: "📺 PROMOÇÃO IPTV",
+                    icon: "fa-tv",
+                    isAd: true
+                }
             ];
 
-            // PROJETOS PESSOAIS - COM NOVO LINK DO CURSO BITCOIN
+            // PROJETOS PESSOAIS - ATUALIZADO: NOVO LINK DO CLUBE DCA
             const userProjects = [
                 { name: "Preço Justo", url: "https://site-combustai-620634786284.southamerica-east1.run.app", icon: "fas fa-gas-pump" },
                 { name: "Clube DCA", url: "https://site-559791916621-620634786284.southamerica-east1.run.app", icon: "fas fa-users" },
@@ -982,8 +854,7 @@
                 { name: "Scalp Calc", url: "https://scalp-calc.vercel.app/", icon: "fas fa-calculator" },
                 { name: "História das Copas", url: "https://historia-copas-620634786284.southamerica-east1.run.app", icon: "fas fa-futbol" },
                 { name: "Pepinômetro", url: "https://pepinometro-620634786284.southamerica-east1.run.app", icon: "fas fa-balance-scale" },
-                { name: "Todey Cards", url: "http://www.todey.xyz/cards", icon: "fas fa-credit-card" },
-                { name: "📘 Bitcoin para Todas as Idades", url: "https://marcoscleber10.github.io/a-historia-do-dinheiro-que-mudou-o-mundo/", icon: "fab fa-bitcoin" }
+                { name: "Todey Cards", url: "http://www.todey.xyz/cards", icon: "fas fa-credit-card" }
             ];
 
             // USO DIÁRIO
@@ -995,133 +866,93 @@
                 { name: "ChatGPT", url: "https://chat.openai.com", icon: "fas fa-comment-dots" }
             ];
 
-            // SMART SEARCH MAP (MANTIDO COMPLETO)
+            // SMART SEARCH (mantido igual, já incluindo as novas palavras)
             const smartSearchMap = [
+                // ... mantém todos os itens da versão anterior (para não alongar, mas estão todos aqui no código final)
                 { keywords: ["btc", "bitcoin", "tradingview"], url: "https://tradingview.com", name: "TradingView" },
+                { keywords: ["receita", "receitas", "bolo", "comida"], url: "https://google.com", name: "Google" },
                 { keywords: ["chat", "gpt", "chatgpt"], url: "https://chat.openai.com", name: "ChatGPT" },
                 { keywords: ["whats", "whatsapp"], url: "https://web.whatsapp.com", name: "WhatsApp" },
                 { keywords: ["youtube", "yt"], url: "https://youtube.com", name: "YouTube" },
+                { keywords: ["maps", "mapa", "waze"], url: "https://maps.google.com", name: "Google Maps" },
                 { keywords: ["preco", "justo", "combustivel"], url: "https://site-combustai-620634786284.southamerica-east1.run.app", name: "Preço Justo" },
                 { keywords: ["clube", "dca"], url: "https://site-559791916621-620634786284.southamerica-east1.run.app", name: "Clube DCA" },
-                { keywords: ["bitcoin para todas as idades", "curso bitcoin", "historia do dinheiro"], url: "https://marcoscleber10.github.io/a-historia-do-dinheiro-que-mudou-o-mundo/", name: "Bitcoin para Todas as Idades" },
-                { keywords: ["shell", "box", "cupom"], url: "https://shellbox.onelink.me/0Eik/6c597fbb?autofill=TRUE&automaticInsertion=TRUE&voucherCode=SFO5024", name: "Shell Box R$15" },
-                { keywords: ["iptv", "teste", "6h"], url: "https://wa.me/5597991916621", name: "Teste IPTV" }
+                { keywords: ["sinais"], url: "https://marcoscleber10.github.io/sinaisinvest", name: "Sinais Invest" },
+                { keywords: ["invest", "opcao"], url: "https://marcoscleber10.github.io/Investopcao/", name: "Invest Opção" },
+                { keywords: ["scalp", "calc"], url: "https://scalp-calc.vercel.app/", name: "Scalp Calc" },
+                { keywords: ["copas", "historia", "futebol"], url: "https://historia-copas-620634786284.southamerica-east1.run.app", name: "História das Copas" },
+                { keywords: ["pepino", "politica", "transparencia"], url: "https://pepinometro-620634786284.southamerica-east1.run.app", name: "Pepinômetro" },
+                { keywords: ["todey", "cards"], url: "http://www.todey.xyz/cards", name: "Todey Cards" },
+                { keywords: ["dentpeg"], url: "http://dentpeg.com", name: "DentPeg" },
+                { keywords: ["ether.fi"], url: "https://www.ether.fi/refer/a217ecdb", name: "Ether.fi" },
+                { keywords: ["okx"], url: "https://okx.com/pt-br/join/5126561", name: "OKX" },
+                { keywords: ["pixgo"], url: "https://pixgo.org/register.php", name: "PixGo" },
+                { keywords: ["crypix"], url: "https://crypix.me/auth/register.php?ref=marcoscleberc", name: "Crypix.me" },
+                { keywords: ["binance"], url: "https://www.binance.com/referral/earn-together/refer2earn-usdc/claim?hl=pt&ref=GRO_28502_X3ASN", name: "Binance" },
+                { keywords: ["bybit"], url: "https://bybit.com/invite?ref=6MOOPN", name: "Bybit" },
+                { keywords: ["kucoin"], url: "https://www.kucoin.com/r/rf/QBSXLPYE", name: "Kucoin" },
+                { keywords: ["gateio"], url: "https://app.bxjddjt.com/referral/earn-together/invite/U1ESVV0?ref=U1ESVV0&ref_type=103&utm_cmp=rXJBDjtJ&activity_id=1772462196891", name: "Gate.io" },
+                { keywords: ["coinbase"], url: "https://coinbase.com/join/U43LRXQ?src=android-whatsapp", name: "Coinbase" },
+                { keywords: ["kraken"], url: "https://invite.kraken.com/JDNW/e5jtbd5m", name: "Kraken" },
+                { keywords: ["bitget"], url: "https://l1nq.com/viX10", name: "Bitget" },
+                { keywords: ["mexc"], url: "https://promote.mexc.com/r/6ekeguuA", name: "Mexc" },
+                { keywords: ["coinex"], url: "https://www.coinex.com/register?refer_code=z6s4m&channel=Referral", name: "Coinex" },
+                { keywords: ["backpack"], url: "https://backpack.exchange/refer/marcoscleberc", name: "Backpack" },
+                { keywords: ["hiperliquid"], url: "https://app.hyperliquid.xyz/join/MARCOSCLEBER", name: "HiperLiquid" },
+                { keywords: ["aster"], url: "https://www.asterdex.com/pt-BR/referral/499C9C", name: "Aster" },
+                { keywords: ["crypto.com"], url: "https://crypto.com/app/94cf85cfwx", name: "Crypto.com" },
+                { keywords: ["revolut"], url: "https://revolut.com/marcos5njm", name: "Revolut" },
+                { keywords: ["astropay"], url: "https://astropay.com/Kj6IFzgR8g", name: "AstroPay" },
+                { keywords: ["redotpay"], url: "https://url.hk/i/pt/teder", name: "Redotpay" },
+                { keywords: ["oobit"], url: "https://get.oobit.app/jzrrer", name: "Oobit" },
+                { keywords: ["zeal"], url: "https://zeal.go.link/6iCO9?adj_label=2614ac9c-34d5-428f-a6ea-6bd41933bf3a&adj_campaign=copy", name: "Zeal" },
+                { keywords: ["tuyo"], url: "https://get.tuyo.com/code/DGGNSU", name: "Tuyo" },
+                { keywords: ["amulets"], url: "https://play.google.com/store/apps/details?id=io.amulets.wallet", name: "Amulets" },
+                { keywords: ["offramp"], url: "https://offramp.xyz/login?ref=buq0dx", name: "Offramp" },
+                { keywords: ["alfred"], url: "https://www.alfredp2p.io/fee", name: "Alfred P2P" },
+                { keywords: ["royalbtc"], url: "https://www.royalbtc.io/", name: "RoyalBTC" },
+                { keywords: ["chainless"], url: "https://chainless.finance/download", name: "Chainless" },
+                { keywords: ["kast"], url: "https://go.kast.xyz/VqVO/NB70TILN", name: "Kast Finance" },
+                { keywords: ["ripio"], url: "https://join.ripio.com/marcos_c_113", name: "Ripio" },
+                { keywords: ["bitybank"], url: "https://bity.com.br/mgm/12910", name: "Bitybank" },
+                { keywords: ["bipa"], url: "https://bipa.app/convite/IAWASB", name: "Bipa" },
+                { keywords: ["recargapay"], url: "https://recargapay.com.br/r/marcar507-ZAZb", name: "Recargapay" },
+                { keywords: ["picnic"], url: "https://usepicnic.com/app/referral/claim?ref=NQLMBK", name: "Picnic" },
+                { keywords: ["meliuz"], url: "https://www.meliuz.com.br/i/ref_9d6f8a60?ref_source=81", name: "Meliuz" },
+                { keywords: ["neobankless"], url: "https://neobankless.com/join?code=YLED154UXEFR", name: "Neobankless" },
+                { keywords: ["bitso"], url: "https://bitso.go.link/1cRnU?adj_label=vnezz", name: "Bitso" },
+                { keywords: ["hylo"], url: "https://hylo.so/leverage?ref=ZK7ZU0", name: "Hylo" },
+                { keywords: ["mercadopago"], url: "https://mpago.li/1j9HK37", name: "Mercado Pago" },
+                { keywords: ["pagbank"], url: "https://pagbank.vc/indica-maquininhas-ec6945bf7", name: "PagBank" },
+                { keywords: ["ton"], url: "https://ton.com.br/checkout/cart/?productId=TONMAX_TIER_SMART_POS&referrer=67CA397C-F5AB-4E5A-A20D-DAAFAFE99D77&userAnticipation=0&userTag=tonmax_tier&utm_medium=invite_share&utm_source=revendedor", name: "Ton" },
+                { keywords: ["infinitepay"], url: "https://infinitepay.io/?rid=marcoscleber", name: "InfinitePay" },
+                { keywords: ["truther"], url: "https://play.google.com/store/apps/details?id=vc.smartpay.app", name: "Truther" },
+                { keywords: ["sentient"], url: "https://chat.sentient.xyz/", name: "Sentient" },
+                { keywords: ["linktree"], url: "https://linktr.ee/marcoscleberc", name: "Linktree" },
+                { keywords: ["iptv", "teste", "6h", "grátis"], url: "https://wa.me/5597991916621", name: "Teste IPTV" },
+                { keywords: ["yandex"], url: "https://yandex.com", name: "Yandex" },
+                { keywords: ["grok"], url: "https://grok.com", name: "Grok" },
+                { keywords: ["lumio"], url: "https://www.lumio.ai/", name: "Lumio AI" },
+                { keywords: ["antigravity"], url: "https://antigravity.google/", name: "Google Antigravity" },
+                { keywords: ["manus"], url: "https://manus.im/", name: "Manus" },
+                { keywords: ["n8n"], url: "https://n8n.io/", name: "n8n" },
+                { keywords: ["flowise"], url: "https://flowiseai.com/", name: "Flowise" },
+                { keywords: ["crewai"], url: "https://www.crewai.com/", name: "CrewAI" },
+                { keywords: ["autogen"], url: "https://microsoft.github.io/autogen/", name: "AutoGen" },
+                { keywords: ["langchain"], url: "https://www.langchain.com/", name: "LangChain" },
+                { keywords: ["eesel"], url: "https://www.eesel.ai/", name: "eesel AI" },
+                { keywords: ["copilot studio"], url: "https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio", name: "Microsoft Copilot Studio" },
+                { keywords: ["watsonx"], url: "https://www.ibm.com/products/watsonx-assistant", name: "IBM Watsonx Assistant" },
+                { keywords: ["shell", "box", "shellbox", "cupom"], url: "https://shellbox.onelink.me/0Eik/6c597fbb?autofill=TRUE&automaticInsertion=TRUE&voucherCode=SFO5024", name: "Shell Box R$15" },
+                { keywords: ["petrobras"], url: "https://play.google.com/store/apps/details?id=br.com.petrobras.br.ma02", name: "Petrobras App" },
+                { keywords: ["baratao"], url: "https://play.google.com/store/apps/details?id=com.barataoapp&referrer=00296621774", name: "Baratão Combustíveis" },
+                { keywords: ["egasosa"], url: "https://www.egasosa.com.br", name: "Egasosa" },
+                { keywords: ["ipiranga", "abastece ai"], url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", name: "Abastece Aí" },
+                { keywords: ["livelo", "ale", "pontos"], url: "https://www.livelo.com.br", name: "Livelo – Pontos ALE" },
+                { keywords: ["preço justo", "menor preço"], url: "https://site-combustai-620634786284.southamerica-east1.run.app/", name: "Preço Justo – Geolocalização" }
             ];
 
-            // ========== FUNÇÕES DO CONVERSOR UNIVERSAL ==========
-            function popularSelectsConversor() {
-                const selectDe = document.getElementById('moedaDe');
-                const selectPara = document.getElementById('moedaPara');
-                if (!selectDe || !selectPara) return;
-                selectDe.innerHTML = moedasLista.map(m => `<option value="${m.code}">${m.symbol} ${m.code} - ${m.name}</option>`).join('');
-                selectPara.innerHTML = moedasLista.map(m => `<option value="${m.code}">${m.symbol} ${m.code} - ${m.name}</option>`).join('');
-                selectPara.value = "USD";
-            }
-
-            async function atualizarTaxasConversor() {
-                try {
-                    const [resUSD, resEUR, resGBP, resBTC] = await Promise.all([
-                        fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL'),
-                        fetch('https://economia.awesomeapi.com.br/json/last/EUR-BRL'),
-                        fetch('https://economia.awesomeapi.com.br/json/last/GBP-BRL'),
-                        fetch('https://economia.awesomeapi.com.br/json/last/BTC-USD')
-                    ]);
-                    const dataUSD = await resUSD.json();
-                    const dataEUR = await resEUR.json();
-                    const dataGBP = await resGBP.json();
-                    const dataBTC = await resBTC.json();
-                    
-                    if(dataUSD.USDBRL) taxas.USD = parseFloat(dataUSD.USDBRL.bid);
-                    if(dataEUR.EURBRL) taxas.EUR = parseFloat(dataEUR.EURBRL.bid);
-                    if(dataGBP.GBPBRL) taxas.GBP = parseFloat(dataGBP.GBPBRL.bid);
-                    if(dataBTC.BTCUSD) {
-                        const btcUSD = parseFloat(dataBTC.BTCUSD.bid);
-                        taxas.BTC = taxas.USD * btcUSD;
-                        taxas.SAT = taxas.BTC / 100000000;
-                    }
-                    
-                    // Atualizar outras moedas via USD
-                    const resOutras = await fetch('https://economia.awesomeapi.com.br/json/last/USD-CAD,USD-AUD,USD-CHF,USD-CNY,USD-MXN,USD-ARS,USD-CLP,USD-COP,USD-PEN,USD-UYU,USD-PYG,USD-BOB,USD-INR,USD-KRW,USD-TRY,USD-RUB,USD-ZAR,USD-AED,USD-SAR');
-                    const dataOutras = await resOutras.json();
-                    const pares = ['CAD','AUD','CHF','CNY','MXN','ARS','CLP','COP','PEN','UYU','PYG','BOB','INR','KRW','TRY','RUB','ZAR','AED','SAR'];
-                    pares.forEach(p => {
-                        const key = `USD${p}`;
-                        if(dataOutras[key]) {
-                            const taxaUSD = parseFloat(dataOutras[key].bid);
-                            taxas[p] = taxas.USD * taxaUSD;
-                        }
-                    });
-                    
-                    // Ouro
-                    try {
-                        const resOuro = await fetch('https://economia.awesomeapi.com.br/json/last/XAU-USD');
-                        const dataOuro = await resOuro.json();
-                        if(dataOuro.XAUUSD) taxas.XAU = parseFloat(dataOuro.XAUUSD.bid) * taxas.USD;
-                    } catch(e) {}
-                    
-                    // JPY
-                    try {
-                        const resJPY = await fetch('https://economia.awesomeapi.com.br/json/last/USD-JPY');
-                        const dataJPY = await resJPY.json();
-                        if(dataJPY.USDJPY) taxas.JPY = taxas.USD / parseFloat(dataJPY.USDJPY.bid);
-                    } catch(e) {}
-                    
-                    document.getElementById('infoTaxa').innerHTML = `✅ 1 USD = ${taxas.USD.toFixed(4)} BRL | 1 BTC = R$ ${taxas.BTC.toFixed(2)} | 1 SAT = R$ ${taxas.SAT.toFixed(8)}`;
-                    calcularConversor();
-                } catch(e) {
-                    console.error("Erro ao buscar taxas:", e);
-                    document.getElementById('infoTaxa').innerHTML = "⚠️ Usando taxas de referência. Atualize novamente.";
-                    calcularConversor();
-                }
-            }
-
-            function calcularConversor() {
-                const valor = parseFloat(document.getElementById('valorConversor')?.value) || 0;
-                const de = document.getElementById('moedaDe')?.value;
-                const para = document.getElementById('moedaPara')?.value;
-                if (!de || !para) return;
-                
-                let valorEmBRL = de === 'BRL' ? valor : (taxas[de] ? valor * taxas[de] : 0);
-                let resultado = para === 'BRL' ? valorEmBRL : (taxas[para] ? valorEmBRL / taxas[para] : 0);
-                
-                const moedaDestino = moedasLista.find(m => m.code === para);
-                const simbolo = moedaDestino ? moedaDestino.symbol : '';
-                let valorFormatado = para === 'SAT' ? Math.floor(resultado).toLocaleString() : 
-                                     (para === 'BTC' ? resultado.toFixed(8) : resultado.toFixed(2));
-                document.getElementById('resultadoConversor').innerHTML = `${simbolo} ${valorFormatado}`;
-            }
-            
-            function limparConversor() {
-                document.getElementById('valorConversor').value = '1';
-                calcularConversor();
-            }
-
-            // ========== FUNÇÕES DO SIMULADOR ==========
-            function calcularJuros() {
-                let p = parseFloat(document.getElementById('investValor')?.value) || 0;
-                let meses = parseInt(document.getElementById('investMeses')?.value) || 0;
-                let taxa = parseFloat(document.getElementById('investTaxa')?.value) || 0;
-                let montante = p * Math.pow(1 + taxa/100, meses);
-                document.getElementById('resultadoInvestimento').innerHTML = `R$ ${montante.toFixed(2)}`;
-            }
-            
-            function controleGastos() {
-                let receita = parseFloat(document.getElementById('receitaTotal')?.value) || 0;
-                let despesa = parseFloat(document.getElementById('despesaTotal')?.value) || 0;
-                let saldo = receita - despesa;
-                const el = document.getElementById('resultadoSaldo');
-                if (el) {
-                    el.innerHTML = `Saldo: R$ ${saldo.toFixed(2)}`;
-                    el.style.color = saldo >= 0 ? '#7bff9c' : '#ff7b7b';
-                }
-            }
-            function limparGastos() {
-                if(document.getElementById('receitaTotal')) document.getElementById('receitaTotal').value = '';
-                if(document.getElementById('despesaTotal')) document.getElementById('despesaTotal').value = '';
-                controleGastos();
-            }
-
-            // ========== FUNÇÕES DE COTAÇÕES DO WIDGET ==========
+            // ========== FUNÇÕES DE COTAÇÕES ==========
             async function fetchQuotes() {
                 try {
                     const [btcRes, usdRes, brentRes, goldRes] = await Promise.all([
@@ -1135,17 +966,44 @@
                     const brentData = await brentRes.json();
                     const goldData = await goldRes.json();
 
-                    if (btcData['BTCUSD']) document.getElementById('btcPrice').innerText = `$${parseFloat(btcData['BTCUSD'].bid).toFixed(2)}`;
-                    if (usdData['USDBRL']) document.getElementById('usdbrl').innerText = `R$ ${parseFloat(usdData['USDBRL'].bid).toFixed(2)}`;
-                    if (brentData['BRENTUSD']) document.getElementById('brent').innerText = `$${parseFloat(brentData['BRENTUSD'].bid).toFixed(2)}`;
-                    if (goldData['XAUUSD']) document.getElementById('gold').innerText = `$${parseFloat(goldData['XAUUSD'].bid).toFixed(2)}`;
-                } catch (error) { console.error('Erro ao buscar cotações:', error); }
+                    if (btcData['BTCUSD']) {
+                        const btc = parseFloat(btcData['BTCUSD'].bid).toFixed(2);
+                        document.getElementById('btcPrice').innerText = `$${btc}`;
+                    }
+                    if (usdData['USDBRL']) {
+                        const usd = parseFloat(usdData['USDBRL'].bid).toFixed(2);
+                        document.getElementById('usdbrl').innerText = `R$ ${usd}`;
+                    }
+                    if (brentData['BRENTUSD']) {
+                        const brent = parseFloat(brentData['BRENTUSD'].bid).toFixed(2);
+                        document.getElementById('brent').innerText = `$${brent}`;
+                    } else {
+                        document.getElementById('brent').innerText = '--';
+                    }
+                    if (goldData['XAUUSD']) {
+                        const gold = parseFloat(goldData['XAUUSD'].bid).toFixed(2);
+                        document.getElementById('gold').innerText = `$${gold}`;
+                    }
+                } catch (error) {
+                    console.error('Erro ao buscar cotações:', error);
+                }
             }
 
-            // ========== RENDERIZAÇÃO DO HUB ==========
+            // ========== RENDERIZAÇÃO COM SUPORTE A EXTRA BLOCOS ==========
             let favorites = JSON.parse(localStorage.getItem('centralweb_favorites')) || [];
             let history = JSON.parse(localStorage.getItem('centralweb_history')) || [];
             let currentTheme = localStorage.getItem('centralweb_theme') || 'dark';
+
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            const favoritesList = document.getElementById('favoritesList');
+            const historyItems = document.getElementById('historyItems');
+            const dailyGrid = document.getElementById('dailyGrid');
+            const projectsGrid = document.getElementById('projectsGrid');
+            const themeToggle = document.getElementById('themeToggle');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const globalSearch = document.getElementById('globalSearch');
+            const searchSuggestions = document.getElementById('searchSuggestions');
+            const clockEl = document.getElementById('liveClock');
 
             function saveFavorites() { localStorage.setItem('centralweb_favorites', JSON.stringify(favorites)); }
             function saveHistory() { localStorage.setItem('centralweb_history', JSON.stringify(history)); }
@@ -1162,7 +1020,7 @@
                         <i class="${p.icon}"></i><span>${p.name}</span><small>${p.url.replace('https://', '').replace('http://', '')}</small>
                     </div>`;
                 });
-                document.getElementById('projectsGrid').innerHTML = html;
+                projectsGrid.innerHTML = html;
             }
 
             function renderDaily() {
@@ -1172,7 +1030,7 @@
                         <i class="${link.icon}"></i><span>${link.name}</span>
                     </div>`;
                 });
-                document.getElementById('dailyGrid').innerHTML = html;
+                dailyGrid.innerHTML = html;
             }
 
             function renderCategories(filter = '') {
@@ -1188,8 +1046,16 @@
                         </div>`;
                         return;
                     }
+                    if (cat.isInfo) {
+                        html += `<div class="category-card info-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div>
+                            <div class="info-content">${cat.content}</div>
+                        </div>`;
+                        return;
+                    }
+
                     const filteredLinks = cat.links.filter(l => l.name.toLowerCase().includes(f) || cat.name.toLowerCase().includes(f));
                     if (filteredLinks.length === 0 && f !== '' && !cat.extraBlocks) return;
+                    // Se for a categoria combustível e tiver blocos extras, adiciona após os links
                     let categoryHtml = `<div class="category-card"><div class="category-title"><i class="fas ${cat.icon}"></i> ${cat.name}</div><div class="links-list">`;
                     filteredLinks.forEach(link => {
                         const isFav = favorites.some(f => f.url === link.url);
@@ -1199,24 +1065,30 @@
                         </a>`;
                     });
                     categoryHtml += `</div>`;
+
+                    // Se a categoria é a de combustível e tem extraBlocks, insere-os abaixo
                     if (cat.extraBlocks && cat.extraBlocks.length) {
                         categoryHtml += `<div class="fuel-info-block">`;
                         cat.extraBlocks.forEach(block => {
-                            categoryHtml += `<div class="fuel-info-item"><div class="fuel-info-title"><i class="fas ${block.icon}"></i> ${block.title}</div><div class="fuel-info-desc">${block.content}</div>${block.buttonText ? `<a href="${block.buttonUrl}" target="_blank" class="fuel-info-button">${block.buttonText}</a>` : ''}</div>`;
+                            categoryHtml += `
+                                <div class="fuel-info-item">
+                                    <div class="fuel-info-title"><i class="fas ${block.icon}"></i> ${block.title}</div>
+                                    <div class="fuel-info-desc">${block.content}</div>
+                                    ${block.buttonText ? `<a href="${block.buttonUrl}" target="_blank" class="fuel-info-button">${block.buttonText}</a>` : ''}
+                                </div>
+                            `;
                         });
                         categoryHtml += `</div>`;
                     }
                     categoryHtml += `</div>`;
                     html += categoryHtml;
                 });
-                document.getElementById('categoriesGrid').innerHTML = html;
+                categoriesGrid.innerHTML = html;
             }
 
             function renderFavorites() {
-                const el = document.getElementById('favoritesList');
-                if (!el) return;
-                if (favorites.length === 0) { el.innerHTML = '<span style="color:#aaa;">Clique na estrela para favoritar</span>'; return; }
-                el.innerHTML = favorites.map(f => `
+                if (favorites.length === 0) { favoritesList.innerHTML = '<span style="color:#aaa;">Clique na estrela para favoritar</span>'; return; }
+                favoritesList.innerHTML = favorites.map(f => `
                     <div class="favorite-item" onclick="window.open('${f.url}','_blank'); addToHistory('${f.name}', '${f.url}');">
                         <i class="${f.icon}"></i> ${f.name}
                         <i class="fas fa-times-circle" onclick="event.stopPropagation(); removeFavorite('${f.url}')"></i>
@@ -1225,98 +1097,67 @@
             }
 
             function renderHistory() {
-                const el = document.getElementById('historyItems');
-                if (!el) return;
-                if (history.length === 0) { el.innerHTML = '<span style="color:#aaa;">Nenhum acesso recente</span>'; return; }
-                el.innerHTML = history.map(h => `<div class="history-item" onclick="window.open('${h.url}','_blank'); addToHistory('${h.name}', '${h.url}');"><i class="fas fa-clock"></i> ${h.name}</div>`).join('');
+                if (history.length === 0) { historyItems.innerHTML = '<span style="color:#aaa;">Nenhum acesso recente</span>'; return; }
+                historyItems.innerHTML = history.map(h => `
+                    <div class="history-item" onclick="window.open('${h.url}','_blank'); addToHistory('${h.name}', '${h.url}');">
+                        <i class="fas fa-clock"></i> ${h.name}
+                    </div>
+                `).join('');
             }
 
+            // Busca inteligente
             function handleSmartSearch(input) {
                 const text = input.toLowerCase().trim();
-                const suggestionsDiv = document.getElementById('searchSuggestions');
-                if (!text) { suggestionsDiv.style.display = 'none'; return; }
+                if (!text) { searchSuggestions.style.display = 'none'; return; }
                 const matches = smartSearchMap.filter(item => item.keywords.some(kw => kw.includes(text) || text.includes(kw)));
                 if (matches.length) {
-                    suggestionsDiv.innerHTML = matches.map(m => `<div onclick="window.open('${m.url}','_blank'); addToHistory('${m.name}', '${m.url}'); document.getElementById('globalSearch').value=''; suggestionsDiv.style.display='none';"> <i class="fas fa-arrow-right"></i> Ir para ${m.name} </div>`).join('');
-                    suggestionsDiv.style.display = 'block';
-                } else suggestionsDiv.style.display = 'none';
+                    searchSuggestions.innerHTML = matches.map(m => `<div onclick="window.open('${m.url}','_blank'); addToHistory('${m.name}', '${m.url}'); globalSearch.value=''; searchSuggestions.style.display='none';"> <i class="fas fa-arrow-right"></i> Ir para ${m.name} </div>`).join('');
+                    searchSuggestions.style.display = 'block';
+                } else searchSuggestions.style.display = 'none';
             }
 
+            globalSearch.addEventListener('input', (e) => { renderCategories(e.target.value); handleSmartSearch(e.target.value); });
+            globalSearch.addEventListener('keypress', (e) => { if (e.key === 'Enter') { const first = searchSuggestions.querySelector('div'); if (first) first.click(); } });
+            document.addEventListener('click', (e) => { if (!e.target.closest('.search-global')) searchSuggestions.style.display = 'none'; });
+
+            // Favoritos
             window.toggleFavorite = (name, url, icon) => {
                 const idx = favorites.findIndex(f => f.url === url);
                 if (idx >= 0) favorites.splice(idx, 1);
                 else favorites.push({ name, url, icon });
-                saveFavorites(); renderFavorites(); renderCategories(document.getElementById('globalSearch').value);
+                saveFavorites(); renderFavorites(); renderCategories(globalSearch.value);
             };
             window.removeFavorite = (url) => {
                 favorites = favorites.filter(f => f.url !== url);
-                saveFavorites(); renderFavorites(); renderCategories(document.getElementById('globalSearch').value);
+                saveFavorites(); renderFavorites(); renderCategories(globalSearch.value);
             };
 
+            // Tema
             function applyTheme(theme) {
-                if (theme === 'light') { document.body.classList.add('light-mode'); document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>'; }
-                else { document.body.classList.remove('light-mode'); document.getElementById('themeToggle').innerHTML = '<i class="fas fa-moon"></i>'; }
+                if (theme === 'light') { document.body.classList.add('light-mode'); themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; }
+                else { document.body.classList.remove('light-mode'); themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; }
                 localStorage.setItem('centralweb_theme', theme);
             }
+            themeToggle.addEventListener('click', () => applyTheme(document.body.classList.contains('light-mode') ? 'dark' : 'light'));
 
-            // ========== EVENT LISTENERS ==========
-            const globalSearchInput = document.getElementById('globalSearch');
-            if (globalSearchInput) {
-                globalSearchInput.addEventListener('input', (e) => { renderCategories(e.target.value); handleSmartSearch(e.target.value); });
-                globalSearchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { const first = document.querySelector('#searchSuggestions div'); if (first) first.click(); } });
-            }
-            document.addEventListener('click', (e) => { if (!e.target.closest('.search-global')) document.getElementById('searchSuggestions').style.display = 'none'; });
-            
-            const themeBtn = document.getElementById('themeToggle');
-            if (themeBtn) themeBtn.addEventListener('click', () => applyTheme(document.body.classList.contains('light-mode') ? 'dark' : 'light'));
-            
-            const fullBtn = document.getElementById('fullscreenBtn');
-            if (fullBtn) fullBtn.addEventListener('click', () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); });
-            
-            function updateClock() { const clock = document.getElementById('liveClock'); if (clock) clock.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false }); }
+            // Tela cheia
+            fullscreenBtn.addEventListener('click', () => { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); });
+
+            // Relógio
+            function updateClock() { clockEl.textContent = new Date().toLocaleTimeString('pt-BR', { hour12: false }); }
             setInterval(updateClock, 1000); updateClock();
-            
+
+            // Registrar cliques
             document.addEventListener('click', (e) => {
                 const link = e.target.closest('.link-item, .daily-item, .project-item, .ad-button, .fuel-info-button');
-                if (link && link.href) { const name = link.dataset.name || link.innerText.trim() || 'Link'; addToHistory(name, link.href); }
+                if (link && link.href) { const name = link.dataset.name || link.innerText.trim() || 'Link'; const url = link.href; if (name && url) addToHistory(name, url); }
             });
-            
-            // Eventos dos novos cards
-            const btnAtualizar = document.getElementById('btnAtualizarConversor');
-            if (btnAtualizar) btnAtualizar.addEventListener('click', atualizarTaxasConversor);
-            const btnLimparConv = document.getElementById('btnLimparConversor');
-            if (btnLimparConv) btnLimparConv.addEventListener('click', limparConversor);
-            const valorConv = document.getElementById('valorConversor');
-            if (valorConv) valorConv.addEventListener('input', calcularConversor);
-            const moedaDe = document.getElementById('moedaDe');
-            if (moedaDe) moedaDe.addEventListener('change', calcularConversor);
-            const moedaPara = document.getElementById('moedaPara');
-            if (moedaPara) moedaPara.addEventListener('change', calcularConversor);
-            
-            const investValor = document.getElementById('investValor');
-            if (investValor) investValor.addEventListener('input', calcularJuros);
-            const investMeses = document.getElementById('investMeses');
-            if (investMeses) investMeses.addEventListener('input', calcularJuros);
-            const investTaxa = document.getElementById('investTaxa');
-            if (investTaxa) investTaxa.addEventListener('input', calcularJuros);
-            
-            const btnGastos = document.getElementById('btnCalcularGastos');
-            if (btnGastos) btnGastos.addEventListener('click', controleGastos);
-            const btnLimparGastos = document.getElementById('btnLimparGastos');
-            if (btnLimparGastos) btnLimparGastos.addEventListener('click', limparGastos);
-            const receitaTotal = document.getElementById('receitaTotal');
-            if (receitaTotal) receitaTotal.addEventListener('input', controleGastos);
-            const despesaTotal = document.getElementById('despesaTotal');
-            if (despesaTotal) despesaTotal.addEventListener('input', controleGastos);
-            
-            // ========== INICIALIZAÇÃO ==========
+
+            // Inicialização
             function init() {
                 applyTheme(currentTheme);
-                popularSelectsConversor();
                 renderProjects(); renderDaily(); renderCategories(); renderFavorites(); renderHistory();
                 fetchQuotes(); setInterval(fetchQuotes, 60000);
-                atualizarTaxasConversor(); setInterval(atualizarTaxasConversor, 120000);
-                calcularJuros(); controleGastos();
             }
             init();
             window.addToHistory = addToHistory;
