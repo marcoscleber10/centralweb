@@ -2104,78 +2104,60 @@ function analyzeTextSentiment(text) {
     return Math.min(10, Math.max(-10, score));
 }
 
-// ── Busca notícias via CryptoPanic (sem chave, CORS livre) ──────────────────
-async function fetchFromCryptoPanic() {
-    const res = await fetch("https://cryptopanic.com/api/free/v1/posts/?auth_token=public&public=true&kind=news&regions=en,pt&limit=20");
-    const data = await res.json();
-    if (!data.results || !data.results.length) throw new Error("sem resultados");
-    return data.results.map(n => ({
-        title: n.title.substring(0, 120),
-        link: n.url || n.source?.url || "#",
-        source: n.source?.title || "CryptoPanic",
-        type: "global",
-        sentiment: analyzeTextSentiment(n.title)
-    }));
+// ── Busca via RSS2JSON (serviço dedicado, sem problemas de CORS) ─────────────
+async function fetchViaRss2Json(feedUrl, sourceName, sourceType) {
+    try {
+        const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&api_key=public&count=5`;
+        const res = await fetch(api, { signal: AbortSignal.timeout(8000) });
+        const data = await res.json();
+        if (data.status !== "ok" || !data.items?.length) return [];
+        return data.items.map(item => ({
+            title: (item.title || "").substring(0, 120),
+            link: item.link || item.guid || "#",
+            source: sourceName,
+            type: sourceType,
+            sentiment: analyzeTextSentiment(item.title || "")
+        })).filter(n => n.title.length > 10);
+    } catch(e) { return []; }
 }
 
-// ── Busca RSS com lista de proxies de fallback ───────────────────────────────
-async function fetchRSSWithFallback(feedUrl, sourceName, sourceType) {
-    const proxies = [
-        url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-        url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-        url => `https://thingproxy.freeboard.io/fetch/${url}`
-    ];
-    for (const makeProxy of proxies) {
-        try {
-            const res = await fetch(makeProxy(feedUrl), { signal: AbortSignal.timeout(6000) });
-            let text;
-            const ct = res.headers.get("content-type") || "";
-            if (ct.includes("json")) {
-                const j = await res.json();
-                text = j.contents || j.body || "";
-            } else {
-                text = await res.text();
-            }
-            if (!text || text.length < 100) continue;
-            const parser = new DOMParser();
-            const xml = parser.parseFromString(text, "text/xml");
-            const items = xml.querySelectorAll("item");
-            if (!items.length) continue;
-            const result = [];
-            for (let i = 0; i < Math.min(5, items.length); i++) {
-                const title = items[i].querySelector("title")?.textContent?.trim() || "";
-                const link  = items[i].querySelector("link")?.textContent?.trim()  || "#";
-                if (title.length > 10) {
-                    result.push({ title: title.substring(0, 120), link, source: sourceName, type: sourceType, sentiment: analyzeTextSentiment(title) });
-                }
-            }
-            if (result.length) return result;
-        } catch(e) { /* tenta próximo proxy */ }
-    }
-    return [];
+// ── Busca via CoinGecko News (API pública, sem chave, CORS ok) ───────────────
+async function fetchCoinGeckoNews() {
+    try {
+        const res = await fetch("https://api.coingecko.com/api/v3/news", { signal: AbortSignal.timeout(8000) });
+        const data = await res.json();
+        if (!data.data?.length) return [];
+        return data.data.slice(0, 10).map(n => ({
+            title: (n.title || "").substring(0, 120),
+            link: n.url || "#",
+            source: n.author || "CoinGecko News",
+            type: "global",
+            sentiment: analyzeTextSentiment(n.title || "")
+        })).filter(n => n.title.length > 10);
+    } catch(e) { return []; }
 }
 
 // ── Função principal de notícias ─────────────────────────────────────────────
 async function fetchRealNews() {
     let allNews = [];
 
-    // 1ª tentativa: CryptoPanic (melhor fonte, CORS ok)
+    // 1ª tentativa: CoinGecko News (API pública sem chave)
     try {
-        const cryptoNews = await fetchFromCryptoPanic();
-        allNews = cryptoNews;
-    } catch(e) { console.warn("CryptoPanic falhou, tentando RSS..."); }
+        const cgNews = await fetchCoinGeckoNews();
+        if (cgNews.length >= 5) allNews = cgNews;
+    } catch(e) {}
 
-    // 2ª tentativa: feeds RSS com múltiplos proxies
+    // 2ª tentativa: RSS2JSON com feeds confiáveis (em paralelo)
     if (allNews.length < 5) {
         const rssSources = [
-            { name: "CoinDesk",        url: "https://feeds.feedburner.com/CoinDesk", type: "global" },
-            { name: "Cointelegraph",   url: "https://cointelegraph.com/rss",         type: "global" },
-            { name: "Portal do Bitcoin", url: "https://portaldobitcoin.com.br/feed/", type: "brasil" },
-            { name: "InfoMoney Cripto", url: "https://www.infomoney.com.br/mercados/criptomoedas/feed/", type: "brasil" },
-            { name: "Livecoins",       url: "https://livecoins.com.br/feed/",        type: "brasil" },
-            { name: "Bitcoin Magazine", url: "https://bitcoinmagazine.com/.rss/full/", type: "global" }
+            { name: "Cointelegraph",    url: "https://cointelegraph.com/rss",                              type: "global" },
+            { name: "CoinDesk",         url: "https://www.coindesk.com/arc/outboundfeeds/rss/",            type: "global" },
+            { name: "Bitcoin Magazine", url: "https://bitcoinmagazine.com/.rss/full/",                     type: "global" },
+            { name: "Portal do Bitcoin",url: "https://portaldobitcoin.com.br/feed/",                      type: "brasil" },
+            { name: "Livecoins",        url: "https://livecoins.com.br/feed/",                             type: "brasil" },
+            { name: "Decrypt",          url: "https://decrypt.co/feed",                                    type: "global" }
         ];
-        const fetches = rssSources.map(s => fetchRSSWithFallback(s.url, s.name, s.type));
+        const fetches = rssSources.map(s => fetchViaRss2Json(s.url, s.name, s.type));
         const results = await Promise.allSettled(fetches);
         results.forEach(r => { if (r.status === "fulfilled" && r.value.length) allNews.push(...r.value); });
     }
@@ -2188,19 +2170,19 @@ async function fetchRealNews() {
         seen.add(key); return true;
     });
 
-    // Garantia de fallback offline: notícias placeholder
+    // Fallback offline garantido
     if (allNews.length === 0) {
         allNews = [
-            { title: "Bitcoin consolida acima de US$60k enquanto mercado aguarda dados macro", link: "https://cointelegraph.com", source: "Cointelegraph", type: "global", sentiment: 2 },
+            { title: "Bitcoin se consolida enquanto mercado aguarda dados macro", link: "https://cointelegraph.com", source: "Cointelegraph", type: "global", sentiment: 2 },
             { title: "ETF de Bitcoin registra maior entrada de capital da semana", link: "https://coindesk.com", source: "CoinDesk", type: "global", sentiment: 3 },
             { title: "Solana atinge novo recorde de transações diárias na rede", link: "https://portaldobitcoin.com.br", source: "Portal do Bitcoin", type: "brasil", sentiment: 4 },
             { title: "Ethereum mantém suporte após atualização de staking", link: "https://coindesk.com", source: "CoinDesk", type: "global", sentiment: 1 },
             { title: "Mercado cripto lateral: investidores aguardam decisão do Fed", link: "https://infomoney.com.br", source: "InfoMoney", type: "brasil", sentiment: 0 },
             { title: "DeFi TVL cresce 12% no mês com protocolos de lending em alta", link: "https://defillama.com", source: "DeFi Llama", type: "global", sentiment: 3 },
-            { title: "Reguladores europeus avançam em framework para ativos digitais", link: "https://cointelegraph.com", source: "Cointelegraph", type: "global", sentiment: 1 },
+            { title: "Reguladores avançam em framework para ativos digitais", link: "https://cointelegraph.com", source: "Cointelegraph", type: "global", sentiment: 1 },
             { title: "Mineração de Bitcoin bate recorde de hashrate global", link: "https://portaldobitcoin.com.br", source: "Portal do Bitcoin", type: "brasil", sentiment: 2 },
             { title: "Altcoins sobem com retorno de liquidez institucional ao mercado", link: "https://coindesk.com", source: "CoinDesk", type: "global", sentiment: 3 },
-            { title: "Whales acumulam BTC nos menores preços da semana, aponta análise on-chain", link: "https://cryptoquant.com", source: "CryptoQuant", type: "global", sentiment: 2 }
+            { title: "Whales acumulam BTC nos menores preços da semana, análise on-chain", link: "https://cryptoquant.com", source: "CryptoQuant", type: "global", sentiment: 2 }
         ];
     }
 
@@ -2306,50 +2288,54 @@ function getRealSummary(sentimentScore, fearGreed, news) {
     }
 }
 
-// Função para traduzir título usando MyMemory (gratuita, sem chave)
-async function translateTitle(title, targetLang = "pt") {
+// Traduz um título usando MyMemory com timeout
+async function translateTitle(title) {
     try {
-        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(title)}&langpair=en|${targetLang}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data && data.responseData && data.responseData.translatedText) {
-            return data.responseData.translatedText;
+        const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(title.substring(0, 200))}&langpair=en|pt-BR`;
+        const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
+        const data = await res.json();
+        const translated = data?.responseData?.translatedText || "";
+        // MyMemory às vezes devolve o mesmo texto ou erro — verificar
+        if (translated && translated !== title && !translated.toLowerCase().includes("mymemory")) {
+            return translated;
         }
-    } catch (e) {
-        console.warn("Erro na tradução:", e);
-    }
-    return title; // fallback para original
+    } catch(e) {}
+    return title; // fallback: mantém original
 }
 
-// Função que traduz todos os títulos de notícias exibidos
+// Traduz todas as notícias com progresso visual
 async function translateNewsToPortuguese() {
     const newsItems = document.querySelectorAll('#sentientContent .news-item');
     if (!newsItems.length) return;
-    // Desabilitar botão enquanto traduz
+
     const translateBtn = document.getElementById('translateNewsBtn');
+    const total = newsItems.length;
+
     if (translateBtn) {
         translateBtn.disabled = true;
-        translateBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Traduzindo...';
+        translateBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> 0/${total}`;
     }
-    // Para cada item, pegar o texto atual (pode ser original ou já traduzido), mas vamos sempre pegar o original armazenado? 
-    // Vamos armazenar os títulos originais no dataset para evitar re-tradução desnecessária.
+
+    let count = 0;
     for (let item of newsItems) {
-        const originalTitle = item.dataset.originalTitle || item.innerText.split('(')[0].replace('📰', '').trim();
+        // Salva o título original na 1ª vez
         if (!item.dataset.originalTitle) {
-            item.dataset.originalTitle = originalTitle;
+            const smallTag = item.querySelector('small');
+            const rawText = item.innerText.replace('📰', '').replace(smallTag?.innerText || '', '').trim();
+            item.dataset.originalTitle = rawText;
         }
-        const translated = await translateTitle(originalTitle);
-        // Atualizar apenas o texto do título, mantendo a fonte (small)
+        const translated = await translateTitle(item.dataset.originalTitle);
         const smallTag = item.querySelector('small');
-        if (smallTag) {
-            item.innerHTML = `📰 ${translated} <small>${smallTag.innerText}</small>`;
-        } else {
-            item.innerHTML = `📰 ${translated}`;
-        }
+        const sourceText = smallTag?.innerText || '';
+        item.innerHTML = `📰 ${translated}${sourceText ? ` <small>${sourceText}</small>` : ''}`;
+        count++;
+        if (translateBtn) translateBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${count}/${total}`;
     }
+
     if (translateBtn) {
         translateBtn.disabled = false;
-        translateBtn.innerHTML = '🌐 Traduzir para PT';
+        translateBtn.innerHTML = '✅ Traduzido';
+        setTimeout(() => { translateBtn.innerHTML = '🌐 Traduzir para PT'; }, 3000);
     }
 }
 
