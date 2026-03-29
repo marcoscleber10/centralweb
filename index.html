@@ -2400,6 +2400,27 @@ async function updateRealSentientData() {
 function renderRealSentientCard() {
     const container = document.getElementById("sentientContent");
     const emoji = sentientData.sentiment_score >= 40 ? "🟢" : (sentientData.sentiment_score <= -40 ? "🔴" : "🟡");
+
+    const corrLabels = {
+        sp500: "S&P500", gold: "Ouro", funding_rate: "Taxa Funding",
+        liquidations_24h: "Liq. 24h", mvrv: "MVRV",
+        open_interest: "Contratos Abertos", defi_dominance: "Dom. DeFi"
+    };
+
+    const statsHTML = Object.entries(sentientData.correlations).map(([k, v]) =>
+        `<div class="sentient-stat-item"><div class="label">${corrLabels[k] || k.replace(/_/g,' ').toUpperCase()}</div><div class="value">${v}</div></div>`
+    ).join('');
+
+    const trendingHTML = sentientData.top_trending.map((t, i) =>
+        `<div class="trending-item"><span class="trending-rank">${i+1}.</span><span class="trending-topic">${t}</span><span class="trending-score">🔥</span></div>`
+    ).join('');
+
+    const newsHTML = sentientData.news.length
+        ? sentientData.news.map(n =>
+            `<div class="news-item" data-original-title="${n.title.replace(/"/g, '&quot;')}" onclick="window.open('${n.link}', '_blank')">📰 ${n.title} <small>(${n.source})</small></div>`
+          ).join('')
+        : '<div class="news-item">Nenhuma notícia carregada.</div>';
+
     container.innerHTML = `
         <div class="sentient-grid">
             <div class="sentient-score-card">
@@ -2414,27 +2435,23 @@ function renderRealSentientCard() {
             </div>
             <div class="trending-list">
                 <h4><i class="fab fa-twitter"></i> Em Alta no X</h4>
-                ${sentientData.top_trending.map((t, i) => `<div class="trending-item"><span class="trending-rank">${i+1}.</span><span class="trending-topic">${t}</span><span class="trending-score">🔥</span></div>`).join('')}
+                ${trendingHTML}
             </div>
         </div>
         <div class="sentient-summary"><h4><i class="fas fa-newspaper"></i> Resumo</h4><p>${sentientData.summary}</p></div>
-        <div class="sentient-stats">
-            const corrLabels = { sp500: "S&P500", gold: "Ouro", funding_rate: "Taxa Funding", liquidations_24h: "Liq. 24h", mvrv: "MVRV", open_interest: "Contratos Abertos", defi_dominance: "Dom. DeFi" };
-        ${Object.entries(sentientData.correlations).map(([k,v]) => `<div class="sentient-stat-item"><div class="label">${corrLabels[k] || k.replace(/_/g,' ').toUpperCase()}</div><div class="value">${v}</div></div>`).join('')}
-        </div>
+        <div class="sentient-stats">${statsHTML}</div>
         <div class="news-list">
-            <h4><i class="fas fa-rss"></i> Últimas notícias (10) 
-                <button id="translateNewsBtn" class="secundario" style="margin-left: 0.8rem; padding: 0.2rem 0.8rem; font-size: 0.8rem;"><i class="fas fa-language"></i> Traduzir para PT</button>
+            <h4><i class="fas fa-rss"></i> Últimas notícias
+                <button id="translateNewsBtn" class="secundario" style="margin-left:0.8rem;padding:0.2rem 0.8rem;font-size:0.8rem;">
+                    <i class="fas fa-language"></i> Traduzir para PT
+                </button>
             </h4>
-            ${sentientData.news.map(n => `<div class="news-item" data-original-title="${n.title.replace(/"/g, '&quot;')}" onclick="window.open('${n.link}', '_blank')">📰 ${n.title} <small>(${n.source})</small></div>`).join('')}
-            ${sentientData.news.length === 0 ? '<div class="news-item">Carregando notícias...</div>' : ''}
+            ${newsHTML}
         </div>
     `;
-    // Após renderizar, anexar evento do botão de traduzir
+
     const translateBtn = document.getElementById('translateNewsBtn');
-    if (translateBtn) {
-        translateBtn.addEventListener('click', translateNewsToPortuguese);
-    }
+    if (translateBtn) translateBtn.addEventListener('click', translateNewsToPortuguese);
 }
             // ==================== INICIALIZAÇÃO ====================
             function init() {
