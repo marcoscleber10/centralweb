@@ -1447,7 +1447,9 @@ const userProjects = [
     { name: "História das Copas", url: "https://historia-copas-620634786284.southamerica-east1.run.app", icon: "fas fa-futbol" },
     { name: "Pepinômetro", url: "https://pepinometro-620634786284.southamerica-east1.run.app", icon: "fas fa-balance-scale" },
     { name: "Todey Cards", url: "http://www.todey.xyz/cards", icon: "fas fa-credit-card" },
-    { name: "📘 Bitcoin para Todas as Idades", url: "https://marcoscleber10.github.io/a-historia-do-dinheiro-que-mudou-o-mundo/", icon: "fab fa-bitcoin" }
+    { name: "📘 Bitcoin para Todas as Idades", url: "https://marcoscleber10.github.io/a-historia-do-dinheiro-que-mudou-o-mundo/", icon: "fab fa-bitcoin" },
+    { name: "⚙️ Ferramentas Bitcoin", url: "https://marcoscleber10.github.io/Ferramentas-bitcoin/", icon: "fab fa-bitcoin" },
+    { name: "⚙️ Ferramentas Solana", url: "https://marcoscleber10.github.io/Ferramentas-solana/", icon: "fas fa-sun" }
 ];
 
 // USO DIÁRIO
@@ -1542,7 +1544,9 @@ const smartSearchMap = [
     { keywords: ["egasosa"], url: "https://www.egasosa.com.br", name: "Egasosa" },
     { keywords: ["ipiranga", "abastece ai"], url: "https://play.google.com/store/apps/details?id=com.ipiranga.abasteceai", name: "Abastece Aí" },
     { keywords: ["livelo", "ale", "pontos"], url: "https://www.livelo.com.br", name: "Livelo – Pontos ALE" },
-    { keywords: ["preço justo", "menor preço"], url: "https://site-combustai-620634786284.southamerica-east1.run.app/", name: "Preço Justo – Geolocalização" }
+    { keywords: ["preço justo", "menor preço"], url: "https://site-combustai-620634786284.southamerica-east1.run.app/", name: "Preço Justo – Geolocalização" },
+    { keywords: ["ferramentas bitcoin", "tools bitcoin"], url: "https://marcoscleber10.github.io/Ferramentas-bitcoin/", name: "Ferramentas Bitcoin" },
+    { keywords: ["ferramentas solana", "tools solana"], url: "https://marcoscleber10.github.io/Ferramentas-solana/", name: "Ferramentas Solana" }
 ];
 
 // ========== FUNÇÕES DE COTAÇÕES ==========
@@ -2145,7 +2149,14 @@ async function fetchRealFearGreed() {
     try {
         const res = await fetch("https://api.alternative.me/fng/?limit=1");
         const data = await res.json();
-        if (data?.data?.[0]) return { value: parseInt(data.data[0].value), text: data.data[0].value_classification };
+        if (data?.data?.[0]) {
+            const classMap = {
+                "Extreme Fear": "Medo Extremo", "Fear": "Medo", "Neutral": "Neutro",
+                "Greed": "Ganância", "Extreme Greed": "Ganância Extrema"
+            };
+            const raw = data.data[0].value_classification;
+            return { value: parseInt(data.data[0].value), text: classMap[raw] || raw };
+        }
     } catch(e) { console.error("Erro Fear & Greed:", e); }
     return { value: 50, text: "Neutro" };
 }
@@ -2228,7 +2239,7 @@ function getRealSummary(sentimentScore, fearGreed, news) {
                (negativeCount > positiveCount ? "Preocupações regulatórias e pressão vendedora." : "Investidores aguardam novos catalisadores.");
     } else {
         return "🔄 Mercado lateral com volume baixo. Aguardando novos catalisadores para definição de direção. " +
-               `Fear & Greed em ${fearGreed.value} (${fearGreed.text}).`;
+               `Medo & Ganância em ${fearGreed.value} (${fearGreed.text}).`;
     }
 }
 
@@ -2330,23 +2341,24 @@ function renderRealSentientCard() {
     container.innerHTML = `
         <div class="sentient-grid">
             <div class="sentient-score-card">
-                <div>Sentiment Score</div>
+                <div>Pontuação de Sentimento</div>
                 <div class="sentient-score ${sentientData.classificationColor}">${sentientData.sentiment_score} ${emoji}</div>
                 <div class="sentient-classification ${sentientData.classificationColor}">${sentientData.classification}</div>
                 <div class="sentient-metrics">
                     <div class="sentient-metric"><div class="label">Volatilidade</div><div class="value">${sentientData.volatility}</div></div>
                     <div class="sentient-metric"><div class="label">Movimento 48h</div><div class="value">${sentientData.prob_move_48h}%</div></div>
-                    <div class="sentient-metric"><div class="label">Fear & Greed</div><div class="value">${sentientData.fear_greed.value} (${sentientData.fear_greed.text})</div></div>
+                    <div class="sentient-metric"><div class="label">Medo & Ganância</div><div class="value">${sentientData.fear_greed.value} (${sentientData.fear_greed.text})</div></div>
                 </div>
             </div>
             <div class="trending-list">
-                <h4><i class="fab fa-twitter"></i> Trending no X</h4>
+                <h4><i class="fab fa-twitter"></i> Em Alta no X</h4>
                 ${sentientData.top_trending.map((t, i) => `<div class="trending-item"><span class="trending-rank">${i+1}.</span><span class="trending-topic">${t}</span><span class="trending-score">🔥</span></div>`).join('')}
             </div>
         </div>
         <div class="sentient-summary"><h4><i class="fas fa-newspaper"></i> Resumo</h4><p>${sentientData.summary}</p></div>
         <div class="sentient-stats">
-            ${Object.entries(sentientData.correlations).map(([k,v]) => `<div class="sentient-stat-item"><div class="label">${k.replace(/_/g,' ').toUpperCase()}</div><div class="value">${v}</div></div>`).join('')}
+            const corrLabels = { sp500: "S&P500", gold: "Ouro", funding_rate: "Taxa Funding", liquidations_24h: "Liq. 24h", mvrv: "MVRV", open_interest: "Contratos Abertos", defi_dominance: "Dom. DeFi" };
+        ${Object.entries(sentientData.correlations).map(([k,v]) => `<div class="sentient-stat-item"><div class="label">${corrLabels[k] || k.replace(/_/g,' ').toUpperCase()}</div><div class="value">${v}</div></div>`).join('')}
         </div>
         <div class="news-list">
             <h4><i class="fas fa-rss"></i> Últimas notícias (10) 
